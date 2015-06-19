@@ -1,16 +1,37 @@
 package com.gohn.walarm;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.Locale;
 
-public class MainActivity extends ActionBarActivity {
+import whdghks913.tistory.examplescrolltab.R;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.Menu;
+
+public class MainActivity extends FragmentActivity {
+
+	SectionsPagerAdapter mSectionsPagerAdapter;
+
+	ViewPager mViewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// Create the adapter that will return a fragment for each of the three
+		// primary sections of the app.
+		mSectionsPagerAdapter = new SectionsPagerAdapter(
+				getApplicationContext(), getSupportFragmentManager());
+
+		// Set up the ViewPager with the sections adapter.
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(mSectionsPagerAdapter);
+
 	}
 
 	@Override
@@ -20,15 +41,45 @@ public class MainActivity extends ActionBarActivity {
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		Context mContext;
+
+		public SectionsPagerAdapter(Context mContext, FragmentManager fm) {
+			super(fm);
+			this.mContext = mContext;
 		}
-		return super.onOptionsItemSelected(item);
+
+		@Override
+		public Fragment getItem(int position) {
+			// getItem is called to instantiate the fragment for the given page.
+			// Return a DummySectionFragment (defined as a static inner class
+			// below) with the page number as its lone argument.
+			switch (position) {
+			case 0:
+				return new Tab1(mContext);
+			case 1:
+				return new Tab2(mContext);
+			}
+			return null;
+		}
+
+		@Override
+		public int getCount() {
+			// total pages.
+			return 2;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			Locale l = Locale.getDefault();
+			switch (position) {
+			case 0:
+				return getString(R.string.title_section1).toUpperCase(l);
+			case 1:
+				return getString(R.string.title_section2).toUpperCase(l);
+			}
+			return null;
+		}
 	}
+
 }
