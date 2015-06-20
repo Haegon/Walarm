@@ -1,6 +1,6 @@
 package com.gohn.walarm;
 
-import whdghks913.tistory.examplescrolltab.R;
+import com.gohn.walarm.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;

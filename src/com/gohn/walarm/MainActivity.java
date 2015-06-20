@@ -2,7 +2,7 @@ package com.gohn.walarm;
 
 import java.util.Locale;
 
-import whdghks913.tistory.examplescrolltab.R;
+import com.gohn.walarm.R;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
