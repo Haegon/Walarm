@@ -49,7 +49,7 @@ build/
 /performanceTest/lib
 .textmate
 /incoming-distributions
-########.idea
+.idea
 atlassian-ide-plugin.xml
 *.sublime-*
 .nb-gradle
