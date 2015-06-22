@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TimePicker;
@@ -46,7 +45,7 @@ public class AddActivity extends Activity {
         switch (id) {
             case R.id.action_save:
                 TimePicker time = (TimePicker)findViewById(R.id.timePicker);
-                Alarm a = new Alarm(time.getCurrentHour()+":"+time.getCurrentMinute(),0,true);
+                Alarm a = new Alarm(time.getCurrentHour()/12,time.getCurrentHour()%12,time.getCurrentMinute(),1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
                 GoHome();
                 return true;

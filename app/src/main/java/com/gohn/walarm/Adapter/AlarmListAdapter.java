@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 
 import com.gohn.walarm.Extention.TextViewEx;
 import com.gohn.walarm.Model.Alarm;
@@ -23,8 +24,9 @@ public class AlarmListAdapter extends BaseAdapter {
     String word;
 
     class ViewHolder {
-        TextViewEx mNameTv;
-        TextViewEx mNumbersTv;
+        TextViewEx mAfternoon;
+        TextViewEx mTime;
+        CheckBox mCheckBox;
     }
 
     public AlarmListAdapter(Context context, ArrayList<Alarm> data, String w) {
@@ -69,27 +71,60 @@ public class AlarmListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
 
         View itemLayout = convertView;
-        ViewHolder viewHolder = null;
+        final ViewHolder viewHolder;// = null;
 
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
             viewHolder = new ViewHolder();
 
-            viewHolder.mNameTv = (TextViewEx) itemLayout.findViewById(R.id.alarm_name_text);
-            viewHolder.mNumbersTv = (TextViewEx) itemLayout.findViewById(R.id.alarm_numbers_text);
+            viewHolder.mAfternoon = (TextViewEx) itemLayout.findViewById(R.id.alarm_afternoon);
+            viewHolder.mTime = (TextViewEx) itemLayout.findViewById(R.id.alarm_time);
+            viewHolder.mCheckBox = (CheckBox) itemLayout.findViewById(R.id.cbAlarm);
 
             itemLayout.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) itemLayout.getTag();
         }
 
-        viewHolder.mNameTv.setText(mData.get(position).AlarmTime.toString());
-        viewHolder.mNumbersTv.setText(mData.get(position).No + " " + word);
+        // 오전오후 표시하기
+        if ( mData.get(position).Afternoon == 1 ) {
+            viewHolder.mAfternoon.setText("오후");
+        } else {
+            viewHolder.mAfternoon.setText("오전");
+        }
+
+        // 시간 그리기
+        String nowTime = mData.get(position).Hour + ":" + mData.get(position).Minute;
+        viewHolder.mTime.setText(nowTime);
+
+        // 체크 박스 표시
+        if ( mData.get(position).IsOn == 1 ) {
+            viewHolder.mCheckBox.setChecked(true);
+        } else {
+            viewHolder.mCheckBox.setChecked(false);
+        }
+
+        // 체크 박스 변경 될 때마다 리스너에서 db에 업데이트
+        viewHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
+
+            //please note that objPlace, position and holder must be declared
+            //as final inside the getView() function scope.
+            @Override
+            public void onClick(View arg0) {
+                final boolean isChecked = viewHolder.mCheckBox.isChecked();
+                if (isChecked){
+                    mData.get(position).On();
+                }else{
+                    mData.get(position).Off();
+                }
+            }
+        });
+
         return itemLayout;
     }
 }
