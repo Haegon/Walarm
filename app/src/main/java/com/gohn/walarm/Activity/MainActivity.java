@@ -11,6 +11,7 @@ import android.view.Menu;
 
 import com.gohn.walarm.Fragment.Tab1;
 import com.gohn.walarm.Fragment.Tab2;
+import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.R;
 
 import java.util.Locale;
@@ -25,6 +26,10 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+
+		AlarmDBMgr dbMgr = AlarmDBMgr.getInstance(this);
+
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.

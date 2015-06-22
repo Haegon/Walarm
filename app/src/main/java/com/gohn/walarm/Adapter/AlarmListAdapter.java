@@ -88,8 +88,8 @@ public class AlarmListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) itemLayout.getTag();
         }
 
-        viewHolder.mNameTv.setText(mData.get(position).Name);
-        viewHolder.mNumbersTv.setText(mData.get(position).Number + " " + word);
+        viewHolder.mNameTv.setText(mData.get(position).AlarmTime.toString());
+        viewHolder.mNumbersTv.setText(mData.get(position).No + " " + word);
         return itemLayout;
     }
 }

@@ -12,7 +12,7 @@
 
 
     <com.gohn.walarm.Extention.ButtonEx
-        android:id="@+id/fab_image_button"
+        android:id="@+id/btn_add_alarm"
         android:layout_width="@dimen/fab_length"
         android:layout_height="@dimen/fab_length"
         android:layout_alignParentRight="true"
