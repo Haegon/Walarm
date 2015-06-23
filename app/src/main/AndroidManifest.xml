@@ -8,13 +8,9 @@
         android:minSdkVersion="12"
         android:targetSdkVersion="18" />
 
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +35,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gohn.walarm.Activity.MainActivity" />
         </activity>
+
+        <receiver android:name="com.gohn.walarm.Scheduler.SampleAlarmReceiver"></receiver>
+
+        <receiver android:name="com.gohn.walarm.Scheduler.SampleBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.gohn.walarm.Scheduler.SampleSchedulingService" />
+
     </application>
 
 </manifest>
