@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.gohn.walarm.Activity.AddActivity;
 import com.gohn.walarm.R;
@@ -18,15 +17,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * This {@code IntentService} does the app's actual work.
- * {@code SampleAlarmReceiver} (a {@code WakefulBroadcastReceiver}) holds a
- * partial wake lock for this service while the service does its work. When the
- * service is finished, it calls {@code completeWakefulIntent()} to release the
- * wake lock.
- */
-public class SampleSchedulingService extends IntentService {
-    public SampleSchedulingService() {
+public class SchedulingService extends IntentService {
+    public SchedulingService() {
         super("SchedulingService");
     }
     
@@ -47,28 +39,28 @@ public class SampleSchedulingService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         // BEGIN_INCLUDE(service_onhandle)
         // The URL from which to fetch content.
-        String urlString = URL;
-    
-        String result ="";
-        
-        // Try to connect to the Google homepage and download content.
-        try {
-            result = loadFromNetwork(urlString);
-        } catch (IOException e) {
-            Log.i(TAG, getString(R.string.connection_error));
-        }
-    
-        // If the app finds the string "doodle" in the Google home page content, it
-        // indicates the presence of a doodle. Post a "Doodle Alert" notification.
-        if (result.indexOf(SEARCH_STRING) != -1) {
-            sendNotification(getString(R.string.doodle_found));
-            Log.i(TAG, "Found doodle!!");
-        } else {
+//        String urlString = URL;
+//
+//        String result ="";
+//
+//        // Try to connect to the Google homepage and download content.
+//        try {
+//            result = loadFromNetwork(urlString);
+//        } catch (IOException e) {
+//            Log.i(TAG, getString(R.string.connection_error));
+//        }
+//
+//        // If the app finds the string "doodle" in the Google home page content, it
+//        // indicates the presence of a doodle. Post a "Doodle Alert" notification.
+//        if (result.indexOf(SEARCH_STRING) != -1) {
+//            sendNotification(getString(R.string.doodle_found));
+//            Log.i(TAG, "Found doodle!!");
+//        } else {
             sendNotification(getString(R.string.no_doodle));
-            Log.i(TAG, "No doodle found. :-(");
-        }
+//            Log.i(TAG, "No doodle found. :-(");
+//        }
         // Release the wake lock provided by the BroadcastReceiver.
-        SampleAlarmReceiver.completeWakefulIntent(intent);
+        AlarmReceiver.completeWakefulIntent(intent);
         // END_INCLUDE(service_onhandle)
     }
     

@@ -36,15 +36,15 @@
                 android:value="com.gohn.walarm.Activity.MainActivity" />
         </activity>
 
-        <receiver android:name="com.gohn.walarm.Scheduler.SampleAlarmReceiver"></receiver>
+        <receiver android:name=".Scheduler.AlarmReceiver"></receiver>
 
-        <receiver android:name="com.gohn.walarm.Scheduler.SampleBootReceiver"
+        <receiver android:name=".Scheduler.BootReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
-        <service android:name="com.gohn.walarm.Scheduler.SampleSchedulingService" />
+        <service android:name=".Scheduler.SchedulingService" />
 
     </application>
 

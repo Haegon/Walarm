@@ -88,6 +88,25 @@ public class AlarmDBMgr {
         insert(cv);
     }
 
+    public Alarm getAlarm(int no) {
+
+        String query = String.format("select _id, afternoon, hour, minute, ison from Alarms where _id=?");
+        Cursor c = rawQuery(query, new String[]{String.format("%d", no)});
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        Alarm a = new Alarm();
+        a.No = c.getInt(0);
+        a.Afternoon = c.getInt(1);
+        a.Hour = c.getInt(2);
+        a.Minute = c.getInt(3);
+        a.IsOn = c.getInt(4);
+
+        return a;
+    }
+
     public ArrayList<Alarm> getAlarms() {
 
         String query = String.format("select _id, afternoon, hour, minute, ison from Alarms");
@@ -123,12 +142,11 @@ public class AlarmDBMgr {
         Cursor c = rawQuery(query, new String[]{});
 
         if ( c.getCount() == 0 ) {
-            return -1;
+            return 0;
         }
 
-        while (c.moveToNext()) {
-            c.getInt(0);
-        }
-        return -100;
+        c.moveToFirst();
+
+        return  c.getInt(0);
     }
 }

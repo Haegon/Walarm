@@ -6,8 +6,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.gohn.walarm.Manager.AlarmDBMgr;
+import com.gohn.walarm.Model.Alarm;
 
 import java.util.Calendar;
 
@@ -15,7 +22,7 @@ import java.util.Calendar;
  * When the alarm fires, this WakefulBroadcastReceiver receives the broadcast Intent 
  * and then starts the IntentService {@code SampleSchedulingService} to do some work.
  */
-public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
+public class AlarmReceiver extends WakefulBroadcastReceiver {
     // The app's AlarmManager, which provides access to the system alarm services.
     private AlarmManager alarmMgr;
     // The pending intent that is triggered when the alarm fires.
@@ -24,7 +31,13 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e("fuck", "fuck");
+        int number = intent.getExtras().getInt("requestCode");
+
+        Log.e("fuck", "requestCode : " + number);
+
+        Alarm a = AlarmDBMgr.getInstance(context).getAlarm(number);
+
+        Toast.makeText(context, String.format("Hello! Alarm Time =>: %d:%d",a.Hour,a.Minute),Toast.LENGTH_SHORT).show();
 
         // BEGIN_INCLUDE(alarm_onreceive)
         /* 
@@ -42,11 +55,16 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
          * In this example, we simply create a new intent to deliver to the service.
          * This intent holds an extra identifying the wake lock.
          */
-        Intent service = new Intent(context, SampleSchedulingService.class);
+        Intent service = new Intent(context, SchedulingService.class);
         
         // Start the service, keeping the device awake while it is launching.
         startWakefulService(context, service);
         // END_INCLUDE(alarm_onreceive)
+
+
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone r = RingtoneManager.getRingtone(context, notification);
+        r.play();
     }
 
     // BEGIN_INCLUDE(set_alarm)
@@ -55,10 +73,11 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
      * alarm fires, the app broadcasts an Intent to this WakefulBroadcastReceiver.
      * @param context
      */
-    public void setAlarm(Context context, int hour, int minute) {
+    public void setAlarm(Context context,int no, int hour, int minute) {
         alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, SampleAlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra("requestCode", no);
+        alarmIntent = PendingIntent.getBroadcast(context, no, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -97,18 +116,20 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
          *         AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
          */
 
-//        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                5000L,
-//                5000L, alarmIntent);
+        //alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        //        10000L,
+        //        10000L, alarmIntent);
 
         // Set the alarm to fire at approximately 8:30 a.m., according to the device's
         // clock, and to repeat once a day.
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-        
+
+        Log.e("gohn", "Alarm Number : " + no);
+
         // Enable {@code SampleBootReceiver} to automatically restart the alarm when the
         // device is rebooted.
-        ComponentName receiver = new ComponentName(context, SampleBootReceiver.class);
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
         PackageManager pm = context.getPackageManager();
 
         pm.setComponentEnabledSetting(receiver,
@@ -130,7 +151,7 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
         
         // Disable {@code SampleBootReceiver} so that it doesn't automatically restart the 
         // alarm when the device is rebooted.
-        ComponentName receiver = new ComponentName(context, SampleBootReceiver.class);
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
         PackageManager pm = context.getPackageManager();
 
         pm.setComponentEnabledSetting(receiver,

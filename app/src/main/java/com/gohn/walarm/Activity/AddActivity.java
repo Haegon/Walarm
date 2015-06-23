@@ -11,11 +11,11 @@ import android.widget.TimePicker;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.R;
-import com.gohn.walarm.Scheduler.SampleAlarmReceiver;
+import com.gohn.walarm.Scheduler.AlarmReceiver;
 
 public class AddActivity extends Activity {
 
-    SampleAlarmReceiver alarm = new SampleAlarmReceiver();
+    AlarmReceiver alarm = new AlarmReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class AddActivity extends Activity {
                 TimePicker time = (TimePicker)findViewById(R.id.timePicker);
                 Alarm a = new Alarm(this,time.getCurrentHour()/12,time.getCurrentHour()%12,time.getCurrentMinute(),1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
-                alarm.setAlarm(this, time.getCurrentHour(),time.getCurrentMinute());
+                alarm.setAlarm(this, a.No, time.getCurrentHour(),time.getCurrentMinute());
                 GoHome();
                 return true;
             default:
