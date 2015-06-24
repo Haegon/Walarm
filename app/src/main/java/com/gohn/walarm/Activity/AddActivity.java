@@ -52,9 +52,9 @@ public class AddActivity extends Activity {
                 int hour = time.getCurrentHour();
                 int min = time.getCurrentMinute();
 
-                Alarm a = new Alarm(this, hour/ 12,hour%12,min,1);
+                Alarm a = new Alarm(this, hour/12,hour%12,min,1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
-                alarmReceiver.setAlarm(this, a.No, a.Hour,a.Minute);
+                alarmReceiver.setAlarm(this, a.No, hour, min);
                 GoHome();
                 return true;
             default:
