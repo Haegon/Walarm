@@ -48,9 +48,13 @@ public class AddActivity extends Activity {
         switch (id) {
             case R.id.action_save:
                 TimePicker time = (TimePicker)findViewById(R.id.timePicker);
-                Alarm a = new Alarm(this,time.getCurrentHour()/12,time.getCurrentHour()%12,time.getCurrentMinute(),1);
+
+                int hour = time.getCurrentHour();
+                int min = time.getCurrentMinute();
+
+                Alarm a = new Alarm(this, hour/ 12,hour%12,min,1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
-                alarmReceiver.setAlarm(this, a.No, time.getCurrentHour(),time.getCurrentMinute());
+                alarmReceiver.setAlarm(this, a.No, a.Hour,a.Minute);
                 GoHome();
                 return true;
             default:

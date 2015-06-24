@@ -92,7 +92,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        // Set the alarm's trigger time to 8:30 a.m.
+
+        // Set the alarm
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
   
@@ -133,6 +134,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         // Set the alarm to fire at approximately 8:30 a.m., according to the device's
         // clock, and to repeat once a day.
+        // API 버전이 19보다 낮은 경우와 높은 경우에 부르는 함수가 다르다.
+        // 그 이유는 setInexactRepeating만 호출하면 19보다 낮은 기기는 알람이 지연됨.
         if(Build.VERSION.SDK_INT < 19) {
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
                     calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
