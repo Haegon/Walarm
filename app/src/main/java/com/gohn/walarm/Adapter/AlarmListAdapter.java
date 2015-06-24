@@ -21,7 +21,6 @@ public class AlarmListAdapter extends BaseAdapter {
     Context mContext = null;
     public ArrayList<Alarm> mData = null;
     LayoutInflater mLayout = null;
-    String word;
 
     class ViewHolder {
         TextViewEx mAfternoon;
@@ -29,11 +28,10 @@ public class AlarmListAdapter extends BaseAdapter {
         CheckBox mCheckBox;
     }
 
-    public AlarmListAdapter(Context context, ArrayList<Alarm> data, String w) {
+    public AlarmListAdapter(Context context, ArrayList<Alarm> data) {
 
         mContext = context;
         mData = data;
-        word = w;
         mLayout = LayoutInflater.from(mContext);
     }
 

@@ -15,7 +15,6 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gohn.walarm.BuildConfig;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 
@@ -35,20 +34,27 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
   
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        if ( vibe == null ) {
-            vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        }
-
         int number = intent.getExtras().getInt("requestCode");
-
         Log.e("gohn", "request code : " + number);
 
         Alarm a = AlarmDBMgr.getInstance(context).getAlarm(number);
 
+        // 알람이 꺼져있으면 아무것도 안함
+        if ( a.IsOn == 0 ) return;
+
+        // 진동을 울려주
+        if ( vibe == null ) {
+            vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+        vibe.vibrate(1000);
+
+        // 토스트 메세지
         Toast.makeText(context, String.format("Hello! Alarm Time =>: %d:%d",a.Hour,a.Minute),Toast.LENGTH_SHORT).show();
 
-        vibe.vibrate(1000);
+        // 알람음
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone r = RingtoneManager.getRingtone(context, notification);
+        r.play();
 
         // BEGIN_INCLUDE(alarm_onreceive)
         /* 
@@ -71,11 +77,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         // Start the service, keeping the device awake while it is launching.
         startWakefulService(context, service);
         // END_INCLUDE(alarm_onreceive)
-
-
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone r = RingtoneManager.getRingtone(context, notification);
-        r.play();
     }
 
     // BEGIN_INCLUDE(set_alarm)

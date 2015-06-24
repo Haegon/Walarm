@@ -1,14 +1,8 @@
 package com.gohn.walarm.Model;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 import com.gohn.walarm.Manager.AlarmDBMgr;
-
-import java.security.PrivilegedAction;
 
 /**
  * Created by Gohn on 2015. 6. 20..

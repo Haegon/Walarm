@@ -4,12 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Button;
-
-import com.gohn.walarm.R;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by Gohn on 2015. 6. 21..
