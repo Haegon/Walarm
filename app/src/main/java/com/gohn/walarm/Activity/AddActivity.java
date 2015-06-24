@@ -15,7 +15,7 @@ import com.gohn.walarm.Scheduler.AlarmReceiver;
 
 public class AddActivity extends Activity {
 
-    AlarmReceiver alarm = new AlarmReceiver();
+    AlarmReceiver alarmReceiver = new AlarmReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class AddActivity extends Activity {
                 TimePicker time = (TimePicker)findViewById(R.id.timePicker);
                 Alarm a = new Alarm(this,time.getCurrentHour()/12,time.getCurrentHour()%12,time.getCurrentMinute(),1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
-                alarm.setAlarm(this, a.No, time.getCurrentHour(),time.getCurrentMinute());
+                alarmReceiver.setAlarm(this, a.No, time.getCurrentHour(),time.getCurrentMinute());
                 GoHome();
                 return true;
             default:

@@ -91,15 +91,21 @@ public class AlarmListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) itemLayout.getTag();
         }
 
+
+        int hour = mData.get(position).Hour;
+        int min = mData.get(position).Minute;
+
         // 오전오후 표시하기
         if ( mData.get(position).Afternoon == 1 ) {
             viewHolder.mAfternoon.setText("오후");
+            if ( mData.get(position).Hour == 0 ) hour = 12;
         } else {
             viewHolder.mAfternoon.setText("오전");
         }
 
         // 시간 그리기
-        String nowTime = mData.get(position).Hour + ":" + mData.get(position).Minute;
+        String nowTime = String.format("%02d:%02d",hour,min);
+
         viewHolder.mTime.setText(nowTime);
 
         // 체크 박스 표시
@@ -117,9 +123,9 @@ public class AlarmListAdapter extends BaseAdapter {
             @Override
             public void onClick(View arg0) {
                 final boolean isChecked = viewHolder.mCheckBox.isChecked();
-                if (isChecked){
+                if (isChecked) {
                     mData.get(position).On();
-                }else{
+                } else {
                     mData.get(position).Off();
                 }
             }

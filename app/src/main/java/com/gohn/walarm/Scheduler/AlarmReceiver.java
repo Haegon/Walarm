@@ -9,10 +9,13 @@ import android.content.pm.PackageManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Vibrator;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.gohn.walarm.BuildConfig;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 
@@ -27,17 +30,25 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     private AlarmManager alarmMgr;
     // The pending intent that is triggered when the alarm fires.
     private PendingIntent alarmIntent;
+
+    Vibrator vibe;
   
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        if ( vibe == null ) {
+            vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+
         int number = intent.getExtras().getInt("requestCode");
 
-        Log.e("fuck", "requestCode : " + number);
+        Log.e("gohn", "request code : " + number);
 
         Alarm a = AlarmDBMgr.getInstance(context).getAlarm(number);
 
         Toast.makeText(context, String.format("Hello! Alarm Time =>: %d:%d",a.Hour,a.Minute),Toast.LENGTH_SHORT).show();
+
+        vibe.vibrate(1000);
 
         // BEGIN_INCLUDE(alarm_onreceive)
         /* 
@@ -122,8 +133,14 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         // Set the alarm to fire at approximately 8:30 a.m., according to the device's
         // clock, and to repeat once a day.
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        if(Build.VERSION.SDK_INT < 19) {
+            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        } else {
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        }
+
 
         Log.e("gohn", "Alarm Number : " + no);
 
