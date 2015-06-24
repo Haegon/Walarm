@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -52,16 +51,6 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
 
         mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
         setListAdapter(mAdapter);
-
-        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("gohn", "Long Click => " + mAdapter.mData.get(position).Hour + ":" + mAdapter.mData.get(position).Minute);
-                return true;
-            }
-        });
-
     }
 
     @Override
