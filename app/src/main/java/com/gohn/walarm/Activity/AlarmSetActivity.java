@@ -73,10 +73,8 @@ public class AlarmSetActivity extends Activity {
         switch (id) {
             case R.id.action_save:
                 if ( flag == Flags.ADD ) {
-                    TimePicker time = (TimePicker) findViewById(R.id.timePicker_add);
-
-                    int hour = time.getCurrentHour();
-                    int min = time.getCurrentMinute();
+                    int hour = timePicker.getCurrentHour();
+                    int min = timePicker.getCurrentMinute();
 
                     Alarm a = new Alarm(this, hour, min, 1);
                     AlarmDBMgr.getInstance(this).addAlarm(a);
