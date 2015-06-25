@@ -57,6 +57,9 @@ public class AddActivity extends Activity {
                 alarmReceiver.setAlarm(this, a.No, hour, min);
                 GoHome();
                 return true;
+            case R.id.action_cancel_delete:
+                GoHome();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

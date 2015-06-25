@@ -13,10 +13,15 @@ public class Alarm {
     public static String FLAGHOUR = "hour";
     public static String FLAGMINUTE = "minute";
 
-    public int Hour;
-    public int Minute;
-    public int No;
-    public int IsOn;
+
+    public int Name;        // 알람 이름
+    public int Hour;        // 알람 시간
+    public int Minute;      // 알람 분
+    public int No;          // 알람 번호
+    public int IsOn;        // 알람 온오프 상태
+    public int AlarmType;   // 진동-벨소리 선택
+    public int Days;        // 날짜 선택
+    public int Volume;      // 음량
 
     private static final String INTENT_ACTION = "aa";
 

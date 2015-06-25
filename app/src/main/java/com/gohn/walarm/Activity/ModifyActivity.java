@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TimePicker;
 
+import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.R;
@@ -20,9 +22,9 @@ public class ModifyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify);
+        setContentView(R.layout.activity_add);
 
-        tpModify = (TimePicker) findViewById(R.id.timePicker_modify);
+        tpModify = (TimePicker) findViewById(R.id.timePicker_add);
 
         int hour = getIntent().getExtras().getInt(Alarm.FLAGHOUR);
         int min = getIntent().getExtras().getInt(Alarm.FLAGMINUTE);
@@ -34,7 +36,12 @@ public class ModifyActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_modify, menu);
+        getMenuInflater().inflate(R.menu.menu_add, menu);
+
+
+        MenuItem item = menu.findItem(R.id.action_cancel_delete);
+        item.setTitle("삭제");
+
         return true;
     }
 
@@ -66,7 +73,7 @@ public class ModifyActivity extends Activity {
 
                 GoHome();
                 return true;
-            case R.id.action_delete:
+            case R.id.action_cancel_delete:
                 // 기존 알람 삭제
                 AlarmDBMgr.getInstance(this).delAlarm(no);
 

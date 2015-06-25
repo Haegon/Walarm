@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gohn.walarm.Activity.AddActivity">
 
+    <item android:id="@+id/action_cancel_delete"
+        android:title="취소"
+        android:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_save"
         android:title="저장"
         android:showAsAction="ifRoom" />
