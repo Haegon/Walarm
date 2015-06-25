@@ -14,7 +14,7 @@ import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
 
-public class AddActivity extends Activity {
+public class AlarmSetActivity extends Activity {
 
     TimePicker timePicker = null;
     AlarmReceiver alarmReceiver = new AlarmReceiver();

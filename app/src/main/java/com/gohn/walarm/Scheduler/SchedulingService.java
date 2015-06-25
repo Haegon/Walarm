@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-import com.gohn.walarm.Activity.AddActivity;
+import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.R;
 
 import java.io.BufferedReader;
@@ -70,7 +70,7 @@ public class SchedulingService extends IntentService {
                this.getSystemService(Context.NOTIFICATION_SERVICE);
     
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-            new Intent(this, AddActivity.class), 0);
+            new Intent(this, AlarmSetActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)

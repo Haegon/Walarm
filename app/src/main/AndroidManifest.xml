@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.AddActivity"
+            android:name=".Activity.AlarmSetActivity"
             android:label="알람 설정"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait" >

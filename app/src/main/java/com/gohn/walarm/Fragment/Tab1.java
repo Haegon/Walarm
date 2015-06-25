@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.gohn.walarm.Activity.AddActivity;
+import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
@@ -60,7 +60,7 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.btn_add_alarm:
-                Intent intent = new Intent(mContext, AddActivity.class);
+                Intent intent = new Intent(mContext, AlarmSetActivity.class);
                 intent.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
 
                 startActivityForResult(intent, 0);
@@ -78,7 +78,7 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
 
         Log.e("gohn", "Just Click => " + hour + ":" + min);
 
-        Intent intent = new Intent(mContext, AddActivity.class);
+        Intent intent = new Intent(mContext, AlarmSetActivity.class);
         intent.putExtra(Flags.ALARMSETINTENT, Flags.MODIFY);
         intent.putExtra(Alarm.FLAGNUMBER, no);
         intent.putExtra(Alarm.FLAGHOUR, hour);
