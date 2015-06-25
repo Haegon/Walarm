@@ -1,6 +1,5 @@
 package com.gohn.walarm.Activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,23 +12,29 @@ import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
 
-public class AddActivity extends Activity {
+public class ModifyActivity extends Activity {
 
+    TimePicker tpModify = null;
     AlarmReceiver alarmReceiver = new AlarmReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_modify);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        tpModify = (TimePicker) findViewById(R.id.timePicker_modify);
+
+        int hour = getIntent().getExtras().getInt(Alarm.FLAGHOUR);
+        int min = getIntent().getExtras().getInt(Alarm.FLAGMINUTE);
+
+        tpModify.setCurrentHour(hour);
+        tpModify.setCurrentMinute(min);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_modify, menu);
         return true;
     }
 
@@ -45,26 +50,31 @@ public class AddActivity extends Activity {
             return true;
         }
 
+        int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+        int hour = tpModify.getCurrentHour();
+        int min = tpModify.getCurrentMinute();
+
         switch (id) {
-            case R.id.action_save:
-                TimePicker time = (TimePicker)findViewById(R.id.timePicker_add);
+            case R.id.action_modify:
+               // 기존 알람 삭제
+                AlarmDBMgr.getInstance(this).delAlarm(no);
 
-                int hour = time.getCurrentHour();
-                int min = time.getCurrentMinute();
-
-                Alarm a = new Alarm(this, hour, min,1);
+                // 새 알람 추가
+                Alarm a = new Alarm(this,hour,min,1);
                 AlarmDBMgr.getInstance(this).addAlarm(a);
                 alarmReceiver.setAlarm(this, a.No, hour, min);
+
+                GoHome();
+                return true;
+            case R.id.action_delete:
+                // 기존 알람 삭제
+                AlarmDBMgr.getInstance(this).delAlarm(no);
+
                 GoHome();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        GoHome();
     }
 
     public void GoHome() {

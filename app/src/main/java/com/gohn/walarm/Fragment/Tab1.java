@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import com.gohn.walarm.Activity.AddActivity;
+import com.gohn.walarm.Activity.ModifyActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
+import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.R;
 
 @SuppressLint("ValidFragment")
@@ -67,6 +70,17 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Log.e("gohn", "Just Click => " + mAdapter.mData.get(position).Hour + ":" + mAdapter.mData.get(position).Minute);
+        int no = mAdapter.mData.get(position).No;
+        int hour = mAdapter.mData.get(position).Hour;
+        int min = mAdapter.mData.get(position).Minute;
+
+        Log.e("gohn", "Just Click => " + hour + ":" + min);
+
+        Intent intent = new Intent(mContext, ModifyActivity.class);
+        intent.putExtra(Alarm.FLAGNUMBER, no);
+        intent.putExtra(Alarm.FLAGHOUR, hour);
+        intent.putExtra(Alarm.FLAGMINUTE, min);
+
+        startActivityForResult(intent, 0);
     }
 }

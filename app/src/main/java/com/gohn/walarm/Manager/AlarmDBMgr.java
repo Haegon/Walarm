@@ -17,7 +17,6 @@ public class AlarmDBMgr {
     public static final String DB_NAME = "Alarms.db";
     public static final String TABLE_NAME = "Alarms";
 
-    public static final String NOON = "afternoon";
     public static final String HOUR = "hour";
     public static final String MIN = "minute";
     public static final String ISON = "ison";
@@ -50,7 +49,6 @@ public class AlarmDBMgr {
         mDatabase.execSQL(
                 "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
                         "(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        NOON + " INTEGER," +
                         HOUR + " INTEGER," +
                         MIN + " INTEGER," +
                         ISON + " INTEGER);");
@@ -81,7 +79,6 @@ public class AlarmDBMgr {
     public void addAlarm(Alarm alarm) {
 
         ContentValues cv = new ContentValues();
-        cv.put(AlarmDBMgr.NOON, alarm.Afternoon);
         cv.put(AlarmDBMgr.HOUR, alarm.Hour);
         cv.put(AlarmDBMgr.MIN, alarm.Minute);
         cv.put(AlarmDBMgr.ISON, alarm.IsOn);
@@ -90,7 +87,7 @@ public class AlarmDBMgr {
 
     public Alarm getAlarm(int no) {
 
-        String query = String.format("select _id, afternoon, hour, minute, ison from Alarms where _id=?");
+        String query = String.format("select _id, hour, minute, ison from Alarms where _id=?");
         Cursor c = rawQuery(query, new String[]{String.format("%d", no)});
 
         if (c != null) {
@@ -99,17 +96,21 @@ public class AlarmDBMgr {
 
         Alarm a = new Alarm();
         a.No = c.getInt(0);
-        a.Afternoon = c.getInt(1);
-        a.Hour = c.getInt(2);
-        a.Minute = c.getInt(3);
-        a.IsOn = c.getInt(4);
+        a.Hour = c.getInt(1);
+        a.Minute = c.getInt(2);
+        a.IsOn = c.getInt(3);
 
         return a;
     }
 
+    public void delAlarm(int no) {
+        delete("_id=?", new String[]{String.format("%d",no)});
+    }
+
+
     public ArrayList<Alarm> getAlarms() {
 
-        String query = String.format("select _id, afternoon, hour, minute, ison from Alarms");
+        String query = String.format("select _id, hour, minute, ison from Alarms");
         Cursor c = rawQuery(query, null);
 
         ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
@@ -118,10 +119,9 @@ public class AlarmDBMgr {
             while (c.moveToNext()) {
                 Alarm a = new Alarm();
                 a.No = c.getInt(0);
-                a.Afternoon = c.getInt(1);
-                a.Hour = c.getInt(2);
-                a.Minute = c.getInt(3);
-                a.IsOn = c.getInt(4);
+                a.Hour = c.getInt(1);
+                a.Minute = c.getInt(2);
+                a.IsOn = c.getInt(3);
 
                 alarmList.add(a);
             }
