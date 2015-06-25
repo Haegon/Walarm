@@ -3,7 +3,7 @@ package com.gohn.walarm.Model;
 /**
  * Created by HaegonKoh on 2015. 6. 25..
  */
-interface Days {
+public interface Days {
     int SUNDAY = 1;
     int MONDAY = SUNDAY<<1;
     int TUESDAY = SUNDAY<<2;

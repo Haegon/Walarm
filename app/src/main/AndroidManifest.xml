@@ -38,17 +38,7 @@
         </activity>
         <activity
             android:name=".Activity.AddActivity"
-            android:label="알람 추가"
-            android:parentActivityName=".Activity.MainActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gohn.walarm.Activity.MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".Activity.ModifyActivity"
-            android:label="알람 수정"
+            android:label="알람 설정"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data

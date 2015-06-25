@@ -10,12 +10,15 @@ import android.widget.TimePicker;
 
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
+import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
 
 public class AddActivity extends Activity {
 
+    TimePicker timePicker = null;
     AlarmReceiver alarmReceiver = new AlarmReceiver();
+    int flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +27,34 @@ public class AddActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        flag = getIntent().getExtras().getInt(Flags.ALARMSETINTENT);
+
+        timePicker = (TimePicker) findViewById(R.id.timePicker_add);
+
+        // 수정 모드인 경우 알람 시간을 picker에 표시
+        if ( flag == Flags.MODIFY ) {
+            int hour = getIntent().getExtras().getInt(Alarm.FLAGHOUR);
+            int min = getIntent().getExtras().getInt(Alarm.FLAGMINUTE);
+
+            timePicker.setCurrentHour(hour);
+            timePicker.setCurrentMinute(min);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add, menu);
+
+        // 메뉴에서 저장 옆에 버튼 이름을 상황에 맞게 바꿔준다.
+        MenuItem item = menu.findItem(R.id.action_cancel_delete);
+
+        if ( flag == Flags.ADD) {
+            item.setTitle("취소");
+        } else if ( flag == Flags.MODIFY ) {
+            item.setTitle("삭제");
+        }
         return true;
     }
 
@@ -47,17 +72,38 @@ public class AddActivity extends Activity {
 
         switch (id) {
             case R.id.action_save:
-                TimePicker time = (TimePicker)findViewById(R.id.timePicker_add);
+                if ( flag == Flags.ADD ) {
+                    TimePicker time = (TimePicker) findViewById(R.id.timePicker_add);
 
-                int hour = time.getCurrentHour();
-                int min = time.getCurrentMinute();
+                    int hour = time.getCurrentHour();
+                    int min = time.getCurrentMinute();
 
-                Alarm a = new Alarm(this, hour, min,1);
-                AlarmDBMgr.getInstance(this).addAlarm(a);
-                alarmReceiver.setAlarm(this, a.No, hour, min);
+                    Alarm a = new Alarm(this, hour, min, 1);
+                    AlarmDBMgr.getInstance(this).addAlarm(a);
+                    alarmReceiver.setAlarm(this, a.No, hour, min);
+                } else if ( flag == Flags.MODIFY ) {
+                    int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+                    int hour = timePicker.getCurrentHour();
+                    int min = timePicker.getCurrentMinute();
+
+                    // 기존 알람 삭제
+                    AlarmDBMgr.getInstance(this).delAlarm(no);
+
+                    // 새 알람 추가
+                    Alarm a = new Alarm(this,hour,min,1);
+                    AlarmDBMgr.getInstance(this).addAlarm(a);
+                    alarmReceiver.setAlarm(this, a.No, hour, min);
+                }
                 GoHome();
                 return true;
             case R.id.action_cancel_delete:
+                if ( flag == Flags.ADD ) {
+
+                } else if ( flag == Flags.MODIFY ) {
+                    // 기존 알람 삭제
+                    int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+                    AlarmDBMgr.getInstance(this).delAlarm(no);
+                }
                 GoHome();
                 return true;
             default:

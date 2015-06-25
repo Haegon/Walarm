@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TimePicker;
 
 import com.gohn.walarm.Activity.AddActivity;
-import com.gohn.walarm.Activity.ModifyActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
+import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 
 @SuppressLint("ValidFragment")
@@ -61,7 +60,10 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.btn_add_alarm:
-                startActivityForResult(new Intent(mContext, AddActivity.class), 0);
+                Intent intent = new Intent(mContext, AddActivity.class);
+                intent.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
+
+                startActivityForResult(intent, 0);
                 break;
         }
     }
@@ -76,7 +78,8 @@ public class Tab1 extends ListFragment implements View.OnClickListener {
 
         Log.e("gohn", "Just Click => " + hour + ":" + min);
 
-        Intent intent = new Intent(mContext, ModifyActivity.class);
+        Intent intent = new Intent(mContext, AddActivity.class);
+        intent.putExtra(Flags.ALARMSETINTENT, Flags.MODIFY);
         intent.putExtra(Alarm.FLAGNUMBER, no);
         intent.putExtra(Alarm.FLAGHOUR, hour);
         intent.putExtra(Alarm.FLAGMINUTE, min);
