@@ -8,4 +8,6 @@ public interface Flags {
     int MODIFY = ADD<<1;
 
     String ALARMSETINTENT = "AlarmSetIntent";
+    String ALARMNUMBER = "AlarmNumber";
+    String ALARMDAYS = "AlarmDays";
 }

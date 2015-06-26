@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 
 import com.gohn.walarm.Fragment.AlarmSetFragment;
@@ -14,6 +15,7 @@ import com.gohn.walarm.Fragment.RingSetFragment;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.R;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends FragmentActivity {
@@ -27,9 +29,7 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
 		AlarmDBMgr dbMgr = AlarmDBMgr.getInstance(this);
-
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.

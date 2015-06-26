@@ -27,7 +27,7 @@ public class BootReceiver extends BroadcastReceiver {
 
                 if ( a.IsOn == 1 ) {
                     Log.e("gohn", "@@@@@ " + a.No);
-                    alarm.setAlarm(context, a.No, a.Hour,a.Minute);
+                    alarm.setAlarm(context, a.No, a.Hour,a.Minute, a.Days);
                 }
             }
         }

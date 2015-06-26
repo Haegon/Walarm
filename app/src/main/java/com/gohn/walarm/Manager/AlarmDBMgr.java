@@ -19,9 +19,8 @@ public class AlarmDBMgr {
 
     public static final String HOUR = "hour";
     public static final String MIN = "minute";
+    public static final String DAYS = "days";
     public static final String ISON = "ison";
- //   public static final String WORD = "word";
- //  public static final String MEANING = "meaning";
 
     public ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
     static final int DB_VERSION = 1;
@@ -51,6 +50,7 @@ public class AlarmDBMgr {
                         "(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         HOUR + " INTEGER," +
                         MIN + " INTEGER," +
+                        DAYS + " INTEGER," +
                         ISON + " INTEGER);");
     }
 
@@ -81,13 +81,14 @@ public class AlarmDBMgr {
         ContentValues cv = new ContentValues();
         cv.put(AlarmDBMgr.HOUR, alarm.Hour);
         cv.put(AlarmDBMgr.MIN, alarm.Minute);
+        cv.put(AlarmDBMgr.DAYS, alarm.Days);
         cv.put(AlarmDBMgr.ISON, alarm.IsOn);
         insert(cv);
     }
 
     public Alarm getAlarm(int no) {
 
-        String query = String.format("select _id, hour, minute, ison from Alarms where _id=?");
+        String query = String.format("select _id, hour, minute, days, ison from Alarms where _id=?");
         Cursor c = rawQuery(query, new String[]{String.format("%d", no)});
 
         if (c != null) {
@@ -98,7 +99,8 @@ public class AlarmDBMgr {
         a.No = c.getInt(0);
         a.Hour = c.getInt(1);
         a.Minute = c.getInt(2);
-        a.IsOn = c.getInt(3);
+        a.Days = c.getInt(3);
+        a.IsOn = c.getInt(4);
 
         return a;
     }
@@ -110,7 +112,7 @@ public class AlarmDBMgr {
 
     public ArrayList<Alarm> getAlarms() {
 
-        String query = String.format("select _id, hour, minute, ison from Alarms");
+        String query = String.format("select _id, hour, minute, days, ison from Alarms");
         Cursor c = rawQuery(query, null);
 
         ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
@@ -121,7 +123,8 @@ public class AlarmDBMgr {
                 a.No = c.getInt(0);
                 a.Hour = c.getInt(1);
                 a.Minute = c.getInt(2);
-                a.IsOn = c.getInt(3);
+                a.Days = c.getInt(3);
+                a.IsOn = c.getInt(4);
 
                 alarmList.add(a);
             }

@@ -75,6 +75,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         int no = mAdapter.mData.get(position).No;
         int hour = mAdapter.mData.get(position).Hour;
         int min = mAdapter.mData.get(position).Minute;
+        int days = mAdapter.mData.get(position).Days;
 
         Log.e("gohn", "Just Click => " + hour + ":" + min);
 
@@ -83,6 +84,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         intent.putExtra(Alarm.FLAGNUMBER, no);
         intent.putExtra(Alarm.FLAGHOUR, hour);
         intent.putExtra(Alarm.FLAGMINUTE, min);
+        intent.putExtra(Alarm.FLAGDAYS, days);
 
         startActivityForResult(intent, 0);
     }

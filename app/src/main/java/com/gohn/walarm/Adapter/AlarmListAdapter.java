@@ -93,15 +93,20 @@ public class AlarmListAdapter extends BaseAdapter {
         int hour = mData.get(position).Hour;
         int min = mData.get(position).Minute;
 
+        // 시간 그리기
+        String nowTime = String.format("%02d:%02d",hour%12,min);
+
         // 오전오후 표시하기
         if ( mData.get(position).Hour/12 == 1 ) {
             viewHolder.mAfternoon.setText("오후");
+            // 새벽 12시는 0시로 표현하고,
+            // 낮 12시는 12시로 표현하기 위한 코드.
+            if ( hour%12 == 0 )
+                nowTime = String.format("%02d:%02d",hour,min);
         } else {
             viewHolder.mAfternoon.setText("오전");
         }
 
-        // 시간 그리기
-        String nowTime = String.format("%02d:%02d",hour%12,min);
 
         viewHolder.mTime.setText(nowTime);
 

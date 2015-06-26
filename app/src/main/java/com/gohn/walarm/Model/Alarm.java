@@ -12,6 +12,7 @@ public class Alarm {
     public static String FLAGNUMBER = "no";
     public static String FLAGHOUR = "hour";
     public static String FLAGMINUTE = "minute";
+    public static String FLAGDAYS = "days";
 
 
     public int Name;        // 알람 이름
@@ -32,10 +33,11 @@ public class Alarm {
         IsOn = 0;
     }
 
-    public Alarm(Context context, int hour, int minute, int ison) {
+    public Alarm(Context context, int hour, int minute, int days, int ison) {
         No = AlarmDBMgr.getInstance().getLastNo() + 1;
         Hour = hour;
         Minute = minute;
+        Days = days;
         IsOn = ison;
     }
 
