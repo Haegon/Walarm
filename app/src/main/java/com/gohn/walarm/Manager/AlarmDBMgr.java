@@ -15,12 +15,15 @@ import java.util.ArrayList;
 public class AlarmDBMgr {
 
     public static final String DB_NAME = "Alarms.db";
-    public static final String TABLE_NAME = "Alarms";
+    public static final String TABLE_ALARM = "Alarms";
+    public static final String TABLE_SEQ = "AlarmSeq";
 
     public static final String HOUR = "hour";
     public static final String MIN = "minute";
     public static final String DAYS = "days";
     public static final String ISON = "ison";
+
+    public static final String CTIME = "ctime";
 
     public ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
     static final int DB_VERSION = 1;
@@ -46,36 +49,43 @@ public class AlarmDBMgr {
         mDatabase = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
         mDatabase.execSQL(
-                "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                "CREATE TABLE IF NOT EXISTS " + TABLE_ALARM +
                         "(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         HOUR + " INTEGER," +
                         MIN + " INTEGER," +
                         DAYS + " INTEGER," +
                         ISON + " INTEGER);");
+        mDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_SEQ +
+                        "(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT, ctime INTEGER);");
     }
 
     public long insert(ContentValues addRowValue) {
 
-        return mDatabase.insert(TABLE_NAME, null, addRowValue);
+        return mDatabase.insert(TABLE_ALARM, null, addRowValue);
     }
 
     public Cursor query(String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return mDatabase.query(TABLE_NAME, columns, selection, selectionArgs, groupBy, having, orderBy);
+        return mDatabase.query(TABLE_ALARM, columns, selection, selectionArgs, groupBy, having, orderBy);
     }
 
     public int update(ContentValues updateRowValue, String whereClause, String[] whereAgs) {
 
-        return mDatabase.update(TABLE_NAME, updateRowValue, whereClause, whereAgs);
+        return mDatabase.update(TABLE_ALARM, updateRowValue, whereClause, whereAgs);
     }
 
     public int delete(String whereClause, String[] whereAgs) {
-        return mDatabase.delete(TABLE_NAME, whereClause, whereAgs);
+        return mDatabase.delete(TABLE_ALARM, whereClause, whereAgs);
     }
 
     public Cursor rawQuery(String clause, String[] type2) {
         return mDatabase.rawQuery(clause, type2);
     }
 
+    public long increaseSeq(ContentValues addRowValue) {
+
+        return mDatabase.insert(TABLE_SEQ, null, addRowValue);
+    }
     public void addAlarm(Alarm alarm) {
 
         ContentValues cv = new ContentValues();
@@ -84,6 +94,10 @@ public class AlarmDBMgr {
         cv.put(AlarmDBMgr.DAYS, alarm.Days);
         cv.put(AlarmDBMgr.ISON, alarm.IsOn);
         insert(cv);
+
+        ContentValues seq = new ContentValues();
+        seq.put(AlarmDBMgr.CTIME, (int)System.currentTimeMillis()/1000);
+        increaseSeq(seq);
     }
 
     public Alarm getAlarm(int no) {
@@ -141,7 +155,7 @@ public class AlarmDBMgr {
 
     public int getLastNo() {
 
-        String query = String.format("select _id from Alarms order by _id desc limit 1 ");
+        String query = String.format("select _id from AlarmSeq order by _id desc limit 1 ");
         Cursor c = rawQuery(query, new String[]{});
 
         if ( c.getCount() == 0 ) {
