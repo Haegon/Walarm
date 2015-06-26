@@ -10,16 +10,19 @@ import com.gohn.walarm.Model.Alarm;
 
 import java.util.ArrayList;
 
-// BEGIN_INCLUDE(autostart)
+// 부팅후 시스템에서 실행시켜주는 리시버
 public class BootReceiver extends BroadcastReceiver {
     AlarmReceiver alarm = new AlarmReceiver();
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))
         {
+            // DB에서 알람을 싹다 가져온다.
             ArrayList<Alarm> alarmList = AlarmDBMgr.getInstance(context).getAlarms();
 
             for ( int i = 0 ; i < alarmList.size() ; i ++ ) {
+
+                // 알람 하나하나에 대해서 알람이 켜져 있는 경우만 알람 등록을 해준다.
                 Alarm a = alarmList.get(i);
 
                 if ( a.IsOn == 1 ) {
@@ -30,4 +33,3 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 }
-//END_INCLUDE(autostart)

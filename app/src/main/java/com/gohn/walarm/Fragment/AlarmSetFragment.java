@@ -20,20 +20,20 @@ import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 
 @SuppressLint("ValidFragment")
-public class Tab1 extends ListFragment implements View.OnClickListener {
+public class AlarmSetFragment extends ListFragment implements View.OnClickListener {
     Context mContext;
 
     AlarmDBMgr dbMgr = null;
     AlarmListAdapter mAdapter = null;
 
-    public Tab1(Context context) {
+    public AlarmSetFragment(Context context) {
         mContext = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tabs1, null);
+        View view = inflater.inflate(R.layout.fragment_alarmset, null);
 
         dbMgr = AlarmDBMgr.getInstance(mContext);
 

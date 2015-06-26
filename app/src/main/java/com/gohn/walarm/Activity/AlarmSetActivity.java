@@ -16,14 +16,14 @@ import com.gohn.walarm.Scheduler.AlarmReceiver;
 
 public class AlarmSetActivity extends Activity {
 
-    TimePicker timePicker = null;
     AlarmReceiver alarmReceiver = new AlarmReceiver();
+    TimePicker timePicker = null;
     int flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_set);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -45,7 +45,7 @@ public class AlarmSetActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_set, menu);
 
         // 메뉴에서 저장 옆에 버튼 이름을 상황에 맞게 바꿔준다.
         MenuItem item = menu.findItem(R.id.action_cancel_delete);

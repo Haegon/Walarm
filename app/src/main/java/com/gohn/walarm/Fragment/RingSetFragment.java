@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.gohn.walarm.R;
 
 @SuppressLint("ValidFragment")
-public class Tab2 extends Fragment {
+public class RingSetFragment extends Fragment {
 	Context mContext;
 
-	public Tab2(Context context) {
+	public RingSetFragment(Context context) {
 		mContext = context;
 	}
 
@@ -22,7 +22,7 @@ public class Tab2 extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.activity_tabs2, null);
+		View view = inflater.inflate(R.layout.fragment_ringset, null);
 
 		return view;
 	}

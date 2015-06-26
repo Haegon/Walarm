@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 
-import com.gohn.walarm.Fragment.Tab1;
-import com.gohn.walarm.Fragment.Tab2;
+import com.gohn.walarm.Fragment.AlarmSetFragment;
+import com.gohn.walarm.Fragment.RingSetFragment;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.R;
 
@@ -64,9 +64,9 @@ public class MainActivity extends FragmentActivity {
 			// below) with the page number as its lone argument.
 			switch (position) {
 			case 0:
-				return new Tab1(mContext);
+				return new AlarmSetFragment(mContext);
 			case 1:
-				return new Tab2(mContext);
+				return new RingSetFragment(mContext);
 			}
 			return null;
 		}
