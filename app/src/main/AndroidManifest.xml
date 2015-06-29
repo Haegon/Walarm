@@ -39,11 +39,7 @@
         <activity
             android:name=".Activity.AlarmSetActivity"
             android:label="알람 설정"
-            android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gohn.walarm.Activity.MainActivity" />
         </activity>
 
         <receiver android:name=".Scheduler.AlarmReceiver" />

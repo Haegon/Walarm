@@ -2,9 +2,11 @@ package com.gohn.walarm.Activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TimePicker;
@@ -24,6 +26,7 @@ public class AlarmSetActivity extends Activity {
     AlarmReceiver alarmReceiver = new AlarmReceiver();
     TimePicker timePicker = null;
     ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
+    Context context;
     int flag;
 
     @Override
@@ -31,6 +34,7 @@ public class AlarmSetActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
 
+        context = getApplicationContext();
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -87,6 +91,11 @@ public class AlarmSetActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        switch (id) {
+            case android.R.id.home:
+                ExitPopup();
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -118,13 +127,11 @@ public class AlarmSetActivity extends Activity {
                 return true;
             case R.id.action_cancel_delete:
                 if (flag == Flags.ADD) {
-
+                    ExitPopup();
                 } else if (flag == Flags.MODIFY) {
                     // 기존 알람 삭제
-                    int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
-                    AlarmDBMgr.getInstance(this).delAlarm(no);
+                    DeletePopup();
                 }
-                GoHome();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -133,7 +140,8 @@ public class AlarmSetActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        GoHome();
+        // 저장 하지 않고 나가기
+        ExitPopup();
     }
 
     public void GoHome() {
@@ -145,7 +153,7 @@ public class AlarmSetActivity extends Activity {
     public int getDays() {
 
         int size = tbDays.size();
-        int days = 0;
+       int days = 0;
 
         if (size > 0) {
             for (int i = 0; i < size; i++) {
@@ -154,5 +162,43 @@ public class AlarmSetActivity extends Activity {
             }
         }
         return days;
+    }
+
+    private void DeletePopup() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+                        AlarmDBMgr.getInstance(context).delAlarm(no);
+                        GoHome();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(AlarmSetActivity.this);
+        builder.setMessage("삭제 하시겠습니까?").setPositiveButton("예", dialogClickListener)
+                .setNegativeButton("아니오", dialogClickListener).show();
+    }
+
+    private void ExitPopup() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        GoHome();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(AlarmSetActivity.this);
+        builder.setMessage("저장하지 않고 나가시겠습니까?").setPositiveButton("예", dialogClickListener)
+                .setNegativeButton("아니오", dialogClickListener).show();
     }
 }
