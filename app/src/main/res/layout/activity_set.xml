@@ -29,7 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
 
         <ToggleButton
@@ -102,6 +104,28 @@
                 android:singleLine="true"
                 android:imeOptions="actionNext"/>
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="진동"
+                android:id="@+id/switch_vibe"
+                android:checked="true" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="벨소리"
+                android:id="@+id/switch_ring"
+                android:checked="true"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
 
 
     </LinearLayout>

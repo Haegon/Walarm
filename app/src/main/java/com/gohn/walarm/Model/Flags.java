@@ -6,6 +6,9 @@ package com.gohn.walarm.Model;
 public interface Flags {
     int ADD = 1;
     int MODIFY = ADD<<1;
+    int VIBRATION = ADD<<2;
+    int RING = ADD<<3;
+
 
     String ALARMSETINTENT = "AlarmSetIntent";
 
@@ -14,4 +17,5 @@ public interface Flags {
     String ALARMMINUTE = "AlarmMinute";
     String ALARMNUMBER = "AlarmNumber";
     String ALARMDAYS = "AlarmDays";
+    String ALARMOPTIONS = "AlarmOptions";
 }

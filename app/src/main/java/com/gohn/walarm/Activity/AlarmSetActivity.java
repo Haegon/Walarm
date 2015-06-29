@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
@@ -30,6 +31,8 @@ public class AlarmSetActivity extends Activity {
     TimePicker timePicker = null;
     ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
     EditText editName;
+    Switch switchVibe;
+    Switch switchRing;
     Context context;
     int flag;
 
@@ -55,12 +58,16 @@ public class AlarmSetActivity extends Activity {
 
         editName = (EditText) findViewById(R.id.edit_name);
 
+        switchVibe = (Switch)findViewById(R.id.switch_vibe);
+        switchRing = (Switch)findViewById(R.id.switch_ring);
+
         // 수정 모드인 경우 현재 알람 정보를 뷰에 표시시
         if (flag == Flags.MODIFY) {
             String name = getIntent().getExtras().getString(Flags.ALARMNAME);
             int hour = getIntent().getExtras().getInt(Flags.ALARMHOUR);
             int min = getIntent().getExtras().getInt(Flags.ALARMMINUTE);
             int days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
+            int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
 
             editName.setText(name);
             timePicker.setCurrentHour(hour);
@@ -73,6 +80,9 @@ public class AlarmSetActivity extends Activity {
             if ((days & Days.THURSDAY) == Days.THURSDAY) tbDays.get(4).setChecked(true);
             if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
             if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
+
+            if ((days & Flags.VIBRATION) != Flags.VIBRATION) switchVibe.setChecked(false);
+            if ((days & Flags.RING) != Flags.RING) switchVibe.setChecked(false);
         }
     }
 
@@ -109,18 +119,29 @@ public class AlarmSetActivity extends Activity {
             return true;
         }
 
+        // 시간은 타임 피커에서 가져온다.
         int hour = timePicker.getCurrentHour();
         int min = timePicker.getCurrentMinute();
 
+        // 옵션은 스위치에서 가져온다.
+        int options = 0;
+        if ( switchVibe.isChecked() )
+            options += Flags.VIBRATION;
+        if ( switchRing.isChecked() )
+            options += Flags.RING;
+
         // 알람 객체 하나 생성
-        Alarm a = new Alarm(this, editName.getText().toString(), hour, min, getDays(), 1);
+        Alarm a = new Alarm(this, editName.getText().toString(), hour, min, getDays(), 1, options);
 
         switch (id) {
             case R.id.action_save:
                 if (flag == Flags.ADD) {
                     // 알람 추가.
+                    Log.e("gohn", "Options Set : " + a.Options);
+
+
                     AlarmDBMgr.getInstance(this).addAlarm(a);
-                    alarmReceiver.setAlarm(this, a.No, hour, min, a.Days);
+                    alarmReceiver.setAlarm(this, a);
                 } else if (flag == Flags.MODIFY) {
                     int no = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
 
@@ -129,7 +150,7 @@ public class AlarmSetActivity extends Activity {
 
                     // 새 알람 추가
                     AlarmDBMgr.getInstance(this).addAlarm(a);
-                    alarmReceiver.setAlarm(this, a.No, hour, min, a.Days);
+                    alarmReceiver.setAlarm(this, a);
                 }
                 GoHome();
                 return true;

@@ -14,7 +14,7 @@ public class Alarm {
     public int Minute;      // 알람 분
     public int No;          // 알람 번호
     public int IsOn;        // 알람 온오프 상태
-    public int AlarmType;   // 진동-벨소리 선택
+    public int Options;   // 진동-벨소리 선택
     public int Days;        // 날짜 선택
     public int Volume;      // 음량
 
@@ -27,13 +27,14 @@ public class Alarm {
         IsOn = 0;
     }
 
-    public Alarm(Context context, String name, int hour, int minute, int days, int ison) {
+    public Alarm(Context context, String name, int hour, int minute, int days, int ison, int options) {
         Name = name;
         No = AlarmDBMgr.getInstance().getLastNo() + 1;
         Hour = hour;
         Minute = minute;
         Days = days;
         IsOn = ison;
+        Options = options;
     }
 
     public void On() {
