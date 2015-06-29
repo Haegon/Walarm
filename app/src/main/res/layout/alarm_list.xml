@@ -9,33 +9,123 @@
         android:id="@+id/alarm_afternoon"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:textSize="25dp"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
         android:text="오전"
         android:textColor="#333"
-        android:layout_weight="0.10" />
+        android:textSize="25dp" />
 
     <com.gohn.walarm.Extention.TextViewEx
         android:id="@+id/alarm_time"
-        android:layout_width="100dp"
+        android:layout_width="130dp"
         android:layout_height="40dp"
-        android:paddingLeft="10dp"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingLeft="0dp"
+        android:text="12:12"
         android:textColor="#000"
-        android:textSize="35dp"
-        android:layout_weight="0.80" />
+        android:textSize="35dp" />
 
 
-    <CheckBox
-        android:id="@+id/cbAlarm"
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:orientation="vertical">
+
+        <com.gohn.walarm.Extention.TextViewEx
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000"
+            android:gravity="top" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="일"
+                android:textColor="#000"
+                android:id="@+id/text_day_1"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="월"
+                android:textColor="#000"
+                android:id="@+id/text_day_2"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="화"
+                android:textColor="#000"
+                android:id="@+id/text_day_3"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="수"
+                android:textColor="#000"
+                android:id="@+id/text_day_4"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="목"
+                android:textColor="#000"
+                android:id="@+id/text_day_5"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="금"
+                android:textColor="#000"
+                android:id="@+id/text_day_6"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+            <com.gohn.walarm.Extention.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="토"
+                android:textColor="#000"
+                android:id="@+id/text_day_7"
+                android:textSize="15dp"
+                android:gravity="bottom" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:layout_alignParentRight="true"
+        android:layout_height="40dp"
         android:layout_gravity="right"
-        android:layout_weight="0.10" />
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbAlarm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center_vertical" />
+    </LinearLayout>
 
 </LinearLayout>

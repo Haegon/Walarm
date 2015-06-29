@@ -7,8 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
@@ -26,6 +29,7 @@ public class AlarmSetActivity extends Activity {
     AlarmReceiver alarmReceiver = new AlarmReceiver();
     TimePicker timePicker = null;
     ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
+    EditText editName;
     Context context;
     int flag;
 
@@ -49,23 +53,27 @@ public class AlarmSetActivity extends Activity {
         tbDays.add((ToggleButton) findViewById(R.id.tb_friday));
         tbDays.add((ToggleButton) findViewById(R.id.tb_saturday));
 
+        editName = (EditText) findViewById(R.id.edit_name);
+
         // 수정 모드인 경우 현재 알람 정보를 뷰에 표시시
-       if (flag == Flags.MODIFY) {
-           int hour = getIntent().getExtras().getInt(Alarm.FLAGHOUR);
-           int min = getIntent().getExtras().getInt(Alarm.FLAGMINUTE);
-           int days = getIntent().getExtras().getInt(Alarm.FLAGDAYS);
+        if (flag == Flags.MODIFY) {
+            String name = getIntent().getExtras().getString(Flags.ALARMNAME);
+            int hour = getIntent().getExtras().getInt(Flags.ALARMHOUR);
+            int min = getIntent().getExtras().getInt(Flags.ALARMMINUTE);
+            int days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
 
-           timePicker.setCurrentHour(hour);
-           timePicker.setCurrentMinute(min);
+            editName.setText(name);
+            timePicker.setCurrentHour(hour);
+            timePicker.setCurrentMinute(min);
 
-           if ( (days & Days.SUNDAY) == Days.SUNDAY )       tbDays.get(0).setChecked(true);
-           if ( (days & Days.MONDAY) == Days.MONDAY )       tbDays.get(1).setChecked(true);
-           if ( (days & Days.TUESDAY) == Days.TUESDAY )     tbDays.get(2).setChecked(true);
-           if ( (days & Days.WEDNESDAY) == Days.WEDNESDAY ) tbDays.get(3).setChecked(true);
-           if ( (days & Days.THURSDAY) == Days.THURSDAY )   tbDays.get(4).setChecked(true);
-           if ( (days & Days.FRIDAY) == Days.FRIDAY )       tbDays.get(5).setChecked(true);
-           if ( (days & Days.SATURDAY) == Days.SATURDAY )   tbDays.get(6).setChecked(true);
-       }
+            if ((days & Days.SUNDAY) == Days.SUNDAY) tbDays.get(0).setChecked(true);
+            if ((days & Days.MONDAY) == Days.MONDAY) tbDays.get(1).setChecked(true);
+            if ((days & Days.TUESDAY) == Days.TUESDAY) tbDays.get(2).setChecked(true);
+            if ((days & Days.WEDNESDAY) == Days.WEDNESDAY) tbDays.get(3).setChecked(true);
+            if ((days & Days.THURSDAY) == Days.THURSDAY) tbDays.get(4).setChecked(true);
+            if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
+            if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
+        }
     }
 
     @Override
@@ -105,7 +113,7 @@ public class AlarmSetActivity extends Activity {
         int min = timePicker.getCurrentMinute();
 
         // 알람 객체 하나 생성
-        Alarm a = new Alarm(this, hour, min, getDays(), 1);
+        Alarm a = new Alarm(this, editName.getText().toString(), hour, min, getDays(), 1);
 
         switch (id) {
             case R.id.action_save:
@@ -114,7 +122,7 @@ public class AlarmSetActivity extends Activity {
                     AlarmDBMgr.getInstance(this).addAlarm(a);
                     alarmReceiver.setAlarm(this, a.No, hour, min, a.Days);
                 } else if (flag == Flags.MODIFY) {
-                    int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+                    int no = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
 
                     // 기존 알람 삭제
                     AlarmDBMgr.getInstance(this).delAlarm(no);
@@ -153,11 +161,11 @@ public class AlarmSetActivity extends Activity {
     public int getDays() {
 
         int size = tbDays.size();
-       int days = 0;
+        int days = 0;
 
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                if ( tbDays.get(i).isChecked() )
+                if (tbDays.get(i).isChecked())
                     days += Days.DAYLIST[i];
             }
         }
@@ -170,7 +178,7 @@ public class AlarmSetActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        int no = getIntent().getExtras().getInt(Alarm.FLAGNUMBER);
+                        int no = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
                         AlarmDBMgr.getInstance(context).delAlarm(no);
                         GoHome();
                         break;

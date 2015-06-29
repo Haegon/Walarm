@@ -1,6 +1,7 @@
 package com.gohn.walarm.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.CheckBox;
 
 import com.gohn.walarm.Extention.TextViewEx;
 import com.gohn.walarm.Model.Alarm;
+import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.R;
 
 import java.util.ArrayList;
@@ -25,7 +27,9 @@ public class AlarmListAdapter extends BaseAdapter {
     class ViewHolder {
         TextViewEx mAfternoon;
         TextViewEx mTime;
+        TextViewEx mName;
         CheckBox mCheckBox;
+        ArrayList<TextViewEx> mDays;
     }
 
     public AlarmListAdapter(Context context, ArrayList<Alarm> data) {
@@ -73,8 +77,9 @@ public class AlarmListAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
 
         View itemLayout = convertView;
-        final ViewHolder viewHolder;// = null;
+        final ViewHolder viewHolder;
 
+        // 리스트뷰에서 리스트 레이아웃 하나에 들어갈 컴포넌트를 초기화 한다.
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
@@ -83,6 +88,16 @@ public class AlarmListAdapter extends BaseAdapter {
             viewHolder.mAfternoon = (TextViewEx) itemLayout.findViewById(R.id.alarm_afternoon);
             viewHolder.mTime = (TextViewEx) itemLayout.findViewById(R.id.alarm_time);
             viewHolder.mCheckBox = (CheckBox) itemLayout.findViewById(R.id.cbAlarm);
+            viewHolder.mName = (TextViewEx) itemLayout.findViewById(R.id.text_name);
+
+            viewHolder.mDays = new ArrayList<TextViewEx>();
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_1));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_2));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_3));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_4));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_5));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_6));
+            viewHolder.mDays.add((TextViewEx) itemLayout.findViewById(R.id.text_day_7));
 
             itemLayout.setTag(viewHolder);
         } else {
@@ -94,15 +109,15 @@ public class AlarmListAdapter extends BaseAdapter {
         int min = mData.get(position).Minute;
 
         // 시간 그리기
-        String nowTime = String.format("%02d:%02d",hour%12,min);
+        String nowTime = String.format("%02d:%02d", hour % 12, min);
 
         // 오전오후 표시하기
-        if ( mData.get(position).Hour/12 == 1 ) {
+        if (mData.get(position).Hour / 12 == 1) {
             viewHolder.mAfternoon.setText("오후");
             // 새벽 12시는 0시로 표현하고,
             // 낮 12시는 12시로 표현하기 위한 코드.
-            if ( hour%12 == 0 )
-                nowTime = String.format("%02d:%02d",hour,min);
+            if (hour % 12 == 0)
+                nowTime = String.format("%02d:%02d", hour, min);
         } else {
             viewHolder.mAfternoon.setText("오전");
         }
@@ -111,7 +126,7 @@ public class AlarmListAdapter extends BaseAdapter {
         viewHolder.mTime.setText(nowTime);
 
         // 체크 박스 표시
-        if ( mData.get(position).IsOn == 1 ) {
+        if (mData.get(position).IsOn == 1) {
             viewHolder.mCheckBox.setChecked(true);
         } else {
             viewHolder.mCheckBox.setChecked(false);
@@ -132,6 +147,18 @@ public class AlarmListAdapter extends BaseAdapter {
                 }
             }
         });
+
+        // 알람 이름 표시
+        viewHolder.mName.setText(mData.get(position).Name);
+
+        // 요일 색깔 변경
+        int days = mData.get(position).Days;
+        for (int i = 0; i < viewHolder.mDays.size(); i++) {
+            if ((days & Days.DAYLIST[i]) == Days.DAYLIST[i])
+                viewHolder.mDays.get(i).setTextColor(Color.BLACK);
+            else
+                viewHolder.mDays.get(i).setTextColor(Color.GRAY);
+        }
 
         return itemLayout;
     }

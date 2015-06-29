@@ -72,6 +72,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        String name = mAdapter.mData.get(position).Name;
         int no = mAdapter.mData.get(position).No;
         int hour = mAdapter.mData.get(position).Hour;
         int min = mAdapter.mData.get(position).Minute;
@@ -81,10 +82,11 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
         Intent intent = new Intent(mContext, AlarmSetActivity.class);
         intent.putExtra(Flags.ALARMSETINTENT, Flags.MODIFY);
-        intent.putExtra(Alarm.FLAGNUMBER, no);
-        intent.putExtra(Alarm.FLAGHOUR, hour);
-        intent.putExtra(Alarm.FLAGMINUTE, min);
-        intent.putExtra(Alarm.FLAGDAYS, days);
+        intent.putExtra(Flags.ALARMNAME, name);
+        intent.putExtra(Flags.ALARMNUMBER, no);
+        intent.putExtra(Flags.ALARMHOUR, hour);
+        intent.putExtra(Flags.ALARMMINUTE, min);
+        intent.putExtra(Flags.ALARMDAYS, days);
 
         startActivityForResult(intent, 0);
     }
