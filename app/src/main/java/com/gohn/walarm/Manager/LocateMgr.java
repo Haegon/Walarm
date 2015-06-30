@@ -16,12 +16,12 @@ import android.content.DialogInterface;
 /**
  * Created by HaegonKoh on 2015. 6. 30..
  */
-    public class GPSTracker extends Service implements LocationListener {
+public class LocateMgr extends Service implements LocationListener {
 
-        private final Context mContext;
+    private final Context mContext;
 
-        // flag for GPS status
-        boolean isGPSEnabled = false;
+    // flag for GPS status
+    boolean isGPSEnabled = false;
 
     // flag for network status
     boolean isNetworkEnabled = false;
@@ -42,9 +42,17 @@ import android.content.DialogInterface;
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    public GPSTracker(Context context) {
+    private LocateMgr(Context context) {
         this.mContext = context;
         getLocation();
+    }
+
+    private static LocateMgr mLocateMgr = null;
+    public static LocateMgr getInstance(Context context) {
+        if (mLocateMgr == null) {
+            mLocateMgr = new LocateMgr(context);
+        }
+        return mLocateMgr;
     }
 
     public Location getLocation() {
@@ -62,6 +70,7 @@ import android.content.DialogInterface;
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
+                Log.e("walarm", "no network provider is enabled");
             } else {
                 this.canGetLocation = true;
                 // First get location from Network Provider
@@ -70,7 +79,7 @@ import android.content.DialogInterface;
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Network", "Network");
+                    Log.e("Network", "Network Enabled");
                     if (locationManager != null) {
                         location = locationManager
                                 .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -87,7 +96,7 @@ import android.content.DialogInterface;
                                 LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("GPS Enabled", "GPS Enabled");
+                        Log.e("walarm", "GPS Enabled");
                         if (locationManager != null) {
                             location = locationManager
                                     .getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -110,18 +119,18 @@ import android.content.DialogInterface;
     /**
      * Stop using GPS listener
      * Calling this function will stop using GPS in your app
-     */
-    public void stopUsingGPS() {
-        if (locationManager != null) {
-            locationManager.removeUpdates(GPSTracker.this);
+     * */
+    public void stopUsingGPS(){
+        if(locationManager != null){
+            locationManager.removeUpdates(LocateMgr.this);
         }
     }
 
     /**
      * Function to get latitude
-     */
-    public double getLatitude() {
-        if (location != null) {
+     * */
+    public double getLatitude(){
+        if(location != null){
             latitude = location.getLatitude();
         }
 
@@ -131,9 +140,9 @@ import android.content.DialogInterface;
 
     /**
      * Function to get longitude
-     */
-    public double getLongitude() {
-        if (location != null) {
+     * */
+    public double getLongitude(){
+        if(location != null){
             longitude = location.getLongitude();
         }
 
@@ -143,9 +152,8 @@ import android.content.DialogInterface;
 
     /**
      * Function to check GPS/wifi enabled
-     *
      * @return boolean
-     */
+     * */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
@@ -153,8 +161,8 @@ import android.content.DialogInterface;
     /**
      * Function to show settings alert dialog
      * On pressing Settings button will lauch Settings Options
-     */
-    public void showSettingsAlert() {
+     * */
+    public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
@@ -165,7 +173,7 @@ import android.content.DialogInterface;
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
