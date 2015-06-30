@@ -18,9 +18,19 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.gohn.walarm.Manager.AlarmDBMgr;
+import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +43,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     Vibrator vibe;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
 
         // 알람의 셋팅 값을 가져온다.
         int number = intent.getExtras().getInt(Flags.ALARMNUMBER);
@@ -70,9 +80,47 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         // 알람음
         if ((options & Flags.RING) == Flags.RING) {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(context, notification);
-            r.play();
+
+            // 위치 정보를 가져온다.
+            LocateMgr locate = LocateMgr.getInstance(context);
+            final double latitude = locate.getInstance(context).getLatitude();
+            final double longitude = locate.getInstance(context).getLongitude();
+
+            // 벨소리를 울린다.
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // TODO Auto-generated method stub
+                    try {
+
+                        // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
+                        HttpClient client = new DefaultHttpClient();
+                        String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
+                        HttpGet get = new HttpGet(getURL);
+                        HttpResponse responseGet = client.execute(get);
+                        HttpEntity resEntityGet = responseGet.getEntity();
+                        if (resEntityGet != null) {
+                            // 결과를 처리합니다.
+                            String res = EntityUtils.toString(resEntityGet);
+
+                            JSONObject jObject = new JSONObject(res);
+                            JSONArray weather = jObject.getJSONArray("weather");
+                            JSONObject item = (JSONObject) weather.get(0);
+                            int wcode = item.getInt("id");
+                            String icon = item.getString("icon");
+
+                            Log.e("ID", "weather code : " + wcode);
+
+                            // 여기서 실제로 알람 울림
+                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                            Ringtone r = RingtoneManager.getRingtone(context, notification);
+                            r.play();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
         }
 
         // 앱이 내려가 있어도 알람이 울릴 수 있게 해주는 부분

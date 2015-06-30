@@ -43,39 +43,6 @@ public class MainActivity extends FragmentActivity {
         // gps 매니저 초기화
         gps = LocateMgr.getInstance(this);
 
-        final double latitude = gps.getInstance(this).getLatitude();
-        final double longitude = gps.getInstance(this).getLongitude();
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
-                    Log.i("REQUEST", getURL);
-                    HttpGet get = new HttpGet(getURL);
-                    HttpResponse responseGet = client.execute(get);
-                    HttpEntity resEntityGet = responseGet.getEntity();
-                    if (resEntityGet != null) {
-                        // 결과를 처리합니다.
-                        String res = EntityUtils.toString(resEntityGet);
-
-                        JSONObject jObject = new JSONObject(res);
-                        JSONArray weather = jObject.getJSONArray("weather");
-                        JSONObject item = (JSONObject) weather.get(0);
-                        int wcode = item.getInt("id");
-
-                        Log.e("ID", "wcode : " + wcode);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
         // GPS 기능이 꺼져 있으면 키도록 다이얼로그 띄움
         if (!gps.canGetLocation()) {
             gps.getInstance(this).showSettingsAlert();
