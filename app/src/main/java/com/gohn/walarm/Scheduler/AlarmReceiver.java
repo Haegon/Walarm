@@ -21,6 +21,7 @@ import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
+import com.gohn.walarm.Model.Weather;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -107,7 +108,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                             int wcode = item.getInt("id");
                             String icon = item.getString("icon");
 
-                            Log.e("ID", "weather code : " + wcode);
+                            Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
 
                             // 여기서 실제로 알람 울림
                             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

@@ -13,7 +13,7 @@ public class Weather {
 
     // http://openweathermap.org/weather-conditions
     // 여기에서 코드 가져와서 날씨를 정해줌.
-    public static int getWeather(int code) {
+    public static int get(int code) {
         if ( code < 600 )
             return RAIN;
         if ( code < 700 )
