@@ -1,33 +1,76 @@
 package com.gohn.walarm.Activity;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.gohn.walarm.Fragment.AlarmSetFragment;
 import com.gohn.walarm.Fragment.RingSetFragment;
 import com.gohn.walarm.Manager.AlarmDBMgr;
+import com.gohn.walarm.Manager.GPSTracker;
 import com.gohn.walarm.Util.BackPressCloseHandler;
 import com.gohn.walarm.R;
 
 import java.util.Locale;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements LocationListener {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	BackPressCloseHandler backPressCloseHandler;
+	GPSTracker gps;
 
 	ViewPager mViewPager;
+
+	@Override
+	public void onLocationChanged(Location location) {
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		Log.d("Latitude","disable");
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		Log.d("Latitude","enable");
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		Log.d("Latitude","status");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		gps = new GPSTracker(MainActivity.this);
+
+		// check if GPS enabled
+		if(gps.canGetLocation()){
+
+			double latitude = gps.getLatitude();
+			double longitude = gps.getLongitude();
+
+			// \n is for new line
+			Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+		}else{
+			// can't get location
+			// GPS or Network is not enabled
+			// Ask user to enable GPS/network in settings
+			gps.showSettingsAlert();
+		}
 
 		AlarmDBMgr dbMgr = AlarmDBMgr.getInstance(this);
 		backPressCloseHandler = new BackPressCloseHandler(this);
