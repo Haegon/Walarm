@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.provider.CalendarContract;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 import android.widget.Toast;
@@ -33,7 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
