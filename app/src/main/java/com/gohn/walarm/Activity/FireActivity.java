@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,7 +45,14 @@ public class FireActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire);
 
+        // 화면이 꺼져있을때도 잠금 화면 위로 액티비티가 보이도록 하는 설정
+        final Window win = getWindow();
+        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
+        // 버튼 이벤트 여기서 함
         ((Button)findViewById(R.id.btn_off)).setOnClickListener(this);
 
         int number = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
@@ -148,12 +157,18 @@ public class FireActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Log.e("gohn","@@@@@ 111");
         switch (v.getId()) {
             case R.id.btn_off:
-                Log.e("gohn","@@@@@ 222");
                 ringtone.stop();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        moveTaskToBack(true);
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }
