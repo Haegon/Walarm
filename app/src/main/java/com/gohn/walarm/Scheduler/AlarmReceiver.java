@@ -6,31 +6,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
-import android.os.Vibrator;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.gohn.walarm.Manager.AlarmDBMgr;
-import com.gohn.walarm.Manager.LocateMgr;
+import com.gohn.walarm.Activity.FireActivity;
 import com.gohn.walarm.Model.Alarm;
-import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
-import com.gohn.walarm.Model.Weather;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -39,88 +22,122 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;  // 알람에 하나에 대한 인텐트
 
-    Vibrator vibe;
+
 
     @Override
     public void onReceive(final Context context, Intent intent) {
 
         // 알람의 셋팅 값을 가져온다.
-        int number = intent.getExtras().getInt(Flags.ALARMNUMBER);
-        int days = intent.getExtras().getInt(Flags.ALARMDAYS);
-        int options = intent.getExtras().getInt(Flags.ALARMOPTIONS);
-
-        Log.e("gohn", "Number : " + number + ", Days : " + days);
-
-        Alarm a = AlarmDBMgr.getInstance(context).getAlarm(number);
-
-        // 알람을 울리는 날이 아니면 아무것도 안함.
-        // 캘린더는 일월화수목금토 가 1,2,3,4,5,6,7 로 되어있음
-        // 배열에 맞추기 위해 -1을 함
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
-        day = Days.DAYLIST[day];
-        Log.e("gohn", "Receive DAY : " + day);
-        Log.e("gohn", "Options : " + options);
-
-        if ((days & day) != day) return;
-
-        // 알람이 꺼져있으면 아무것도 안함
-        if (a.IsOn == 0) return;
-
-        // 진동을 울려주자
-        if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
-            if (vibe == null) {
-                vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                vibe.vibrate(1000);
-            }
-        }
+//        int number = intent.getExtras().getInt(Flags.ALARMNUMBER);
+//        int days = intent.getExtras().getInt(Flags.ALARMDAYS);
+//        int options = intent.getExtras().getInt(Flags.ALARMOPTIONS);
+//
+//        Log.e("gohn", "Number : " + number + ", Days : " + days);
+//
+//        Alarm a = AlarmDBMgr.getInstance(context).getAlarm(number);
+//
+//        // 알람을 울리는 날이 아니면 아무것도 안함.
+//        // 캘린더는 일월화수목금토 가 1,2,3,4,5,6,7 로 되어있음
+//        // 배열에 맞추기 위해 -1을 함
+//        int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
+//        day = Days.DAYLIST[day];
+//        Log.e("gohn", "Receive DAY : " + day);
+//        Log.e("gohn", "Options : " + options);
+//
+//        if ((days & day) != day) return;
+//
+//        // 알람이 꺼져있으면 아무것도 안함
+//        if (a.IsOn == 0) return;
+//
+//        // 진동을 울려주자
+//        if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
+//            if (vibe == null) {
+//                vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+//                vibe.vibrate(1000);
+//            }
+//        }
 
         // 토스트 메세지
-        Toast.makeText(context, String.format("Hello! Alarm Time =>: %d:%d", a.Hour, a.Minute), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, String.format("Hello! Alarm Time =>: %d:%d", a.Hour, a.Minute), Toast.LENGTH_SHORT).show();
+
+        intent.setClass(context,FireActivity.class);
+       // Intent i = new Intent(context, testActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(intent);
 
         // 알람음
-        if ((options & Flags.RING) == Flags.RING) {
+//        if ((options & Flags.RING) == Flags.RING) {
+//
+//            // 위치 정보를 가져온다.
+//            LocateMgr locate = LocateMgr.getInstance(context);
+//            final double latitude = locate.getInstance(context).getLatitude();
+//            final double longitude = locate.getInstance(context).getLongitude();
+//
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//            builder.setMessage("알람 시간 입니다.")
+//                    .setCancelable(false)
+//                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            Toast.makeText(context, String.format("Fuck"), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
 
-            // 위치 정보를 가져온다.
-            LocateMgr locate = LocateMgr.getInstance(context);
-            final double latitude = locate.getInstance(context).getLatitude();
-            final double longitude = locate.getInstance(context).getLongitude();
+//            ((Activity)context).runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                    builder.setMessage("알람 시간 입니다.")
+//                            .setCancelable(false)
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//                                    Toast.makeText(context, String.format("Fuck"), Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                    AlertDialog alert = builder.create();
+//                    alert.show();
+//                }
+//            });
 
-            // 벨소리를 울린다.
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    try {
-                        // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
-                        HttpClient client = new DefaultHttpClient();
-                        String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
-                        HttpGet get = new HttpGet(getURL);
-                        HttpResponse responseGet = client.execute(get);
-                        HttpEntity resEntityGet = responseGet.getEntity();
-                        if (resEntityGet != null) {
-                            // 결과를 처리합니다.
-                            String res = EntityUtils.toString(resEntityGet);
-
-                            JSONObject jObject = new JSONObject(res);
-                            JSONArray weather = jObject.getJSONArray("weather");
-                            JSONObject item = (JSONObject) weather.get(0);
-                            int wcode = item.getInt("id");
-                            String icon = item.getString("icon");
-
-                            Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
-
-                            // 여기서 실제로 알람 울림
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            // 날씨 코드로부터 날씨를 가져오고, 날씨로 날씨의 벨소리를 가져와서 울려준다.
-                            Ringtone r = RingtoneManager.getRingtone(context, AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
-                            r.play();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
+//            // 벨소리를 울린다.
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    // TODO Auto-generated method stub
+//                    try {
+//                        // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
+//                        HttpClient client = new DefaultHttpClient();
+//                        String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
+//                        HttpGet get = new HttpGet(getURL);
+//                        HttpResponse responseGet = client.execute(get);
+//                        HttpEntity resEntityGet = responseGet.getEntity();
+//                        if (resEntityGet != null) {
+//                            // 결과를 처리합니다.
+//                            String res = EntityUtils.toString(resEntityGet);
+//
+//                            JSONObject jObject = new JSONObject(res);
+//                            JSONArray weather = jObject.getJSONArray("weather");
+//                            JSONObject item = (JSONObject) weather.get(0);
+//                            int wcode = item.getInt("id");
+//                            String icon = item.getString("icon");
+//
+//                            Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
+//
+//                            // 여기서 실제로 알람 울림
+//                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                            // 날씨 코드로부터 날씨를 가져오고, 날씨로 날씨의 벨소리를 가져와서 울려준다.
+//                            Ringtone r = RingtoneManager.getRingtone(context, AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
+//                            r.play();
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }).start();
+//        }
 
         // 앱이 내려가 있어도 알람이 울릴 수 있게 해주는 부분
         Intent service = new Intent(context, SchedulingService.class);

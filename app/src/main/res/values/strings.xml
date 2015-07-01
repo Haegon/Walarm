@@ -25,6 +25,7 @@
     <string name="no_doodle">알람 시간 입니다.</string>
     <string name="connection_error">Connection error.</string>
     <string name="title_activity_modify">ModifyActivity</string>
+    <string name="title_activity_fire">FireActivity</string>
 
 
 </resources>

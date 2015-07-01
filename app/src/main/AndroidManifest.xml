@@ -55,6 +55,10 @@
 
         <service android:name=".Scheduler.SchedulingService" />
 
+        <activity
+            android:name=".Activity.FireActivity"
+            android:label="@string/title_activity_fire" >
+        </activity>
     </application>
 
 </manifest>

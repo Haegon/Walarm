@@ -44,7 +44,10 @@ public class AlarmSetActivity extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        flag = getIntent().getExtras().getInt(Flags.ALARMSETINTENT);
+        if ( getIntent().getExtras() == null )
+            flag = Flags.ADD;
+        else
+            flag = getIntent().getExtras().getInt(Flags.ALARMSETINTENT);
 
         timePicker = (TimePicker) findViewById(R.id.timePicker_add);
         tbDays.add((ToggleButton) findViewById(R.id.tb_sunday));
