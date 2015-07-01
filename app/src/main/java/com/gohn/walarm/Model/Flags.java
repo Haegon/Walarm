@@ -18,4 +18,6 @@ public interface Flags {
     String ALARMNUMBER = "AlarmNumber";
     String ALARMDAYS = "AlarmDays";
     String ALARMOPTIONS = "AlarmOptions";
+
+    String RINGWEATHER = "RingWeather";
 }

@@ -11,6 +11,8 @@ public class Weather {
     public static int GRAY = 3;
     public static int EXTREAM = 4;
 
+    public static int[] WEATHERS = {CLEAR, RAIN, SNOW, GRAY, EXTREAM};
+
     // http://openweathermap.org/weather-conditions
     // 여기에서 코드 가져와서 날씨를 정해줌.
     public static int get(int code) {

@@ -91,7 +91,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 public void run() {
                     // TODO Auto-generated method stub
                     try {
-
                         // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
                         HttpClient client = new DefaultHttpClient();
                         String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
@@ -112,7 +111,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
                             // 여기서 실제로 알람 울림
                             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            Ringtone r = RingtoneManager.getRingtone(context, notification);
+                            // 날씨 코드로부터 날씨를 가져오고, 날씨로 날씨의 벨소리를 가져와서 울려준다.
+                            Ringtone r = RingtoneManager.getRingtone(context, AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
                             r.play();
                         }
                     } catch (Exception e) {

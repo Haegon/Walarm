@@ -9,12 +9,12 @@ import com.gohn.walarm.Manager.AlarmDBMgr;
  */
 public class Alarm {
 
-    public String Name;        // 알람 이름
+    public String Name;     // 알람 이름
     public int Hour;        // 알람 시간
     public int Minute;      // 알람 분
     public int No;          // 알람 번호
     public int IsOn;        // 알람 온오프 상태
-    public int Options;   // 진동-벨소리 선택
+    public int Options;     // 진동-벨소리 선택
     public int Days;        // 날짜 선택
     public int Volume;      // 음량
 

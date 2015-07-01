@@ -58,8 +58,6 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
-        Log.e("gohn","@@@@@@@@@@ 111");
-
         switch (v.getId()) {
             case R.id.btn_add_alarm:
                 Intent intent = new Intent(mContext, AlarmSetActivity.class);
