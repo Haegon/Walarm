@@ -29,7 +29,6 @@ public class ButtonEx extends Button {
             @Override
             public void onClick(View v) {
                 l.onClick(v);
-
             }
         });
     }
