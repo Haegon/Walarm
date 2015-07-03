@@ -122,31 +122,23 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        // 유저가 선택을 취소 했을때.
+        if ( data == null ) return;
+
+        // 벨소리 선택 팝업에서 선택된 알람이 인텐트에 담겨온다.
         Uri uri = (Uri)data.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+        if ( uri == null ) return;
+
         Ringtone ringtone = RingtoneManager.getRingtone(mContext, uri);
+
         String title = ringtone.getTitle(mContext);
 
         dbMgr.updateRing(requestCode, uri.toString());
 
-//        rings.get(requestCode).setText(title);
         updateRingName();
 
         Log.e("gohn", "req code : " + requestCode);
         Log.e("gohn", "data : " + uri);
-
-
-//        //Iterator<String> keyset= data.getExtras().keySet().iterator();
-//        //while( keyset.hasNext())
-//        //    Log.v("key" , keyset.next());
-//
-//        //Data i get as NULL, it should be valid intent
-//        //super.onActivityResult(requestCode, resultCode, data);
-////
-//        switch (requestCode) {
-//
-//            case 100:
-//
-//
-//        }
     }
 }

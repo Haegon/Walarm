@@ -2,6 +2,7 @@ package com.gohn.walarm.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -14,12 +15,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
-import com.gohn.walarm.Model.Alarm;
-import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.Model.Weather;
 import com.gohn.walarm.R;
@@ -32,8 +30,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.Calendar;
 
 public class FireActivity extends Activity implements View.OnClickListener{
 
@@ -55,26 +51,8 @@ public class FireActivity extends Activity implements View.OnClickListener{
         // 버튼 이벤트 여기서 함
         ((Button)findViewById(R.id.btn_off)).setOnClickListener(this);
 
-        int number = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
-        int days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
+        // 진동, 벨 옵션을 가져온다.
         int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
-
-        Log.e("gohn", "Number : " + number + ", Days : " + days);
-
-        Alarm a = AlarmDBMgr.getInstance(getApplicationContext()).getAlarm(number);
-
-        // 알람을 울리는 날이 아니면 아무것도 안함.
-        // 캘린더는 일월화수목금토 가 1,2,3,4,5,6,7 로 되어있음
-        // 배열에 맞추기 위해 -1을 함
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
-        day = Days.DAYLIST[day];
-        Log.e("gohn", "Receive DAY : " + day);
-        Log.e("gohn", "Options : " + options);
-
-        if ((days & day) != day) return;
-
-        // 알람이 꺼져있으면 아무것도 안함
-        if (a.IsOn == 0) return;
 
         // 진동을 울려주자
         if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
@@ -84,10 +62,7 @@ public class FireActivity extends Activity implements View.OnClickListener{
             }
         }
 
-        // 토스트 메세지
-        Toast.makeText(getApplicationContext(), String.format("Hello! Alarm Time =>: %d:%d", a.Hour, a.Minute), Toast.LENGTH_SHORT).show();
-
-        // 알람음
+        // 알람을 울려주자
         if ((options & Flags.RING) == Flags.RING) {
 
             // 위치 정보를 가져온다.
@@ -167,8 +142,13 @@ public class FireActivity extends Activity implements View.OnClickListener{
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
-        moveTaskToBack(true);
-        finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
+//        moveTaskToBack(true);
+//        finish();
+//        android.os.Process.killProcess(android.os.Process.myPid());
+
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
     }
 }

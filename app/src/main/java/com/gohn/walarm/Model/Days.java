@@ -1,9 +1,5 @@
 package com.gohn.walarm.Model;
 
-import android.content.Intent;
-
-import java.util.ArrayList;
-
 /**
  * Created by HaegonKoh on 2015. 6. 25..
  */

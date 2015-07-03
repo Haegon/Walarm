@@ -13,9 +13,8 @@ import com.gohn.walarm.Fragment.AlarmSetFragment;
 import com.gohn.walarm.Fragment.RingSetFragment;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
-import com.gohn.walarm.Util.BackPressCloseHandler;
 import com.gohn.walarm.R;
-
+import com.gohn.walarm.Util.BackPressCloseHandler;
 
 import java.util.Locale;
 

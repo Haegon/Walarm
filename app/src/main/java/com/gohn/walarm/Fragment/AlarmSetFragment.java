@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
-import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 
