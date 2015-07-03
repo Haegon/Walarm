@@ -2,7 +2,6 @@ package com.gohn.walarm.Activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -141,14 +140,6 @@ public class FireActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onBackPressed() {
-        // TODO Auto-generated method stub
-//        moveTaskToBack(true);
-//        finish();
-//        android.os.Process.killProcess(android.os.Process.myPid());
-
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
+        finish();
     }
 }

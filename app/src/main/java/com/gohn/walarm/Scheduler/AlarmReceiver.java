@@ -29,10 +29,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
 
-        // FireActivity에 모든 알람 액션을 위임한다.
-        intent.setClass(context,FireActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         int number = intent.getExtras().getInt(Flags.ALARMNUMBER);
         int days = intent.getExtras().getInt(Flags.ALARMDAYS);
         int options = intent.getExtras().getInt(Flags.ALARMOPTIONS);
@@ -54,6 +50,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         // 알람이 꺼져있으면 아무것도 안함
         if (a.IsOn == 0) return;
 
+        // FireActivity에 모든 알람 액션을 위임한다.
+        intent.setClass(context,FireActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
 
         // 로컬 푸시
