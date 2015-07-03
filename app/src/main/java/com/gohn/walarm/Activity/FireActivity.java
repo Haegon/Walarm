@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -94,7 +93,6 @@ public class FireActivity extends Activity implements View.OnClickListener{
                             Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
 
                             // 여기서 실제로 알람 울림
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                             // 날씨 코드로부터 날씨를 가져오고, 날씨로 날씨의 벨소리를 가져와서 울려준다.
                             ringtone = RingtoneManager.getRingtone(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
                             ringtone.play();
