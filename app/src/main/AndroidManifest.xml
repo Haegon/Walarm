@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gohn.walarm"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -27,11 +27,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,13 +41,12 @@
         <activity
             android:name=".Activity.AlarmSetActivity"
             android:label="알람 설정"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <receiver android:name=".Scheduler.AlarmReceiver" />
         <receiver
             android:name=".Scheduler.BootReceiver"
-            android:enabled="false" >
+            android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -57,8 +56,8 @@
 
         <activity
             android:name=".Activity.FireActivity"
-            android:label="@string/title_activity_fire" >
-        </activity>
+            android:label="@string/title_activity_fire"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

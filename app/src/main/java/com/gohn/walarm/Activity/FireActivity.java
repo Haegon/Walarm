@@ -2,8 +2,8 @@ package com.gohn.walarm.Activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -29,10 +29,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class FireActivity extends Activity implements View.OnClickListener{
+public class FireActivity extends Activity implements View.OnClickListener {
 
     Vibrator vibe;
-    Ringtone ringtone;
+    MediaPlayer ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class FireActivity extends Activity implements View.OnClickListener{
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         // 버튼 이벤트 여기서 함
-        ((Button)findViewById(R.id.btn_off)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_off)).setOnClickListener(this);
 
         // 진동, 벨 옵션을 가져온다.
         int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
@@ -56,7 +56,8 @@ public class FireActivity extends Activity implements View.OnClickListener{
         if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
             if (vibe == null) {
                 vibe = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vibe.vibrate(1000);
+                long[] pattern = {1000, 1000, 1000, 1000, 1000, 1000};
+                vibe.vibrate(pattern, 2);
             }
         }
 
@@ -92,10 +93,15 @@ public class FireActivity extends Activity implements View.OnClickListener{
 
                             Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
 
-                            // 여기서 실제로 알람 울림
-                            // 날씨 코드로부터 날씨를 가져오고, 날씨로 날씨의 벨소리를 가져와서 울려준다.
-                            ringtone = RingtoneManager.getRingtone(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
-                            ringtone.play();
+                            ring = new MediaPlayer();
+                            ring.setDataSource(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
+                            final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                            if (audioManager.getStreamVolume(AudioManager.STREAM_RING) != 0) {
+                                ring.setAudioStreamType(AudioManager.STREAM_RING);
+                                ring.setLooping(true);
+                                ring.prepare();
+                                ring.start();
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -131,7 +137,8 @@ public class FireActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_off:
-                ringtone.stop();
+                vibe.cancel();
+                ring.stop();
                 break;
         }
     }
