@@ -108,6 +108,19 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     }
 
 
+    public void setSnooze(Context context, Intent intent) {
+
+        Intent i = new Intent(context, AlarmReceiver.class);
+        i.putExtra(Flags.ALARMNUMBER, intent.getExtras().getInt(Flags.ALARMNUMBER));
+        i.putExtra(Flags.ALARMDAYS, intent.getExtras().getInt(Flags.ALARMDAYS));
+        i.putExtra(Flags.ALARMOPTIONS, intent.getExtras().getInt(Flags.ALARMOPTIONS));
+        alarmIntent = PendingIntent.getBroadcast(context, intent.getExtras().getInt(Flags.ALARMNUMBER), i, 0);
+
+        AlarmManager manager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000*60*5, alarmIntent);
+    }
+
+
     public void cancelAlarm(Context context) {
         // If the alarm has been set, cancel it.
         if (alarmMgr != null) {

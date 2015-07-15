@@ -9,9 +9,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Off"
+        android:text="끄기"
         android:id="@+id/btn_off"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="스누즈"
+        android:id="@+id/btn_snooze"
+        android:layout_below="@+id/btn_off"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp" />
 
 </RelativeLayout>

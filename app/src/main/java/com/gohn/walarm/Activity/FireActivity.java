@@ -2,6 +2,7 @@ package com.gohn.walarm.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.Model.Weather;
 import com.gohn.walarm.R;
+import com.gohn.walarm.Scheduler.AlarmReceiver;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,8 +33,14 @@ import org.json.JSONObject;
 
 public class FireActivity extends Activity implements View.OnClickListener {
 
+    AlarmReceiver alarmReceiver = new AlarmReceiver();
     Vibrator vibe;
     MediaPlayer ring;
+    int number;
+    int options;
+    int days;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +56,15 @@ public class FireActivity extends Activity implements View.OnClickListener {
 
         // 버튼 이벤트 여기서 함
         ((Button) findViewById(R.id.btn_off)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_snooze)).setOnClickListener(this);
+
+        // 인텐트를 가져온다.
+        intent = getIntent();
 
         // 진동, 벨 옵션을 가져온다.
-        int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
+        options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
+        number = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
+        days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
 
         // 진동을 울려주자
         if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
@@ -137,14 +151,28 @@ public class FireActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_off:
-                vibe.cancel();
-                ring.stop();
+                stop();
+                break;
+            case R.id.btn_snooze:
+                if ( intent != null ) {
+                    stop();
+                    alarmReceiver.setSnooze(this, intent);
+                } else
+                    Log.e("gohn","Intent is null");
+                break;
+            default:
+                Log.e("gohn","Unknown Button");
                 break;
         }
     }
 
     @Override
     public void onBackPressed() {
-        finish();
+        //finish();
+    }
+
+    void stop() {
+        vibe.cancel();
+        ring.stop();
     }
 }
