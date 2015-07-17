@@ -23,7 +23,7 @@ public class TextViewEx extends TextView {
     }
 
     public void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "bd_font.mp3");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "man.mp3");
         setTypeface(tf);
     }
 }

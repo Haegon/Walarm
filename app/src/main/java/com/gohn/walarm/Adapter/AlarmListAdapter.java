@@ -2,18 +2,23 @@ package com.gohn.walarm.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import com.gohn.walarm.Extention.TextViewEx;
 import com.gohn.walarm.Model.Alarm;
+import com.gohn.walarm.Model.Colors;
 import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Gohn on 2015. 6. 20..
@@ -25,7 +30,7 @@ public class AlarmListAdapter extends BaseAdapter {
     LayoutInflater mLayout = null;
 
     class ViewHolder {
-        TextViewEx mAfternoon;
+        ImageView mImage;
         TextViewEx mTime;
         TextViewEx mName;
         CheckBox mCheckBox;
@@ -83,9 +88,14 @@ public class AlarmListAdapter extends BaseAdapter {
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
+//            Random rnd = new Random();
+//            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+//            ColorDrawable colorDrawable = new ColorDrawable(color);
+            itemLayout.setBackground(Colors.getRandomColor(position));
+
             viewHolder = new ViewHolder();
 
-            viewHolder.mAfternoon = (TextViewEx) itemLayout.findViewById(R.id.alarm_afternoon);
+            viewHolder.mImage = (ImageView)itemLayout.findViewById(R.id.image_afternoon);
             viewHolder.mTime = (TextViewEx) itemLayout.findViewById(R.id.alarm_time);
             viewHolder.mCheckBox = (CheckBox) itemLayout.findViewById(R.id.cbAlarm);
             viewHolder.mName = (TextViewEx) itemLayout.findViewById(R.id.text_name);
@@ -112,14 +122,14 @@ public class AlarmListAdapter extends BaseAdapter {
         String nowTime = String.format("%02d:%02d", hour % 12, min);
 
         // 오전오후 표시하기
-        if (mData.get(position).Hour / 12 == 1) {
-            viewHolder.mAfternoon.setText("오후");
+        if (mData.get(position).Hour > 5 && mData.get(position).Hour < 18) {
+            viewHolder.mImage.setImageResource(R.drawable.w_day);
             // 새벽 12시는 0시로 표현하고,
             // 낮 12시는 12시로 표현하기 위한 코드.
             if (hour % 12 == 0)
                 nowTime = String.format("%02d:%02d", hour, min);
         } else {
-            viewHolder.mAfternoon.setText("오전");
+            viewHolder.mImage.setImageResource(R.drawable.w_night);
         }
 
 
@@ -155,7 +165,7 @@ public class AlarmListAdapter extends BaseAdapter {
         int days = mData.get(position).Days;
         for (int i = 0; i < viewHolder.mDays.size(); i++) {
             if ((days & Days.DAYLIST[i]) == Days.DAYLIST[i])
-                viewHolder.mDays.get(i).setTextColor(Color.BLACK);
+                viewHolder.mDays.get(i).setTextColor(Color.WHITE);
             else
                 viewHolder.mDays.get(i).setTextColor(Color.GRAY);
         }
