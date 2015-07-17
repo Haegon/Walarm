@@ -34,7 +34,7 @@ public class MainActivity extends FragmentActivity {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(R.color.bg_color);
+        window.setStatusBarColor(getResources().getColor(R.color.bg_color));
 
         // gps 매니저 초기화
         gps = LocateMgr.getInstance(this);
