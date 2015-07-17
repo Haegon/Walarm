@@ -25,7 +25,6 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
     Context mContext;
     AlarmDBMgr dbMgr;
     ArrayList<ButtonEx> buttons = new ArrayList<ButtonEx>();
-    ArrayList<TextViewEx> titles = new ArrayList<TextViewEx>();
     ArrayList<TextViewEx> rings = new ArrayList<TextViewEx>();
 
 
@@ -45,12 +44,6 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_3));
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_4));
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_5));
-
-        titles.add((TextViewEx) view.findViewById(R.id.text_weather_1));
-        titles.add((TextViewEx) view.findViewById(R.id.text_weather_2));
-        titles.add((TextViewEx) view.findViewById(R.id.text_weather_3));
-        titles.add((TextViewEx) view.findViewById(R.id.text_weather_4));
-        titles.add((TextViewEx) view.findViewById(R.id.text_weather_5));
 
         rings.add((TextViewEx) view.findViewById(R.id.text_ring_1));
         rings.add((TextViewEx) view.findViewById(R.id.text_ring_2));

@@ -88,10 +88,7 @@ public class AlarmListAdapter extends BaseAdapter {
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
-//            Random rnd = new Random();
-//            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-//            ColorDrawable colorDrawable = new ColorDrawable(color);
-            itemLayout.setBackground(Colors.getRandomColor(position));
+            itemLayout.setBackground(Colors.getAlarmColor(position));
 
             viewHolder = new ViewHolder();
 

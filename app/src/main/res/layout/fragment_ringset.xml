@@ -3,53 +3,33 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center_horizontal" >
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="match_parent">
 
                     <com.gohn.walarm.Extention.ButtonEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/btn_weather_1"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
+                        android:background="#ff99fff7"/>
 
-                    <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="맑음"
-                        android:id="@+id/text_weather_1"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentBottom="false"
-                        android:gravity="center_vertical"
                         android:layout_alignLeft="@+id/btn_weather_1"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="20dp"
-                        android:textSize="30dp" />
+                        android:src="@drawable/w_day" />
 
                     <com.gohn.walarm.Extention.TextViewEx
                         android:layout_width="wrap_content"
@@ -62,204 +42,166 @@
                         android:layout_alignEnd="@+id/btn_weather_1"
                         android:paddingRight="20dp" />
                 </RelativeLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="match_parent">
 
                     <com.gohn.walarm.Extention.ButtonEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/btn_weather_2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
+                        android:background="#fff1ff81"/>
 
-                    <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="비"
-                        android:id="@+id/text_weather_2"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentBottom="false"
-                        android:gravity="center_vertical"
                         android:layout_alignLeft="@+id/btn_weather_2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="20dp"
-                        android:textSize="30dp" />
+                        android:src="@drawable/w_rain" />
 
                     <com.gohn.walarm.Extention.TextViewEx
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="벨소리 2"
+                        android:text="벨소리 1"
                         android:id="@+id/text_ring_2"
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_2"
                         android:layout_alignEnd="@+id/btn_weather_2"
                         android:paddingRight="20dp" />
                 </RelativeLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="match_parent">
 
                     <com.gohn.walarm.Extention.ButtonEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/btn_weather_3"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
+                        android:background="#ff91ff99"/>
 
-                    <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="눈"
-                        android:id="@+id/text_weather_3"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentBottom="false"
-                        android:gravity="center_vertical"
                         android:layout_alignLeft="@+id/btn_weather_3"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="20dp"
-                        android:textSize="30dp" />
+                        android:src="@drawable/w_snow" />
 
                     <com.gohn.walarm.Extention.TextViewEx
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="벨소리 3"
+                        android:text="벨소리 1"
                         android:id="@+id/text_ring_3"
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_3"
                         android:layout_alignEnd="@+id/btn_weather_3"
                         android:paddingRight="20dp" />
                 </RelativeLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="match_parent">
 
                     <com.gohn.walarm.Extention.ButtonEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/btn_weather_4"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
+                        android:background="#ffd7ffb7"/>
 
-                    <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="흐림"
-                        android:id="@+id/text_weather_4"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentBottom="false"
-                        android:gravity="center_vertical"
                         android:layout_alignLeft="@+id/btn_weather_4"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="20dp"
-                        android:textSize="30dp" />
+                        android:src="@drawable/w_gray" />
 
                     <com.gohn.walarm.Extention.TextViewEx
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="벨소리 4"
+                        android:text="벨소리 1"
                         android:id="@+id/text_ring_4"
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_4"
                         android:layout_alignEnd="@+id/btn_weather_4"
                         android:paddingRight="20dp" />
                 </RelativeLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp">
+                    android:layout_height="match_parent">
 
                     <com.gohn.walarm.Extention.ButtonEx
-                        android:layout_width="wrap_content"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/btn_weather_5"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
+                        android:background="#ffd1ff50"/>
 
-                    <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Extream"
-                        android:id="@+id/text_weather_5"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentBottom="false"
-                        android:gravity="center_vertical"
                         android:layout_alignLeft="@+id/btn_weather_5"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="20dp"
-                        android:textSize="30dp" />
+                        android:src="@drawable/w_extream" />
 
                     <com.gohn.walarm.Extention.TextViewEx
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="벨소리 5"
+                        android:text="벨소리 1"
                         android:id="@+id/text_ring_5"
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_5"
                         android:layout_alignEnd="@+id/btn_weather_5"
                         android:paddingRight="20dp" />
                 </RelativeLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
 
 </LinearLayout>

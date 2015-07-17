@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.gohn.walarm.Fragment.AlarmSetFragment;
 import com.gohn.walarm.Fragment.RingSetFragment;
@@ -15,8 +17,6 @@ import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Util.BackPressCloseHandler;
-
-import java.util.Locale;
 
 public class MainActivity extends FragmentActivity {
 
@@ -29,6 +29,12 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(R.color.bg_color);
 
         // gps 매니저 초기화
         gps = LocateMgr.getInstance(this);
