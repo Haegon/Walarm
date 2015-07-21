@@ -3,6 +3,7 @@ package com.gohn.walarm.Activity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.view.View;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,8 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
@@ -21,10 +24,13 @@ import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class AlarmSetActivity extends Activity {
+public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTimeSetListener {
 
     AlarmReceiver alarmReceiver = new AlarmReceiver();
     TimePicker timePicker = null;
@@ -34,6 +40,8 @@ public class AlarmSetActivity extends Activity {
     Switch switchRing;
     Context context;
     int flag;
+
+    private TextView timeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +94,39 @@ public class AlarmSetActivity extends Activity {
             if ((days & Flags.VIBRATION) != Flags.VIBRATION) switchVibe.setChecked(false);
             if ((days & Flags.RING) != Flags.RING) switchVibe.setChecked(false);
         }
+
+        timeTextView = (TextView)findViewById(R.id.text_picker);
+        Button timeButton = (Button)findViewById(R.id.btn_picker);
+        // Show a timepicker when the timeButton is clicked
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        AlarmSetActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false
+                );
+                tpd.setThemeDark(false);
+                tpd.vibrate(true);
+                tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        Log.d("TimePicker", "Dialog was cancelled");
+                    }
+                });
+                tpd.show(getFragmentManager(), "Timepickerdialog");
+            }
+        });
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        String minuteString = minute < 10 ? "0"+minute : ""+minute;
+        String time = "You picked the following time: "+hourString+"h"+minuteString;
+        timeTextView.setText(time);
     }
 
     @Override
