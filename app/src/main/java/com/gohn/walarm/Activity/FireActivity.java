@@ -152,11 +152,14 @@ public class FireActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_off:
                 stop();
+                finish();
                 break;
             case R.id.btn_snooze:
                 if ( intent != null ) {
                     stop();
                     alarmReceiver.setSnooze(this, intent);
+                    // TODO : 토스트 메세지 띄워주자.
+                    finish();
                 } else
                     Log.e("gohn","Intent is null");
                 break;
@@ -168,7 +171,6 @@ public class FireActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        //finish();
     }
 
     void stop() {

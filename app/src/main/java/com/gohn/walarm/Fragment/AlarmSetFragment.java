@@ -17,6 +17,7 @@ import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
+import com.melnykov.fab.FloatingActionButton;
 
 @SuppressLint("ValidFragment")
 public class AlarmSetFragment extends ListFragment implements View.OnClickListener {
@@ -38,8 +39,6 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
         // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
         // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
-        Button btnAdd = (Button) view.findViewById(R.id.btn_add_alarm);
-        btnAdd.setOnClickListener(this);
 
         return view;
     }
@@ -53,14 +52,17 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
         setListAdapter(mAdapter);
 
-        //ListView listView = (ListView)view.findViewById();
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.attachToListView(listView);
+        fab.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btn_add_alarm:
+            case R.id.fab:
                 Intent intent = new Intent(mContext, AlarmSetActivity.class);
                 intent.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
 
