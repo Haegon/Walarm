@@ -52,6 +52,8 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
         mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
         setListAdapter(mAdapter);
+
+        //ListView listView = (ListView)view.findViewById();
     }
 
     @Override

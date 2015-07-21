@@ -23,16 +23,17 @@
                         android:background="#ff99fff7"/>
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignLeft="@+id/btn_weather_1"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentBottom="false"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/w_day" />
+                        android:src="@drawable/w_day"
+                        android:layout_marginLeft="20dp" />
 
                     <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="벨소리 1"
@@ -40,7 +41,8 @@
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_1"
                         android:layout_alignEnd="@+id/btn_weather_1"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -63,16 +65,17 @@
                         android:background="#fff1ff81"/>
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignLeft="@+id/btn_weather_2"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentBottom="false"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/w_rain" />
+                        android:src="@drawable/w_rain"
+                        android:layout_marginLeft="20dp" />
 
                     <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="벨소리 1"
@@ -80,7 +83,8 @@
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_2"
                         android:layout_alignEnd="@+id/btn_weather_2"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -103,16 +107,17 @@
                         android:background="#ff91ff99"/>
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignLeft="@+id/btn_weather_3"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentBottom="false"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/w_snow" />
+                        android:src="@drawable/w_snow"
+                        android:layout_marginLeft="20dp" />
 
                     <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="벨소리 1"
@@ -120,7 +125,8 @@
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_3"
                         android:layout_alignEnd="@+id/btn_weather_3"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -143,16 +149,17 @@
                         android:background="#ffd7ffb7"/>
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignLeft="@+id/btn_weather_4"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentBottom="false"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/w_gray" />
+                        android:src="@drawable/w_gray"
+                        android:layout_marginLeft="20dp" />
 
                     <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="벨소리 1"
@@ -160,7 +167,8 @@
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_4"
                         android:layout_alignEnd="@+id/btn_weather_4"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -183,16 +191,17 @@
                         android:background="#ffd1ff50"/>
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignLeft="@+id/btn_weather_5"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentBottom="false"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/w_extream" />
+                        android:src="@drawable/w_extream"
+                        android:layout_marginLeft="20dp" />
 
                     <com.gohn.walarm.Extention.TextViewEx
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="벨소리 1"
@@ -200,7 +209,8 @@
                         android:layout_centerVertical="true"
                         android:layout_alignRight="@+id/btn_weather_5"
                         android:layout_alignEnd="@+id/btn_weather_5"
-                        android:paddingRight="20dp" />
+                        android:paddingRight="20dp"
+                        android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>
 

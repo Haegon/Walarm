@@ -22,6 +22,8 @@ public class Colors {
             Color.parseColor("#ffd7ffb7"),
             Color.parseColor("#ffd1ff50")};
 
+    public static int Background = Color.parseColor("#ffffaa43");
+
     public static ColorDrawable getAlarmColor(int index) {
         return new ColorDrawable(arrayRing[index%5]);
     }
