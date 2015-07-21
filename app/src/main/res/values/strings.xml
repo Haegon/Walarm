@@ -18,6 +18,7 @@
     <string name="connection_error">Connection error.</string>
     <string name="title_activity_modify">ModifyActivity</string>
     <string name="title_activity_fire">FireActivity</string>
+    <string name="title_activity_set">set</string>
 
 
 </resources>

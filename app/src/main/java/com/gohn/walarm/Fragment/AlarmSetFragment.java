@@ -37,9 +37,6 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
         dbMgr = AlarmDBMgr.getInstance(mContext);
 
-        // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
-        // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
-
         return view;
     }
 
@@ -55,6 +52,8 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.attachToListView(listView);
+        // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
+        // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
         fab.setOnClickListener(this);
     }
 
