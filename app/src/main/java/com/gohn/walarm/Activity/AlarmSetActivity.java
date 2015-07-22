@@ -104,7 +104,7 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
 
             editName.setText(name);
-            btnTimePicker.setText(getTimeString(mHour,mMinute));
+            btnTimePicker.setText(getTimeString(mHour, mMinute));
 
             if ((days & Days.SUNDAY) == Days.SUNDAY) tbDays.get(0).setChecked(true);
             if ((days & Days.MONDAY) == Days.MONDAY) tbDays.get(1).setChecked(true);
@@ -114,8 +114,10 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
             if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
 
-            if ((days & Flags.VIBRATION) != Flags.VIBRATION) switchVibe.setChecked(false);
-            if ((days & Flags.RING) != Flags.RING) switchVibe.setChecked(false);
+            if ((options & Flags.VIBRATION) == Flags.VIBRATION) switchVibe.setChecked(true);
+            else switchVibe.setChecked(false);
+            if ((options & Flags.RING) == Flags.RING) switchRing.setChecked(true);
+            else switchRing.setChecked(false);
         } else {
             // 추가 모드인 경우 삭제 버튼을 제거.
             btnDelete.setVisibility(View.GONE);
@@ -142,87 +144,6 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
         mMinute = minute;
         btnTimePicker.setText(getTimeString(mHour,mMinute));
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_set, menu);
-//
-//        // 메뉴에서 저장 옆에 버튼 이름을 상황에 맞게 바꿔준다.
-//        MenuItem item = menu.findItem(R.id.action_cancel_delete);
-//
-//        if (flag == Flags.ADD) {
-//            item.setTitle("취소");
-//        } else if (flag == Flags.MODIFY) {
-//            item.setTitle("삭제");
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        switch (id) {
-//            case android.R.id.home:
-//                ExitPopup();
-//        }
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        // 시간은 타임 피커에서 가져온다.
-//        int hour = timePicker.getCurrentHour();
-//        int min = timePicker.getCurrentMinute();
-//
-//        // 옵션은 스위치에서 가져온다.
-//        int options = 0;
-//        if ( switchVibe.isChecked() )
-//            options += Flags.VIBRATION;
-//        if ( switchRing.isChecked() )
-//            options += Flags.RING;
-//
-//        // 알람 객체 하나 생성
-//        Alarm a = new Alarm(this, editName.getText().toString(), hour, min, getDays(), 1, options);
-//
-//        switch (id) {
-//            case R.id.action_save:
-//                if (flag == Flags.ADD) {
-//                    // 알람 추가.
-//                    Log.e("gohn", "Options Set : " + a.Options);
-//
-//
-//                    AlarmDBMgr.getInstance(this).addAlarm(a);
-//                    alarmReceiver.setAlarm(this, a);
-//                } else if (flag == Flags.MODIFY) {
-//                    int no = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
-//
-//                    // 기존 알람 삭제
-//                    AlarmDBMgr.getInstance(this).delAlarm(no);
-//
-//                    // 새 알람 추가
-//                    AlarmDBMgr.getInstance(this).addAlarm(a);
-//                    alarmReceiver.setAlarm(this, a);
-//                }
-//                GoHome();
-//                return true;
-//            case R.id.action_cancel_delete:
-//                if (flag == Flags.ADD) {
-//                    ExitPopup();
-//                } else if (flag == Flags.MODIFY) {
-//                    // 기존 알람 삭제
-//                    DeletePopup();
-//                }
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     @Override
     public void onBackPressed() {

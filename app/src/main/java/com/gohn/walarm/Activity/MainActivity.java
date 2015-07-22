@@ -43,7 +43,7 @@ public class MainActivity extends FragmentActivity {
 
         // GPS 기능이 꺼져 있으면 키도록 다이얼로그 띄움
         if (!gps.canGetLocation()) {
-            gps.getInstance(this).showSettingsAlert();
+            LocateMgr.getInstance(this).showSettingsAlert();
         }
 
         AlarmDBMgr dbMgr = AlarmDBMgr.getInstance(this);

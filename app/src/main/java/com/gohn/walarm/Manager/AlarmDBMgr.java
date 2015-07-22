@@ -25,6 +25,7 @@ public class AlarmDBMgr {
     public static final String HOUR = "hour";
     public static final String MIN = "minute";
     public static final String DAYS = "days";
+    public static final String OPTIONS = "options";
     public static final String ISON = "ison";
 
     public static final String CTIME = "ctime";
@@ -62,6 +63,7 @@ public class AlarmDBMgr {
                         HOUR + " INTEGER," +
                         MIN + " INTEGER," +
                         DAYS + " INTEGER," +
+                        OPTIONS + " INTEGER," +
                         ISON + " INTEGER);");
         mDatabase.execSQL(
                 "CREATE TABLE IF NOT EXISTS " + TABLE_SEQ +
@@ -109,7 +111,7 @@ public class AlarmDBMgr {
         ContentValues cv = new ContentValues();
         cv.put(URI, uri);
 
-        return  mDatabase.update(TABLE_RING, cv, "weather=?", new String[]{String.format("%d",weather)});
+        return  mDatabase.update(TABLE_RING, cv, "weather=?", new String[]{String.format("%d", weather)});
     }
 
     public Cursor query(String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
@@ -142,6 +144,7 @@ public class AlarmDBMgr {
         cv.put(AlarmDBMgr.MIN, alarm.Minute);
         cv.put(AlarmDBMgr.DAYS, alarm.Days);
         cv.put(AlarmDBMgr.ISON, alarm.IsOn);
+        cv.put(AlarmDBMgr.OPTIONS, alarm.Options);
         insert(cv);
 
         ContentValues seq = new ContentValues();
@@ -151,7 +154,7 @@ public class AlarmDBMgr {
 
     public Alarm getAlarm(int no) {
 
-        String query = String.format("select _id, name, hour, minute, days, ison from Alarms where _id=?");
+        String query = String.format("select _id, name, hour, minute, days, options, ison from Alarms where _id=?");
         Cursor c = rawQuery(query, new String[]{String.format("%d", no)});
 
         if (c != null) {
@@ -164,7 +167,8 @@ public class AlarmDBMgr {
         a.Hour = c.getInt(2);
         a.Minute = c.getInt(3);
         a.Days = c.getInt(4);
-        a.IsOn = c.getInt(5);
+        a.Options = c.getInt(5);
+        a.IsOn = c.getInt(6);
 
         return a;
     }
@@ -176,7 +180,7 @@ public class AlarmDBMgr {
 
     public ArrayList<Alarm> getAlarms() {
 
-        String query = String.format("select _id, name, hour, minute, days, ison from Alarms");
+        String query = String.format("select _id, name, hour, minute, days, options, ison from Alarms");
         Cursor c = rawQuery(query, null);
 
         ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
@@ -189,7 +193,8 @@ public class AlarmDBMgr {
                 a.Hour = c.getInt(2);
                 a.Minute = c.getInt(3);
                 a.Days = c.getInt(4);
-                a.IsOn = c.getInt(5);
+                a.Options = c.getInt(5);
+                a.IsOn = c.getInt(6);
 
                 alarmList.add(a);
             }
@@ -225,9 +230,6 @@ public class AlarmDBMgr {
         String query = String.format("select _id from AlarmRing");
         Cursor c = rawQuery(query, new String[]{});
 
-        if (c.getCount() == 0) {
-            return true;
-        }
-        return false;
+        return c.getCount() == 0;
     }
 }

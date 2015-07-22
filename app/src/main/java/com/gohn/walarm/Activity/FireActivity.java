@@ -55,8 +55,8 @@ public class FireActivity extends Activity implements View.OnClickListener {
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         // 버튼 이벤트 여기서 함
-        ((Button) findViewById(R.id.btn_off)).setOnClickListener(this);
-        ((Button) findViewById(R.id.btn_snooze)).setOnClickListener(this);
+        findViewById(R.id.btn_off).setOnClickListener(this);
+        findViewById(R.id.btn_snooze).setOnClickListener(this);
 
         // 인텐트를 가져온다.
         intent = getIntent();
@@ -80,8 +80,8 @@ public class FireActivity extends Activity implements View.OnClickListener {
 
             // 위치 정보를 가져온다.
             LocateMgr locate = LocateMgr.getInstance(getApplicationContext());
-            final double latitude = locate.getInstance(getApplicationContext()).getLatitude();
-            final double longitude = locate.getInstance(getApplicationContext()).getLongitude();
+            final double latitude = LocateMgr.getInstance(getApplicationContext()).getLatitude();
+            final double longitude = LocateMgr.getInstance(getApplicationContext()).getLongitude();
 
             // 벨소리를 울린다.
             new Thread(new Runnable() {

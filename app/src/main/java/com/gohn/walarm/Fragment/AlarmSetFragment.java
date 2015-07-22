@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.gohn.walarm.Activity.AlarmSetActivity;
@@ -79,6 +78,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         int hour = mAdapter.mData.get(position).Hour;
         int min = mAdapter.mData.get(position).Minute;
         int days = mAdapter.mData.get(position).Days;
+        int options = mAdapter.mData.get(position).Options;
 
         Log.e("gohn", "Just Click => " + hour + ":" + min);
 
@@ -89,6 +89,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         intent.putExtra(Flags.ALARMHOUR, hour);
         intent.putExtra(Flags.ALARMMINUTE, min);
         intent.putExtra(Flags.ALARMDAYS, days);
+        intent.putExtra(Flags.ALARMOPTIONS, options);
 
         startActivityForResult(intent, 0);
     }

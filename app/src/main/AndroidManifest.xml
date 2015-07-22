@@ -60,10 +60,6 @@
             android:name=".Activity.FireActivity"
             android:label="@string/title_activity_fire"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".set"
-            android:label="@string/title_activity_set" >
-        </activity>
     </application>
 
 </manifest>
