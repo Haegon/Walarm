@@ -14,12 +14,14 @@ import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.gohn.walarm.Extention.ButtonEx;
+import com.gohn.walarm.Extention.EditTextEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Days;
@@ -32,24 +34,30 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTimeSetListener {
+public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTimeSetListener, View.OnClickListener {
 
     AlarmReceiver alarmReceiver = new AlarmReceiver();
     ButtonEx btnTimePicker;
-    //    TimePicker timePicker = null;
-//    ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
-    EditText editName;
-    //    Switch switchVibe;
-//    Switch switchRing;
+    ButtonEx btnCancel;
+    ButtonEx btnDelete;
+    ButtonEx btnSave;
+    ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
+    EditTextEx editName;
+    Switch switchVibe;
+    Switch switchRing;
     Context context;
     int flag;
 
-    private TextView timeTextView;
+    int mHour;
+    int mMinute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
+
+        LinearLayout layout = (LinearLayout)findViewById(R.layout.activity_set);
 
         context = getApplicationContext();
 
@@ -58,15 +66,20 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
         else
             flag = getIntent().getExtras().getInt(Flags.ALARMSETINTENT);
 
-//        timePicker = (TimePicker) findViewById(R.id.timePicker_add);
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_sunday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_monday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_tuesday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_wednesday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_thursday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_friday));
-//        tbDays.add((ToggleButton) findViewById(R.id.tb_saturday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_sunday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_monday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_tuesday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_wednesday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_thursday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_friday));
+        tbDays.add((ToggleButton) findViewById(R.id.tb_saturday));
 
+        btnCancel = (ButtonEx) findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(this);
+        btnDelete = (ButtonEx) findViewById(R.id.btn_del);
+        btnDelete.setOnClickListener(this);
+        btnSave = (ButtonEx) findViewById(R.id.btn_save);
+        btnSave.setOnClickListener(this);
         btnTimePicker = (ButtonEx) findViewById(R.id.btn_timepicker);
         btnTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,67 +102,52 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
                 tpd.show(getFragmentManager(), "Timepickerdialog");
             }
         });
-        editName = (EditText) findViewById(R.id.text_name);
-//
-//        switchVibe = (Switch)findViewById(R.id.switch_vibe);
-//        switchRing = (Switch)findViewById(R.id.switch_ring);
+        editName = (EditTextEx) findViewById(R.id.text_name);
+
+        switchVibe = (Switch)findViewById(R.id.switch_vibe);
+        switchRing = (Switch)findViewById(R.id.switch_ring);
 
         // 수정 모드인 경우 현재 알람 정보를 뷰에 표시시
         if (flag == Flags.MODIFY) {
             String name = getIntent().getExtras().getString(Flags.ALARMNAME);
-            int hour = getIntent().getExtras().getInt(Flags.ALARMHOUR);
-            int min = getIntent().getExtras().getInt(Flags.ALARMMINUTE);
+            mHour = getIntent().getExtras().getInt(Flags.ALARMHOUR);
+            mMinute = getIntent().getExtras().getInt(Flags.ALARMMINUTE);
             int days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
             int options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
 
-//            editName.setText(name);
-//            timePicker.setCurrentHour(hour);
-//            timePicker.setCurrentMinute(min);
-//
-//            if ((days & Days.SUNDAY) == Days.SUNDAY) tbDays.get(0).setChecked(true);
-//            if ((days & Days.MONDAY) == Days.MONDAY) tbDays.get(1).setChecked(true);
-//            if ((days & Days.TUESDAY) == Days.TUESDAY) tbDays.get(2).setChecked(true);
-//            if ((days & Days.WEDNESDAY) == Days.WEDNESDAY) tbDays.get(3).setChecked(true);
-//            if ((days & Days.THURSDAY) == Days.THURSDAY) tbDays.get(4).setChecked(true);
-//            if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
-//            if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
-//
-//            if ((days & Flags.VIBRATION) != Flags.VIBRATION) switchVibe.setChecked(false);
-//            if ((days & Flags.RING) != Flags.RING) switchVibe.setChecked(false);
-        }
+            editName.setText(name);
+            btnTimePicker.setText(getTimeString(mHour,mMinute));
 
-//        timeTextView = (TextView)findViewById(R.id.text_picker);
-//        Button timeButton = (Button)findViewById(R.id.btn_picker);
-//        // Show a timepicker when the timeButton is clicked
-//        timeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Calendar now = Calendar.getInstance();
-//                TimePickerDialog tpd = TimePickerDialog.newInstance(
-//                        AlarmSetActivity.this,
-//                        now.get(Calendar.HOUR_OF_DAY),
-//                        now.get(Calendar.MINUTE),
-//                        false
-//                );
-//                tpd.setThemeDark(false);
-//                tpd.vibrate(true);
-//                tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                    @Override
-//                    public void onCancel(DialogInterface dialogInterface) {
-//                        Log.d("TimePicker", "Dialog was cancelled");
-//                    }
-//                });
-//                tpd.show(getFragmentManager(), "Timepickerdialog");
-//            }
-//        });
+            if ((days & Days.SUNDAY) == Days.SUNDAY) tbDays.get(0).setChecked(true);
+            if ((days & Days.MONDAY) == Days.MONDAY) tbDays.get(1).setChecked(true);
+            if ((days & Days.TUESDAY) == Days.TUESDAY) tbDays.get(2).setChecked(true);
+            if ((days & Days.WEDNESDAY) == Days.WEDNESDAY) tbDays.get(3).setChecked(true);
+            if ((days & Days.THURSDAY) == Days.THURSDAY) tbDays.get(4).setChecked(true);
+            if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
+            if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
+
+            if ((days & Flags.VIBRATION) != Flags.VIBRATION) switchVibe.setChecked(false);
+            if ((days & Flags.RING) != Flags.RING) switchVibe.setChecked(false);
+        } else {
+            // 추가 모드인 경우 삭제 버튼을 제거.
+            btnDelete.setVisibility(View.GONE);
+
+            Calendar c = Calendar.getInstance();
+            btnTimePicker.setText(getTimeString(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
+        }
+    }
+
+    public String getTimeString(int hour, int minute) {
+
+        String noon;
+        if ( hour >= 0 && hour <12 ) noon = "AM";
+        else noon = "PM";
+        return String.format("%s %02d:%02d", noon, hour%12, minute);
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
-        String minuteString = minute < 10 ? "0" + minute : "" + minute;
-        String time = hourString + "h " + minuteString + "m";
-        btnTimePicker.setText(time);
+        btnTimePicker.setText(getTimeString(hourOfDay,minute));
     }
 
 //    @Override
@@ -247,17 +245,16 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
 
     public int getDays() {
 
-//        int size = tbDays.size();
-//        int days = 0;
-//
-//        if (size > 0) {
-//            for (int i = 0; i < size; i++) {
-//                if (tbDays.get(i).isChecked())
-//                    days += Days.DAYLIST[i];
-//            }
-//        }
-//        return days;
-        return 0;
+        int size = tbDays.size();
+        int days = 0;
+
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                if (tbDays.get(i).isChecked())
+                    days += Days.DAYLIST[i];
+            }
+        }
+        return days;
     }
 
     private void DeletePopup() {
@@ -296,5 +293,20 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
         AlertDialog.Builder builder = new AlertDialog.Builder(AlarmSetActivity.this);
         builder.setMessage("저장하지 않고 나가시겠습니까?").setPositiveButton("예", dialogClickListener)
                 .setNegativeButton("아니오", dialogClickListener).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_cancel:
+                break;
+            case R.id.btn_del:
+                break;
+            case R.id.btn_save:
+                break;
+            default:
+                Log.e("gohn","Unknown Button");
+                break;
+        }
     }
 }

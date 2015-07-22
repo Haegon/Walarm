@@ -3,6 +3,7 @@ package com.gohn.walarm.Extention;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,13 +14,20 @@ import android.widget.Button;
  */
 public class ButtonEx extends Button {
 
-    public ButtonEx(Context context) {
-        super(context);
+    public ButtonEx(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
     }
 
-    public ButtonEx(Context context, AttributeSet attributes) {
-        super(context, attributes);
-    };
+    public ButtonEx(Context context) {
+        super(context);
+        init();
+    }
+
+     public ButtonEx(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
 
     @Override
     public void setOnClickListener(final OnClickListener l) {
@@ -42,5 +50,10 @@ public class ButtonEx extends Button {
             getBackground().setColorFilter(null);
         }
         return super.onTouchEvent(event);
+    }
+
+    public void init() {
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "man.mp3");
+        setTypeface(tf);
     }
 }

@@ -46,50 +46,6 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
-
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="일"
-            android:textOff="일"
-            android:id="@+id/tb_sunday" />
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="월"
-            android:textOff="월"
-            android:id="@+id/tb_monday" />
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="화"
-            android:textOff="화"
-            android:id="@+id/tb_tuesday" />
-        <ToggleButton
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:textOn="수"
-            android:textOff="수"
-            android:id="@+id/tb_wednesday" />
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="목"
-            android:textOff="목"
-            android:id="@+id/tb_thursday" />
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="금"
-            android:textOff="금"
-            android:id="@+id/tb_friday" />
-        <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="wrap_content"
-            android:textOn="토"
-            android:textOff="토"
-            android:id="@+id/tb_saturday" />
-
     </LinearLayout>
 
         <LinearLayout
@@ -124,20 +80,6 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp">
 
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="진동"
-                android:id="@+id/switch_vibe"
-                android:checked="true" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="벨소리"
-                android:id="@+id/switch_ring"
-                android:checked="true"
-                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
 
