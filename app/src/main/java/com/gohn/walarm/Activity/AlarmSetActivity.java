@@ -1,23 +1,14 @@
 package com.gohn.walarm.Activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.view.View;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.gohn.walarm.Extention.ButtonEx;
@@ -51,13 +42,10 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
     int mHour;
     int mMinute;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
-
-        LinearLayout layout = (LinearLayout)findViewById(R.layout.activity_set);
 
         context = getApplicationContext();
 
@@ -133,7 +121,10 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             btnDelete.setVisibility(View.GONE);
 
             Calendar c = Calendar.getInstance();
-            btnTimePicker.setText(getTimeString(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            btnTimePicker.setText(getTimeString(mHour, mMinute));
         }
     }
 
@@ -147,7 +138,9 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        btnTimePicker.setText(getTimeString(hourOfDay,minute));
+        mHour = hourOfDay;
+        mMinute = minute;
+        btnTimePicker.setText(getTimeString(mHour,mMinute));
     }
 
 //    @Override
@@ -165,7 +158,7 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
 //        }
 //        return true;
 //    }
-
+//
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will
@@ -299,13 +292,42 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancel:
+                ExitPopup();
                 break;
             case R.id.btn_del:
+                DeletePopup();
                 break;
             case R.id.btn_save:
+                // 옵션은 스위치에서 가져온다.
+                int options = 0;
+                if ( switchVibe.isChecked() )
+                    options += Flags.VIBRATION;
+                if ( switchRing.isChecked() )
+                    options += Flags.RING;
+
+                // 알람 객체 하나 생성
+                Alarm a = new Alarm(this, editName.getText().toString(), mHour, mMinute, getDays(), 1, options);
+
+                if (flag == Flags.ADD) {
+                    // 알람 추가.
+                    Log.e("gohn", "Options Set : " + a.Options);
+
+                    AlarmDBMgr.getInstance(this).addAlarm(a);
+                    alarmReceiver.setAlarm(this, a);
+                } else if (flag == Flags.MODIFY) {
+                    int no = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
+
+                    // 기존 알람 삭제
+                    AlarmDBMgr.getInstance(this).delAlarm(no);
+
+                    // 새 알람 추가
+                    AlarmDBMgr.getInstance(this).addAlarm(a);
+                    alarmReceiver.setAlarm(this, a);
+                }
+                GoHome();
                 break;
             default:
-                Log.e("gohn","Unknown Button");
+                Log.e("gohn", "Unknown Button");
                 break;
         }
     }

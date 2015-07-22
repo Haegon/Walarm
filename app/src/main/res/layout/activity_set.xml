@@ -29,8 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#FF537673"
-            android:textSize="@dimen/set_text"
-            android:visibility="gone"/>
+            android:textSize="@dimen/set_text"/>
         <com.gohn.walarm.Extention.ButtonEx
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -59,10 +58,10 @@
         <com.gohn.walarm.Extention.EditTextEx
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="출근"
             android:id="@+id/text_name"
             android:layout_weight="1"
             android:gravity="center"
+            android:hint="School"
             android:textSize="@dimen/set_text"/>
     </LinearLayout>
 
@@ -75,7 +74,7 @@
         <com.gohn.walarm.Extention.ButtonEx
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="PM 12:12"
+            android:text="PM 00:00"
             android:gravity="center"
             android:textSize="@dimen/set_time"
             android:background="#FFC36215"

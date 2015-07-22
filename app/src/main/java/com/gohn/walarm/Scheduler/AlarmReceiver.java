@@ -25,7 +25,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     private PendingIntent alarmIntent;  // 알람에 하나에 대한 인텐트
 
 
-
     @Override
     public void onReceive(final Context context, Intent intent) {
 
@@ -51,8 +50,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         if (a.IsOn == 0) return;
 
         // FireActivity에 모든 알람 액션을 위임한다.
-        intent.setClass(context,FireActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setClass(context, FireActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
 
         // 로컬 푸시
@@ -72,13 +71,15 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
+        Log.e("gohn", "@@@@@ Hour : " + a.Hour + ", Minute : " + a.Minute + ", Days : " + a.Days + ", Options : " + a.Options);
+
         // Set the alarm
         calendar.set(Calendar.HOUR_OF_DAY, a.Hour);
         calendar.set(Calendar.MINUTE, a.Minute);
 
         // API 버전이 19보다 낮은 경우와 높은 경우에 부르는 함수가 다르다.
         // 그 이유는 setInexactRepeating만 호출하면 19보다 낮은 기기는 알람이 지연됨.
-        if (Build.VERSION.SDK_INT < 19) {
+        if (Build.VERSION.SDK_INT <= 19) {
             // SystemClock.elapsedRealtime() 가 추가 된 이유는
             // setRepeating이 현재 시간 이전을 등록하면 알람이 바로 울려버린다.
             // 알람 시간이 현재 시간 보다 작으면 하루를 추가 해서 시작하도록 한것.
@@ -116,8 +117,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         i.putExtra(Flags.ALARMOPTIONS, intent.getExtras().getInt(Flags.ALARMOPTIONS));
         alarmIntent = PendingIntent.getBroadcast(context, intent.getExtras().getInt(Flags.ALARMNUMBER), i, 0);
 
-        AlarmManager manager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000*60*5, alarmIntent);
+        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000 * 60 * 5, alarmIntent);
     }
 
 
