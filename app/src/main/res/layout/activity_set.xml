@@ -152,6 +152,18 @@
             android:text="진동"
             android:id="@+id/switch_vibe"
             android:checked="true" />
+
+        <CheckBox
+            android:id="@+id/cbVibe"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="false"
+            android:button="@drawable/onoff"
+            android:gravity="center_vertical" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -169,6 +181,17 @@
             android:checked="true"
             android:layout_alignParentRight="true" />
 
+
+        <CheckBox
+            android:id="@+id/cbRing"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="false"
+            android:button="@drawable/onoff"
+            android:gravity="center_vertical" />
     </LinearLayout>
 
 </LinearLayout>

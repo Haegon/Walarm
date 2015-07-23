@@ -105,7 +105,6 @@
             android:clickable="true"
             android:focusable="false"
             android:button="@drawable/onoff"
-            android:buttonTint="#ffffffff"
             android:gravity="center_vertical" />
 
         <com.gohn.walarm.Extention.TextViewEx

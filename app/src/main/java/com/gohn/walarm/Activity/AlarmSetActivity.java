@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.ToggleButton;
 
@@ -34,11 +35,11 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
     ButtonEx btnSave;
     ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
     EditTextEx editName;
-    Switch switchVibe;
-    Switch switchRing;
+    CheckBox cbVibe;
+    CheckBox cbRing;
     Context context;
-    int flag;
 
+    int flag;
     int mHour;
     int mMinute;
 
@@ -92,8 +93,8 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
         });
         editName = (EditTextEx) findViewById(R.id.text_name);
 
-        switchVibe = (Switch)findViewById(R.id.switch_vibe);
-        switchRing = (Switch)findViewById(R.id.switch_ring);
+        cbVibe = (CheckBox)findViewById(R.id.cbVibe);
+        cbRing = (CheckBox)findViewById(R.id.cbRing);
 
         // 수정 모드인 경우 현재 알람 정보를 뷰에 표시시
         if (flag == Flags.MODIFY) {
@@ -114,10 +115,11 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             if ((days & Days.FRIDAY) == Days.FRIDAY) tbDays.get(5).setChecked(true);
             if ((days & Days.SATURDAY) == Days.SATURDAY) tbDays.get(6).setChecked(true);
 
-            if ((options & Flags.VIBRATION) == Flags.VIBRATION) switchVibe.setChecked(true);
-            else switchVibe.setChecked(false);
-            if ((options & Flags.RING) == Flags.RING) switchRing.setChecked(true);
-            else switchRing.setChecked(false);
+            if ((options & Flags.VIBRATION) == Flags.VIBRATION) cbVibe.setChecked(true);
+            else cbVibe.setChecked(false);
+            if ((options & Flags.RING) == Flags.RING) cbRing.setChecked(true);
+            else cbRing.setChecked(false);
+
         } else {
             // 추가 모드인 경우 삭제 버튼을 제거.
             btnDelete.setVisibility(View.GONE);
@@ -221,9 +223,9 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             case R.id.btn_save:
                 // 옵션은 스위치에서 가져온다.
                 int options = 0;
-                if ( switchVibe.isChecked() )
+                if ( cbVibe.isChecked() )
                     options += Flags.VIBRATION;
-                if ( switchRing.isChecked() )
+                if ( cbRing.isChecked() )
                     options += Flags.RING;
 
                 // 알람 객체 하나 생성
