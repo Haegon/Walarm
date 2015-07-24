@@ -140,58 +140,46 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FF546365"
-        android:layout_weight="1">
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="진동"
-            android:id="@+id/switch_vibe"
-            android:checked="true" />
+        android:layout_weight="1"
+        android:gravity="center_vertical|right">
 
         <CheckBox
             android:id="@+id/cbVibe"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_alignParentRight="true"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:clickable="true"
             android:focusable="false"
             android:button="@drawable/onoff"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFD67365"
         android:layout_weight="1">
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="벨소리"
-            android:id="@+id/switch_ring"
-            android:checked="true"
-            android:layout_alignParentRight="true" />
-
 
         <CheckBox
             android:id="@+id/cbRing"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_alignParentRight="true"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:clickable="true"
             android:focusable="false"
             android:button="@drawable/onoff"
             android:gravity="center_vertical" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
