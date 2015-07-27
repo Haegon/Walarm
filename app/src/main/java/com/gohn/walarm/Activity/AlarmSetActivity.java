@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Switch;
 import android.widget.ToggleButton;
 
 import com.gohn.walarm.Extention.ButtonEx;

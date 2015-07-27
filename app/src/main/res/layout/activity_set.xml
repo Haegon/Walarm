@@ -2,184 +2,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.gohn.walarm.set"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.gohn.walarm.set">
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <com.gohn.walarm.Extention.ButtonEx
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Cancel"
             android:id="@+id/btn_cancel"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/set_text"
-            android:background="#FF326594"/>
-        <com.gohn.walarm.Extention.ButtonEx
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Delete"
+            android:layout_weight="1"
+            android:background="#FF326594"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textSize="@dimen/set_text" />
+
+        <com.gohn.walarm.Extention.ButtonEx
             android:id="@+id/btn_del"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="#FF537673"
-            android:textSize="@dimen/set_text"/>
-        <com.gohn.walarm.Extention.ButtonEx
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Save"
-            android:id="@+id/btn_save"
             android:layout_weight="1"
+            android:background="#FF537673"
             android:gravity="center"
-            android:textSize="@dimen/set_text"
-            android:background="#ffe2ff47" />
+            android:text="Delete"
+            android:textSize="@dimen/set_text" />
+
+        <com.gohn.walarm.Extention.ButtonEx
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffe2ff47"
+            android:gravity="center"
+            android:text="Save"
+            android:textSize="@dimen/set_text" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="#FF64A63B"
-        android:layout_weight="1">
+        android:orientation="horizontal">
+
         <com.gohn.walarm.Extention.TextViewEx
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Name"
             android:layout_weight="2"
+            android:background="#ff5fffd5"
             android:gravity="center"
-            android:textSize="@dimen/set_text"
-            android:background="#ff5fffd5" />
+            android:text="Name"
+            android:textSize="@dimen/set_text" />
+
         <com.gohn.walarm.Extention.EditTextEx
+            android:id="@+id/text_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/text_name"
             android:layout_weight="1"
             android:gravity="center"
             android:hint="School"
-            android:textSize="@dimen/set_text"/>
+            android:textSize="@dimen/set_text" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
         <com.gohn.walarm.Extention.ButtonEx
+            android:id="@+id/btn_timepicker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="PM 00:00"
-            android:gravity="center"
-            android:textSize="@dimen/set_time"
             android:background="#FFC36215"
-            android:id="@+id/btn_timepicker" />
+            android:gravity="center"
+            android:text="PM 00:00"
+            android:textSize="@dimen/set_time" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.7"
         android:background="#FF8344C5"
-        android:layout_weight="0.7">
+        android:orientation="horizontal">
 
         <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="match_parent"
-            android:textOn="일"
-            android:textOff="일"
             android:id="@+id/tb_sunday"
-            android:layout_weight="1"/>
-        <ToggleButton
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
-            android:textOn="월"
-            android:textOff="월"
+            android:layout_weight="1"
+            android:textOff="일"
+            android:textOn="일" />
+
+        <ToggleButton
             android:id="@+id/tb_monday"
-            android:layout_weight="1" />
-        <ToggleButton
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
-            android:textOn="화"
-            android:textOff="화"
-            android:id="@+id/tb_tuesday"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textOff="월"
+            android:textOn="월" />
+
         <ToggleButton
+            android:id="@+id/tb_tuesday"
+            android:layout_width="@dimen/day_length"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textOff="화"
+            android:textOn="화" />
+
+        <ToggleButton
+            android:id="@+id/tb_wednesday"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:textOn="수"
+            android:layout_weight="1"
             android:textOff="수"
-            android:id="@+id/tb_wednesday"
-            android:layout_weight="1" />
+            android:textOn="수" />
+
         <ToggleButton
-            android:layout_width="@dimen/day_length"
-            android:layout_height="match_parent"
-            android:textOn="목"
-            android:textOff="목"
             android:id="@+id/tb_thursday"
-            android:layout_weight="1" />
-        <ToggleButton
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
-            android:textOn="금"
-            android:textOff="금"
+            android:layout_weight="1"
+            android:textOff="목"
+            android:textOn="목" />
+
+        <ToggleButton
             android:id="@+id/tb_friday"
-            android:layout_weight="1" />
-        <ToggleButton
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
-            android:textOn="토"
-            android:textOff="토"
+            android:layout_weight="1"
+            android:textOff="금"
+            android:textOn="금" />
+
+        <ToggleButton
             android:id="@+id/tb_saturday"
-            android:layout_weight="1" />
+            android:layout_width="@dimen/day_length"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textOff="토"
+            android:textOn="토" />
 
     </LinearLayout>
 
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF546365"
         android:layout_weight="1"
-        android:gravity="center_vertical|right">
+        android:background="#FF546365"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal">
+
+
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginLeft="20dp"
+            android:text="Vibe"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/set_text" />
 
         <CheckBox
             android:id="@+id/cbVibe"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/onoff"
             android:clickable="true"
             android:focusable="false"
-            android:button="@drawable/onoff"
-            android:gravity="center_vertical"
-            android:layout_alignParentEnd="true" />
+            android:gravity="center_vertical" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFD67365"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#FF975834"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal">
 
+
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginLeft="20dp"
+            android:text="Ring"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/set_text" />
 
         <CheckBox
             android:id="@+id/cbRing"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/onoff"
             android:clickable="true"
             android:focusable="false"
-            android:button="@drawable/onoff"
             android:gravity="center_vertical" />
+
     </RelativeLayout>
 
 </LinearLayout>

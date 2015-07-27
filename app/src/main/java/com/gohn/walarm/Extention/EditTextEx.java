@@ -27,7 +27,7 @@ public class EditTextEx extends EditText {
     }
 
     public void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "man.mp3");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "ca.mp3");
         setTypeface(tf);
 
         setTextColor(Color.WHITE);
