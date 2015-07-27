@@ -128,6 +128,9 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             mMinute = c.get(Calendar.MINUTE);
 
             btnTimePicker.setText(getTimeString(mHour, mMinute));
+
+            cbVibe.setChecked(true);
+            cbRing.setChecked(true);
         }
     }
 
