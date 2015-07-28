@@ -1,9 +1,7 @@
 package com.gohn.walarm.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -13,24 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.Toast;
 
-import com.gohn.walarm.Manager.AlarmDBMgr;
-import com.gohn.walarm.Manager.LocateMgr;
-import com.gohn.walarm.Model.Flags;
-import com.gohn.walarm.Model.Ring;
-import com.gohn.walarm.Model.Weather;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class FireActivity extends Activity implements View.OnClickListener {
 
@@ -56,72 +40,73 @@ public class FireActivity extends Activity implements View.OnClickListener {
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         // 버튼 이벤트 여기서 함
-        findViewById(R.id.btn_off).setOnClickListener(this);
-        findViewById(R.id.btn_snooze).setOnClickListener(this);
+        findViewById(R.id.btn_num_ok).setOnClickListener(this);
+        findViewById(R.id.btn_snooze_1).setOnClickListener(this);
+        findViewById(R.id.btn_snooze_2).setOnClickListener(this);
 
         // 인텐트를 가져온다.
         intent = getIntent();
-
-        // 진동, 벨 옵션을 가져온다.
-        options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
-        number = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
-        days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
-
-        // 진동을 울려주자
-        if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
-            if (vibe == null) {
-                vibe = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                long[] pattern = {1000, 1000, 1000, 1000, 1000, 1000};
-                vibe.vibrate(pattern, 2);
-            }
-        }
-
-        // 알람을 울려주자
-        if ((options & Flags.RING) == Flags.RING) {
-
-            // 위치 정보를 가져온다.
-            LocateMgr locate = LocateMgr.getInstance(getApplicationContext());
-            final double latitude = LocateMgr.getInstance(getApplicationContext()).getLatitude();
-            final double longitude = LocateMgr.getInstance(getApplicationContext()).getLongitude();
-
-            // 벨소리를 울린다.
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    try {
-                        // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
-                        HttpClient client = new DefaultHttpClient();
-                        String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
-                        HttpGet get = new HttpGet(getURL);
-                        HttpResponse responseGet = client.execute(get);
-                        HttpEntity resEntityGet = responseGet.getEntity();
-                        if (resEntityGet != null) {
-                            // 결과를 처리합니다.
-                            String res = EntityUtils.toString(resEntityGet);
-
-                            JSONObject jObject = new JSONObject(res);
-                            JSONArray weather = jObject.getJSONArray("weather");
-                            JSONObject item = (JSONObject) weather.get(0);
-                            int wcode = item.getInt("id");
-                            String icon = item.getString("icon");
-
-                            Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
-
-                            ring = new MediaPlayer();
-                            ring.setDataSource(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
-                            final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                            ring.setAudioStreamType(AudioManager.STREAM_ALARM);
-                            ring.setLooping(true);
-                            ring.prepare();
-                            ring.start();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
+//
+//        // 진동, 벨 옵션을 가져온다.
+//        options = getIntent().getExtras().getInt(Flags.ALARMOPTIONS);
+//        number = getIntent().getExtras().getInt(Flags.ALARMNUMBER);
+//        days = getIntent().getExtras().getInt(Flags.ALARMDAYS);
+//
+//        // 진동을 울려주자
+//        if ((options & Flags.VIBRATION) == Flags.VIBRATION) {
+//            if (vibe == null) {
+//                vibe = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+//                long[] pattern = {1000, 1000, 1000, 1000, 1000, 1000};
+//                vibe.vibrate(pattern, 2);
+//            }
+//        }
+//
+//        // 알람을 울려주자
+//        if ((options & Flags.RING) == Flags.RING) {
+//
+//            // 위치 정보를 가져온다.
+//            LocateMgr locate = LocateMgr.getInstance(getApplicationContext());
+//            final double latitude = LocateMgr.getInstance(getApplicationContext()).getLatitude();
+//            final double longitude = LocateMgr.getInstance(getApplicationContext()).getLongitude();
+//
+//            // 벨소리를 울린다.
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    // TODO Auto-generated method stub
+//                    try {
+//                        // 위도 경도를 기준으로 현재 날씨 코드를 가져온다.
+//                        HttpClient client = new DefaultHttpClient();
+//                        String getURL = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitude, longitude);
+//                        HttpGet get = new HttpGet(getURL);
+//                        HttpResponse responseGet = client.execute(get);
+//                        HttpEntity resEntityGet = responseGet.getEntity();
+//                        if (resEntityGet != null) {
+//                            // 결과를 처리합니다.
+//                            String res = EntityUtils.toString(resEntityGet);
+//
+//                            JSONObject jObject = new JSONObject(res);
+//                            JSONArray weather = jObject.getJSONArray("weather");
+//                            JSONObject item = (JSONObject) weather.get(0);
+//                            int wcode = item.getInt("id");
+//                            String icon = item.getString("icon");
+//
+//                            Log.e("ID", "weather code : " + wcode + " , weather : " + Weather.get(wcode));
+//
+//                            ring = new MediaPlayer();
+//                            ring.setDataSource(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
+//                            final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                            ring.setAudioStreamType(AudioManager.STREAM_ALARM);
+//                            ring.setLooping(true);
+//                            ring.prepare();
+//                            ring.start();
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }).start();
+//        }
     }
 
     @Override
@@ -149,15 +134,24 @@ public class FireActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_off:
+            case R.id.btn_num_ok:
                 stop();
                 finish();
                 break;
-            case R.id.btn_snooze:
+            case R.id.btn_snooze_1:
                 if ( intent != null ) {
                     stop();
-                    alarmReceiver.setSnooze(this, intent);
-                    // TODO : 토스트 메세지 띄워주자.
+                    alarmReceiver.setSnooze(this, intent, 5);
+                    Toast.makeText(this, "5분 후에 알람이 다시 울립니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else
+                    Log.e("gohn","Intent is null");
+                break;
+            case R.id.btn_snooze_2:
+                if ( intent != null ) {
+                    stop();
+                    alarmReceiver.setSnooze(this, intent, 10);
+                    Toast.makeText(this, "10분 후에 알람이 다시 울립니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else
                     Log.e("gohn","Intent is null");

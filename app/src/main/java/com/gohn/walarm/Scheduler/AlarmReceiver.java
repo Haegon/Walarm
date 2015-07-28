@@ -109,7 +109,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     }
 
 
-    public void setSnooze(Context context, Intent intent) {
+    public void setSnooze(Context context, Intent intent, int min) {
 
         Intent i = new Intent(context, AlarmReceiver.class);
         i.putExtra(Flags.ALARMNUMBER, intent.getExtras().getInt(Flags.ALARMNUMBER));
@@ -118,7 +118,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         alarmIntent = PendingIntent.getBroadcast(context, intent.getExtras().getInt(Flags.ALARMNUMBER), i, 0);
 
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000 * 60 * 5, alarmIntent);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000 * 60 * min, alarmIntent);
     }
 
 

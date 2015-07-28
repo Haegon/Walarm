@@ -1,26 +1,288 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="15"
     tools:context="com.gohn.walarm.Activity.FireActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <com.gohn.walarm.Extention.TextViewEx
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="끄기"
-        android:id="@+id/btn_off"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="5"
+        android:background="@drawable/button_small"
+        android:gravity="center"
+        android:text="1234"
+        android:textSize="@dimen/fire_digit"
+        android:textScaleX="1.5"
+        android:password="false" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="스누즈"
-        android:id="@+id/btn_snooze"
-        android:layout_below="@+id/btn_off"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp" />
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="5"
+        android:background="@drawable/button_small"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_7"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="7"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_8"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="8"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_9"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="9"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_0"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="0"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_4"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="4"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_5"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="5"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_6"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="6"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_clear"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="C"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_1"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="1"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_2"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="2"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_3"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="3"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.gohn.walarm.Extention.ButtonEx
+                    android:id="@+id/btn_num_ok"
+                    android:layout_width="@dimen/fire_circle"
+                    android:layout_height="@dimen/fire_circle"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_circle"
+                    android:text="OK"
+                    android:textSize="@dimen/fire_num"
+                    android:layout_margin="10dp" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="horizontal">
+        <com.gohn.walarm.Extention.ButtonEx
+            android:id="@+id/btn_snooze_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/button_small"
+            android:text="Snooze\n5 min"
+            android:layout_weight="1"
+            android:textSize="@dimen/set_text"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="2dp" />
+        <com.gohn.walarm.Extention.ButtonEx
+            android:id="@+id/btn_snooze_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/button_small"
+            android:text="Snooze\n10 min"
+            android:layout_weight="1"
+            android:textSize="@dimen/set_text"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="2dp" />
+    </LinearLayout>
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="끄기"-->
+    <!--android:id="@+id/btn_off"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_centerHorizontal="true" />-->
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="스누즈"-->
+    <!--android:id="@+id/btn_snooze"-->
+    <!--android:layout_below="@+id/btn_off"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="38dp" />-->
+
+</LinearLayout>
