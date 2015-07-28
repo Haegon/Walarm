@@ -6,20 +6,50 @@
     android:weightSum="15"
     tools:context="com.gohn.walarm.Activity.FireActivity">
 
-    <com.gohn.walarm.Extention.TextViewEx
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
-        android:layout_weight="5"
         android:background="@drawable/button_small"
-        android:gravity="center"
-        android:text="1234"
-        android:textSize="@dimen/fire_digit"
-        android:textScaleX="1.5"
-        android:password="false" />
+        android:layout_weight="5">
+
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="0"
+            android:id="@+id/text_digit_1"
+            android:textSize="@dimen/fire_digit"/>
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="9"
+            android:id="@+id/text_digit_2"
+            android:textSize="@dimen/fire_digit"/>
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="2"
+            android:id="@+id/text_digit_3"
+            android:textSize="@dimen/fire_digit"/>
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="9"
+            android:id="@+id/text_digit_4"
+            android:textSize="@dimen/fire_digit"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -248,7 +278,7 @@
             android:background="@drawable/button_small"
             android:text="Snooze\n5 min"
             android:layout_weight="1"
-            android:textSize="@dimen/set_text"
+            android:textSize="@dimen/fire_text"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="1dp"
             android:layout_marginTop="1dp"
@@ -261,7 +291,7 @@
             android:background="@drawable/button_small"
             android:text="Snooze\n10 min"
             android:layout_weight="1"
-            android:textSize="@dimen/set_text"
+            android:textSize="@dimen/fire_text"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="2dp"
             android:layout_marginTop="1dp"
