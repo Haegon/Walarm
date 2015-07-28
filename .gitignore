@@ -52,6 +52,7 @@ build/
 #.idea
 .idea/workspace.xml
 .idea/misc.xml
+.idea/libraries/*
 atlassian-ide-plugin.xml
 *.sublime-*
 .nb-gradle

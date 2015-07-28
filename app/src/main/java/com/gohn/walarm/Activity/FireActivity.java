@@ -110,12 +110,10 @@ public class FireActivity extends Activity implements View.OnClickListener {
                             ring = new MediaPlayer();
                             ring.setDataSource(getApplicationContext(), AlarmDBMgr.getInstance().getRing(Weather.get(wcode)));
                             final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                            if (audioManager.getStreamVolume(AudioManager.STREAM_RING) != 0) {
-                                ring.setAudioStreamType(AudioManager.STREAM_RING);
-                                ring.setLooping(true);
-                                ring.prepare();
-                                ring.start();
-                            }
+                            ring.setAudioStreamType(AudioManager.STREAM_ALARM);
+                            ring.setLooping(true);
+                            ring.prepare();
+                            ring.start();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
