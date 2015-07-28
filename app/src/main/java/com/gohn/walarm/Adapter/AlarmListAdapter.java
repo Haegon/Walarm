@@ -92,7 +92,7 @@ public class AlarmListAdapter extends BaseAdapter {
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
-            GradientDrawable drawable = (GradientDrawable)itemLayout.getResources().getDrawable(R.drawable.button_ring);
+            GradientDrawable drawable = (GradientDrawable)itemLayout.getResources().getDrawable(R.drawable.button_normal);
             drawable.setColor(Colors.getAlarmColor(position));
             itemLayout.setBackground(drawable);
 

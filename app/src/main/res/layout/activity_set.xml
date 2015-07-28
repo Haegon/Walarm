@@ -17,47 +17,62 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF326594"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Cancel"
-            android:textSize="@dimen/set_text" />
+            android:textSize="@dimen/set_text"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp" />
 
         <com.gohn.walarm.Extention.ButtonEx
             android:id="@+id/btn_del"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF537673"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Delete"
-            android:textSize="@dimen/set_text" />
+            android:textSize="@dimen/set_text"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp" />
 
         <com.gohn.walarm.Extention.ButtonEx
             android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#ffe0acff"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Save"
-            android:textSize="@dimen/set_text" />
+            android:textSize="@dimen/set_text"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="1dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#FF64A63B"
         android:orientation="horizontal">
 
         <com.gohn.walarm.Extention.TextViewEx
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="2"
-            android:background="#ff5fffd5"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Name"
-            android:textSize="@dimen/set_text" />
+            android:textSize="@dimen/set_text"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp" />
 
         <com.gohn.walarm.Extention.EditTextEx
             android:id="@+id/text_name"
@@ -66,7 +81,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:hint="School"
-            android:textSize="@dimen/set_text" />
+            android:textSize="@dimen/set_text"
+            android:background="@drawable/button_small"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,18 +99,20 @@
             android:id="@+id/btn_timepicker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFC36215"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="PM 00:00"
-            android:textSize="@dimen/set_time" />
+            android:textSize="@dimen/set_time"
+            android:layout_margin="1dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
-        android:background="#FF8344C5"
-        android:orientation="horizontal">
+        android:background="@drawable/button_small"
+        android:orientation="horizontal"
+        android:layout_margin="1dp">
 
         <ToggleButton
             android:id="@+id/tb_sunday"
@@ -154,9 +176,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#FF546365"
+        android:background="@drawable/button_small"
         android:gravity="center_vertical|right"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="1dp">
 
 
         <com.gohn.walarm.Extention.TextViewEx
@@ -186,9 +209,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#FF975834"
+        android:background="@drawable/button_small"
         android:gravity="center_vertical|right"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="1dp">
 
 
         <com.gohn.walarm.Extention.TextViewEx

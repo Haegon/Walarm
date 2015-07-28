@@ -57,7 +57,7 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
 
         // 이 뷰에서 버튼 핸들링을 하겠다는 코드.
         for (int i = 0; i < buttons.size(); i++) {
-            GradientDrawable drawable = (GradientDrawable)getResources().getDrawable(R.drawable.button_ring);
+            GradientDrawable drawable = (GradientDrawable)getResources().getDrawable(R.drawable.button_normal);
             drawable.setColor(Colors.getRingColor(i));
 
             buttons.get(i).setBackground(drawable);

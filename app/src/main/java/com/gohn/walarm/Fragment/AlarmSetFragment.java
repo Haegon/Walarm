@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
-import com.gohn.walarm.Extention.ListViewEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
@@ -49,7 +48,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
         setListAdapter(mAdapter);
 
-        ListViewEx listView = (ListViewEx) view.findViewById(android.R.id.list);
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
 
         // 리스트들의 구분선 제거 - xml에서 해도 되는데 여기서 해보고 싶었음.
         listView.setDivider(null);
