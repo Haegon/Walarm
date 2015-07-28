@@ -3,6 +3,7 @@ package com.gohn.walarm.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.gohn.walarm.Extention.ButtonEx;
 import com.gohn.walarm.Extention.TextViewEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
+import com.gohn.walarm.Model.Colors;
 import com.gohn.walarm.R;
 
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_ringset, null);
         dbMgr = AlarmDBMgr.getInstance(mContext);
 
+        view.setBackgroundColor(Colors.Background);
+
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_1));
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_2));
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_3));
@@ -52,8 +56,13 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         rings.add((TextViewEx) view.findViewById(R.id.text_ring_5));
 
         // 이 뷰에서 버튼 핸들링을 하겠다는 코드.
-        for (int i = 0; i < buttons.size(); i++)
+        for (int i = 0; i < buttons.size(); i++) {
+            GradientDrawable drawable = (GradientDrawable)getResources().getDrawable(R.drawable.button_ring);
+            drawable.setColor(Colors.getRingColor(i));
+
+            buttons.get(i).setBackground(drawable);
             buttons.get(i).setOnClickListener(this);
+        }
 
         updateRingName();
 

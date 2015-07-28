@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:weightSum="1"
-    android:background="#ffffcf7e">
+    android:background="@drawable/button_state">
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/image_afternoon"
-        android:src="@drawable/w_day"
-        android:tint="#ffffffff" />
+        android:src="@drawable/w_day"/>
 
 
     <LinearLayout

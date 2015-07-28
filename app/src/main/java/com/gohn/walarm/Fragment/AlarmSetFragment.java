@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
+import com.gohn.walarm.Extention.ListViewEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
@@ -48,7 +49,12 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
         setListAdapter(mAdapter);
 
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        ListViewEx listView = (ListViewEx) view.findViewById(android.R.id.list);
+
+        // 리스트들의 구분선 제거 - xml에서 해도 되는데 여기서 해보고 싶었음.
+        listView.setDivider(null);
+        listView.setDividerHeight(3);
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.attachToListView(listView);
         // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데

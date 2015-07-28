@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import com.gohn.walarm.Model.Colors;
 import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.R;
 
+import java.nio.channels.Selector;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -88,7 +92,9 @@ public class AlarmListAdapter extends BaseAdapter {
         if (itemLayout == null) {
             itemLayout = mLayout.inflate(R.layout.alarm_list, null);
 
-            itemLayout.setBackground(Colors.getAlarmColor(position));
+            GradientDrawable drawable = (GradientDrawable)itemLayout.getResources().getDrawable(R.drawable.button_ring);
+            drawable.setColor(Colors.getAlarmColor(position));
+            itemLayout.setBackground(drawable);
 
             viewHolder = new ViewHolder();
 
@@ -142,8 +148,6 @@ public class AlarmListAdapter extends BaseAdapter {
         // 체크 박스 변경 될 때마다 리스너에서 db에 업데이트
         viewHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
 
-            //please note that objPlace, position and holder must be declared
-            //as final inside the getView() function scope.
             @Override
             public void onClick(View arg0) {
                 final boolean isChecked = viewHolder.mCheckBox.isChecked();

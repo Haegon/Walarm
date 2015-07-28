@@ -19,8 +19,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#ff2c696c"/>
+                        android:layout_alignParentEnd="true" />
 
                     <ImageView
                         android:layout_width="80dp"
@@ -61,8 +60,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#ffeabe5f"/>
+                        android:layout_alignParentEnd="true"/>
 
                     <ImageView
                         android:layout_width="80dp"
@@ -103,8 +101,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#ffbf4b18"/>
+                        android:layout_alignParentEnd="true"/>
 
                     <ImageView
                         android:layout_width="80dp"
@@ -145,8 +142,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#ff582c2b"/>
+                        android:layout_alignParentEnd="true"/>
 
                     <ImageView
                         android:layout_width="80dp"
@@ -187,8 +183,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="#ff20151b"/>
+                        android:layout_alignParentEnd="true"/>
 
                     <ImageView
                         android:layout_width="80dp"
