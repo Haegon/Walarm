@@ -16,43 +16,43 @@
             android:id="@+id/btn_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Cancel"
-            android:textSize="@dimen/set_text"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp" />
+            android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.ButtonEx
             android:id="@+id/btn_del"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Delete"
-            android:textSize="@dimen/set_text"
-            android:layout_marginRight="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp" />
+            android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.ButtonEx
             android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Save"
-            android:textSize="@dimen/set_text"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="1dp" />
+            android:textSize="@dimen/set_text" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,29 +64,29 @@
         <com.gohn.walarm.Extention.TextViewEx
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
             android:layout_weight="2"
             android:background="@drawable/button_small"
             android:gravity="center"
             android:text="Name"
-            android:textSize="@dimen/set_text"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp" />
+            android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.EditTextEx
             android:id="@+id/text_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:hint="School"
-            android:textSize="@dimen/set_text"
-            android:background="@drawable/button_small"
-            android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp" />
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_small"
+            android:gravity="center"
+            android:hint="School"
+            android:textSize="@dimen/set_text" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,7 +103,10 @@
             android:gravity="center"
             android:text="PM 00:00"
             android:textSize="@dimen/set_time"
-            android:layout_margin="1dp" />
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,63 +115,87 @@
         android:layout_weight="0.7"
         android:background="@drawable/button_small"
         android:orientation="horizontal"
-        android:layout_margin="1dp">
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp">
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_sunday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="일"
-            android:textOn="일" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_sunday"
+            android:textOn="@string/day_sunday"
+            android:textSize="@dimen/set_text" />
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_monday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="월"
-            android:textOn="월" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_monday"
+            android:textOn="@string/day_monday"
+            android:textSize="@dimen/set_text"/>
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_tuesday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="화"
-            android:textOn="화" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_tuesday"
+            android:textOn="@string/day_tuesday"
+            android:textSize="@dimen/set_text" />
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_wednesday"
-            android:layout_width="50dp"
+            android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="수"
-            android:textOn="수" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_wednesday"
+            android:textOn="@string/day_wednesday"
+            android:textSize="@dimen/set_text" />
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_thursday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="목"
-            android:textOn="목" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_thursday"
+            android:textOn="@string/day_thursday"
+            android:textSize="@dimen/set_text" />
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_friday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="금"
-            android:textOn="금" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_friday"
+            android:textOn="@string/day_friday"
+            android:textSize="@dimen/set_text" />
 
-        <ToggleButton
+        <com.gohn.walarm.Extention.ToggleButtonEx
             android:id="@+id/tb_saturday"
             android:layout_width="@dimen/day_length"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textOff="토"
-            android:textOn="토" />
+            android:background="@drawable/button_toggle"
+            android:textOff="@string/day_saturday"
+            android:textOn="@string/day_saturday"
+            android:textSize="@dimen/set_text"/>
 
     </LinearLayout>
 
@@ -179,15 +206,18 @@
         android:background="@drawable/button_small"
         android:gravity="center_vertical|right"
         android:orientation="horizontal"
-        android:layout_margin="1dp">
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp">
 
 
         <com.gohn.walarm.Extention.TextViewEx
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_marginLeft="20dp"
-            android:text="Vibe"
             android:gravity="center_vertical"
+            android:text="Vibe"
             android:textSize="@dimen/set_text" />
 
         <CheckBox
@@ -201,7 +231,7 @@
             android:button="@drawable/onoff"
             android:clickable="true"
             android:focusable="false"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical|right" />
 
     </RelativeLayout>
 
@@ -212,15 +242,18 @@
         android:background="@drawable/button_small"
         android:gravity="center_vertical|right"
         android:orientation="horizontal"
-        android:layout_margin="1dp">
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
 
 
         <com.gohn.walarm.Extention.TextViewEx
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_marginLeft="20dp"
-            android:text="Ring"
             android:gravity="center_vertical"
+            android:text="Ring"
             android:textSize="@dimen/set_text" />
 
         <CheckBox

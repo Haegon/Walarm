@@ -5,14 +5,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import com.gohn.walarm.Extention.ButtonEx;
 import com.gohn.walarm.Extention.EditTextEx;
+import com.gohn.walarm.Extention.ToggleButtonEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Days;
@@ -32,7 +35,7 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
     ButtonEx btnCancel;
     ButtonEx btnDelete;
     ButtonEx btnSave;
-    ArrayList<ToggleButton> tbDays = new ArrayList<ToggleButton>();
+    ArrayList<ToggleButtonEx> tbDays = new ArrayList<ToggleButtonEx>();
     EditTextEx editName;
     CheckBox cbVibe;
     CheckBox cbRing;
@@ -54,13 +57,27 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
         else
             flag = getIntent().getExtras().getInt(Flags.ALARMSETINTENT);
 
-        tbDays.add((ToggleButton) findViewById(R.id.tb_sunday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_monday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_tuesday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_wednesday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_thursday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_friday));
-        tbDays.add((ToggleButton) findViewById(R.id.tb_saturday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_sunday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_monday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_tuesday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_wednesday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_thursday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_friday));
+        tbDays.add((ToggleButtonEx) findViewById(R.id.tb_saturday));
+
+        // 토글 버튼 색깔 리스너 달아준다.
+        for (final ToggleButtonEx tb : tbDays) {
+            tb.setTextColor(Color.GRAY);
+            tb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        tb.setTextColor(Color.WHITE);
+                    } else {
+                        tb.setTextColor(Color.GRAY);
+                    }
+                }
+            });
+        }
 
         btnCancel = (ButtonEx) findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(this);
@@ -79,7 +96,7 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
                         now.get(Calendar.MINUTE),
                         false
                 );
-                tpd.setThemeDark(false);
+                tpd.setThemeDark(true);
                 tpd.vibrate(true);
                 tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
