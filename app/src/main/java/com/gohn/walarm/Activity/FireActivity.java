@@ -18,6 +18,7 @@ import android.widget.Button;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.Model.Flags;
+import com.gohn.walarm.Model.Ring;
 import com.gohn.walarm.Model.Weather;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Scheduler.AlarmReceiver;
@@ -172,7 +173,7 @@ public class FireActivity extends Activity implements View.OnClickListener {
     }
 
     void stop() {
-        vibe.cancel();
-        ring.stop();
+        if ( vibe != null ) vibe.cancel();
+        if ( ring != null ) ring.stop();
     }
 }
