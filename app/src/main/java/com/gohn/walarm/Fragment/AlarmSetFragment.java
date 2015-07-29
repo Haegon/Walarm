@@ -3,6 +3,7 @@ package com.gohn.walarm.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alarmset, null);
+        view.setBackgroundColor(Color.WHITE);
 
         dbMgr = AlarmDBMgr.getInstance(mContext);
 
@@ -52,7 +54,7 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
         // 리스트들의 구분선 제거 - xml에서 해도 되는데 여기서 해보고 싶었음.
         listView.setDivider(null);
-        listView.setDividerHeight(3);
+        //listView.setDividerHeight(3);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.attachToListView(listView);

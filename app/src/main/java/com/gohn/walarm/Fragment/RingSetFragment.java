@@ -3,6 +3,7 @@ package com.gohn.walarm.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -41,7 +42,7 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_ringset, null);
         dbMgr = AlarmDBMgr.getInstance(mContext);
 
-        view.setBackgroundColor(Colors.Background);
+        view.setBackgroundColor(Color.WHITE);
 
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_1));
         buttons.add((ButtonEx) view.findViewById(R.id.btn_weather_2));
@@ -60,7 +61,7 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
             GradientDrawable drawable = (GradientDrawable)getResources().getDrawable(R.drawable.button_normal);
             drawable.setColor(Colors.getRingColor(i));
 
-            buttons.get(i).setBackground(drawable);
+            buttons.get(i).setBackground(getResources().getDrawable(R.drawable.button_stroke));
             buttons.get(i).setOnClickListener(this);
         }
 
