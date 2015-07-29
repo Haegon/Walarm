@@ -31,12 +31,13 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(Colors.Background);
-        }
+        // 블랙 테마 아닐때 사용하려고 했던 부분.
+//        if (android.os.Build.VERSION.SDK_INT >= 21) {
+//            Window window = getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            window.setStatusBarColor(Colors.Background);
+//        }
 
         // gps 매니저 초기화
         gps = LocateMgr.getInstance(this);
@@ -103,13 +104,6 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-//            Locale l = Locale.getDefault();
-//            switch (position) {
-//                case 0:
-//                    return getString(R.string.title_section1).toUpperCase(l);
-//                case 1:
-//                    return getString(R.string.title_section2).toUpperCase(l);
-//            }
             return null;
         }
     }

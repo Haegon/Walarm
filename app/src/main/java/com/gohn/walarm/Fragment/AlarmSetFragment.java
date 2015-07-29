@@ -74,9 +74,9 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         fam.setOnClickListener(this);
         fam.setVisibility(View.INVISIBLE);
 
+        // 버튼 이벤트를 가져온다.
         com.getbase.floatingactionbutton.FloatingActionButton fab_add = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_add);
         fab_add.setOnClickListener(this);
-
         com.getbase.floatingactionbutton.FloatingActionButton fab_option = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_option);
         fab_option.setOnClickListener(this);
     }
@@ -126,9 +126,11 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         startActivityForResult(intent, 0);
     }
 
+    // 스크롤 할 때 fab가 자동으로 보였다 사라지는 기능이 있긴한데
+    // toggle 기능때문에 자동을 막고 스크롤 onScroll에서 보이고 숨기고를 담당하도록 하였다.
+    // fab의 온스크롤에다가 현재 리스트뷰를 등록하면 전에 등록했던 리스너는 씹히는 거지같은 경우 때문에..
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        Log.e("gohn", "onScrollStateChanged");
         if ( scrollState == SCROLL_STATE_IDLE) {
             fab_menu.show();
         } else {
@@ -140,7 +142,6 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Log.e("gohn", "onScroll");
     }
 
     void toggle() {
