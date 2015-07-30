@@ -3,6 +3,8 @@ package com.gohn.walarm.Util;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.gohn.walarm.R;
+
 /**
  * Created by HaegonKoh on 2015. 6. 29..
  */
@@ -30,7 +32,7 @@ public class BackPressCloseHandler {
     }
 
     private void showGuide() {
-        toast = Toast.makeText(activity, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+        toast = Toast.makeText(activity, R.string.toast_back, Toast.LENGTH_SHORT);
         toast.show();
     }
 }

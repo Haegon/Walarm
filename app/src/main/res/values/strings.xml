@@ -26,4 +26,6 @@
     <string name="dlg_no">No</string>
     <string name="dlg_cancel">Do you want to exit without saving?</string>
 
+    <string name="toast_back">You can exit, if you press \'back\' button again.</string>
+
 </resources>
