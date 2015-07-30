@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.gohn.walarm.Extention.ButtonEx;
 import com.gohn.walarm.Extention.TextViewEx;
@@ -208,7 +207,6 @@ public class FireActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_num_ok:
                 if (cur_location == 4) {
-                    Log.e("gohn", "@@@@@ Finish");
                     stop();
                     finish();
                 }
@@ -236,7 +234,6 @@ public class FireActivity extends Activity implements View.OnClickListener {
                 if (intent != null) {
                     stop();
                     alarmReceiver.setSnooze(this, intent, 5);
-                    Toast.makeText(this, "5분 후에 알람이 다시 울립니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else
                     Log.e("gohn", "Intent is null");
@@ -245,7 +242,6 @@ public class FireActivity extends Activity implements View.OnClickListener {
                 if (intent != null) {
                     stop();
                     alarmReceiver.setSnooze(this, intent, 10);
-                    Toast.makeText(this, "10분 후에 알람이 다시 울립니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else
                     Log.e("gohn", "Intent is null");

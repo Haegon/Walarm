@@ -28,5 +28,9 @@
 
     <string name="toast_back">You can exit, if you press \'back\' button again.</string>
     <string name="toast_days">Please select at least one day of the week.</string>
+    <string name="toast_set"> left to fire the alarm.</string>
+    <string name="toast_day">d </string>
+    <string name="toast_hour">h </string>
+    <string name="toast_minute">m </string>
 
 </resources>

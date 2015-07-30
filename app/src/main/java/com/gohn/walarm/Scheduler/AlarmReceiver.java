@@ -10,13 +10,16 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.gohn.walarm.Activity.FireActivity;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Alarm;
 import com.gohn.walarm.Model.Days;
 import com.gohn.walarm.Model.Flags;
+import com.gohn.walarm.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
@@ -106,6 +109,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
+
+        showToast(context,a.Days,a.Hour,a.Minute);
     }
 
 
@@ -119,6 +124,79 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000 * 60 * min, alarmIntent);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(min);
+        sb.append(context.getResources().getString(R.string.toast_minute));
+        sb.append(context.getResources().getString(R.string.toast_set));
+
+        Toast.makeText(context, sb.toString() , Toast.LENGTH_LONG).show();
+    }
+
+    public void showToast(Context context, int aDays, int aHour, int aMinute) {
+
+        // 현재시간을 가져온다.
+        Calendar calendar = Calendar.getInstance();
+        int cDay = calendar.get(Calendar.DAY_OF_WEEK) - 1; // 일요일이 1부터 시작해서 0부터 하고싶었음.
+        int cHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int cMinute = calendar.get(Calendar.MINUTE);
+
+        // 일요일 0시 0분 부터 현재까지 몇분이 지났는지 구한다.
+        int cWeekMinute = cDay * 24 * 60 + cHour * 60 + cMinute;
+        Log.e("gohn", String.format("Day : %d, Hour : %d, Minute : %d, Total : %d", cDay, cHour, cMinute, cWeekMinute));
+
+        ArrayList<Integer> aDay = new ArrayList<Integer>();
+
+        int currentMinuteOfDay = aHour * 60 + aMinute;
+
+        if ((aDays & Days.SUNDAY) == Days.SUNDAY)       aDay.add(0 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.MONDAY) == Days.MONDAY)       aDay.add(1 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.TUESDAY) == Days.TUESDAY)     aDay.add(2 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.WEDNESDAY) == Days.WEDNESDAY) aDay.add(3 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.THURSDAY) == Days.THURSDAY)   aDay.add(4 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.FRIDAY) == Days.FRIDAY)       aDay.add(5 * Days.MINUTEOFDAY + currentMinuteOfDay);
+        if ((aDays & Days.SATURDAY) == Days.SATURDAY)   aDay.add(6 * Days.MINUTEOFDAY + currentMinuteOfDay);
+
+        // 남은시간을 구해서 토스트를 띄운다.
+        int leftMinute = 0;
+        for ( int i = 0 ; i < aDay.size() ; i ++ ) {
+            leftMinute = aDay.get(i) - cWeekMinute;
+            if ( leftMinute > 0 ) {
+                break;
+            }
+        }
+
+        // 이번주에 띄울알람이 없는경우에는 Days.MINUTEOFWEEK 를 더해서 다음주 중에서 찾는다.
+        if ( leftMinute < 0 ) {
+            for (int i = 0; i < aDay.size(); i++) {
+                leftMinute = aDay.get(i) - cWeekMinute + Days.MINUTEOFWEEK;
+                if (leftMinute > 0) {
+                    break;
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if ( leftMinute >= Days.MINUTEOFDAY) {
+            sb.append(leftMinute / Days.MINUTEOFDAY);
+            sb.append(context.getResources().getString(R.string.toast_day));
+
+            leftMinute = leftMinute - (leftMinute / Days.MINUTEOFDAY ) * Days.MINUTEOFDAY;
+        }
+
+        if ( leftMinute >= Days.MINUTEOFHOUR) {
+            sb.append(leftMinute / Days.MINUTEOFHOUR);
+            sb.append(context.getResources().getString(R.string.toast_hour));
+
+            leftMinute = leftMinute - (leftMinute / Days.MINUTEOFHOUR ) * Days.MINUTEOFHOUR;
+        }
+
+        sb.append(leftMinute);
+        sb.append(context.getResources().getString(R.string.toast_minute));
+
+        sb.append(context.getResources().getString(R.string.toast_set));
+
+        Toast.makeText(context, sb.toString() , Toast.LENGTH_LONG).show();
     }
 
 
