@@ -38,7 +38,7 @@ public class SchedulingService extends IntentService {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, AlarmSetActivity.class), 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_app)
+                .setSmallIcon(R.drawable.ic_noti)
                 .setContentTitle(getString(R.string.noti_title))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(msg))
