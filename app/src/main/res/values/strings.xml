@@ -27,5 +27,6 @@
     <string name="dlg_cancel">Do you want to exit without saving?</string>
 
     <string name="toast_back">You can exit, if you press \'back\' button again.</string>
+    <string name="toast_days">Please select at least one day of the week.</string>
 
 </resources>

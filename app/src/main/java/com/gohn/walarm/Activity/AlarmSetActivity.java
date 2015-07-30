@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ToggleButton;
+import android.widget.Toast;
 
 import com.gohn.walarm.Extention.ButtonEx;
 import com.gohn.walarm.Extention.EditTextEx;
@@ -247,12 +247,19 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
                 if ( cbRing.isChecked() )
                     options += Flags.RING;
 
-                // 알람 객체 하나 생성
-                Alarm a = new Alarm(this, editName.getText().toString(), mHour, mMinute, getDays(), 1, options);
+                    int days = getDays();
 
-                if (flag == Flags.ADD) {
-                    // 알람 추가.
-                    Log.e("gohn", "Options Set : " + a.Options);
+                    if ( days == 0 ) {
+                        Toast.makeText(this, R.string.toast_days, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // 알람 객체 하나 생성
+                    Alarm a = new Alarm(this, editName.getText().toString(), mHour, mMinute, days, 1, options);
+
+                    if (flag == Flags.ADD) {
+                        // 알람 추가.
+                        Log.e("gohn", "Options Set : " + a.Options);
 
                     AlarmDBMgr.getInstance(this).addAlarm(a);
                     alarmReceiver.setAlarm(this, a);
