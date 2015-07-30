@@ -226,8 +226,8 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(AlarmSetActivity.this);
-        builder.setMessage("저장하지 않고 나가시겠습니까?").setPositiveButton("예", dialogClickListener)
-                .setNegativeButton("아니오", dialogClickListener).show();
+        builder.setMessage(R.string.dlg_cancel).setPositiveButton(R.string.dlg_yes, dialogClickListener)
+                .setNegativeButton(R.string.dlg_no, dialogClickListener).show();
     }
 
     @Override

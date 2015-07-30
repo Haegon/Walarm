@@ -2,33 +2,28 @@
 <resources>
 
     <string name="app_name">Walarm</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_section1">Alarm List</string>
-    <string name="title_section2">Ring Setting</string>
-    <string name="title_activity_add">AddActivity</string>
 
-    <string name="hello_world">Hello world!</string>
-
-
-    <string name="start_text">Start Alarm</string>
-    <string name="cancel_text">Cancel Alarm</string>
     <string name="noti_title">Walarm !!</string>
-    <string name="noti_msg">알람 시간 입니다.</string>
-    <string name="connection_error">Connection error.</string>
-    <string name="title_activity_modify">ModifyActivity</string>
-    <string name="title_activity_fire">FireActivity</string>
-    <string name="title_activity_set">set</string>
+    <string name="noti_msg">It is your Alarm Time</string>
 
-    <string name="day_sunday">일</string>
-    <string name="day_monday">월</string>
-    <string name="day_tuesday">화</string>
-    <string name="day_wednesday">수</string>
-    <string name="day_thursday">목</string>
-    <string name="day_friday">금</string>
-    <string name="day_saturday">토</string>
+    <string name="day_sunday">S</string>
+    <string name="day_monday">M</string>
+    <string name="day_tuesday">T</string>
+    <string name="day_wednesday">W</string>
+    <string name="day_thursday">T</string>
+    <string name="day_friday">F</string>
+    <string name="day_saturday">S</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="set_cancel">Cancel</string>
+    <string name="set_delete">Delete</string>
+    <string name="set_save">Save</string>
+    <string name="set_name">Name</string>
+    <string name="set_hint">ex) School</string>
+    <string name="set_vibe">Vibe</string>
+    <string name="set_ring">Ring</string>
 
+    <string name="dlg_yes">Yes</string>
+    <string name="dlg_no">No</string>
+    <string name="dlg_cancel">Do you want to exit without saving?</string>
 
 </resources>

@@ -78,8 +78,8 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         // 버튼 이벤트를 가져온다.
         com.getbase.floatingactionbutton.FloatingActionButton fab_add = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_add);
         fab_add.setOnClickListener(this);
-        com.getbase.floatingactionbutton.FloatingActionButton fab_option = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_option);
-        fab_option.setOnClickListener(this);
+//        com.getbase.floatingactionbutton.FloatingActionButton fab_option = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_option);
+//        fab_option.setOnClickListener(this);
         com.getbase.floatingactionbutton.FloatingActionButton fab_help = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_help);
         fab_help.setOnClickListener(this);
         com.getbase.floatingactionbutton.FloatingActionButton fab_info = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_info);
@@ -98,9 +98,9 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
                 intentAdd.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
                 startActivityForResult(intentAdd, 0);
                 break;
-            case R.id.fab_option:
-                Log.e("gohn", "fab_option");
-                break;
+//            case R.id.fab_option:
+//                Log.e("gohn", "fab_option");
+//                break;
             case R.id.fab_info:
                 Log.e("gohn", "fab_option");
                 break;

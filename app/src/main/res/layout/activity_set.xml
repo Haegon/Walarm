@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
-            android:text="Cancel"
+            android:text="@string/set_cancel"
             android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.ButtonEx
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
-            android:text="Delete"
+            android:text="@string/set_delete"
             android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.ButtonEx
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
-            android:text="Save"
+            android:text="@string/set_save"
             android:textSize="@dimen/set_text" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
             android:layout_weight="2"
             android:background="@drawable/button_small"
             android:gravity="center"
-            android:text="Name"
+            android:text="@string/set_name"
             android:textSize="@dimen/set_text" />
 
         <com.gohn.walarm.Extention.EditTextEx
@@ -85,7 +85,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_small"
             android:gravity="center"
-            android:hint="School"
+            android:hint="@string/set_hint"
             android:textSize="@dimen/set_text" />
     </LinearLayout>
 
@@ -217,7 +217,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
-            android:text="Vibe"
+            android:text="@string/set_vibe"
             android:textSize="@dimen/set_text" />
 
         <CheckBox
@@ -253,7 +253,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
-            android:text="Ring"
+            android:text="@string/set_ring"
             android:textSize="@dimen/set_text" />
 
         <CheckBox

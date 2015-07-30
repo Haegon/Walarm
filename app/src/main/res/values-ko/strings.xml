@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Walarm</string>
+    
+    <string name="noti_title">Walarm !!</string>
+    <string name="noti_msg">알람 시간 입니다.</string>
+
+    <string name="day_sunday">일</string>
+    <string name="day_monday">월</string>
+    <string name="day_tuesday">화</string>
+    <string name="day_wednesday">수</string>
+    <string name="day_thursday">목</string>
+    <string name="day_friday">금</string>
+    <string name="day_saturday">토</string>
+
+    <string name="set_cancel">취소</string>
+    <string name="set_delete">삭제</string>
+    <string name="set_save">저장</string>
+    <string name="set_name">이름</string>
+    <string name="set_hint">예) 출근</string>
+    <string name="set_vibe">진동</string>
+    <string name="set_ring">벨소리</string>
+
+    <string name="dlg_yes">예</string>
+    <string name="dlg_no">아니오</string>
+    <string name="dlg_cancel">저장하지 않고 나가시겠습니까?</string>
+
+</resources>
