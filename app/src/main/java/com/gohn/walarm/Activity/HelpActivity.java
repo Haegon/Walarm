@@ -10,10 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.widget.Button;
 
-import com.gohn.walarm.Fragment.HelpP1Fragment;
-import com.gohn.walarm.Fragment.HelpP2Fragment;
-import com.gohn.walarm.Fragment.HelpP3Fragment;
-import com.gohn.walarm.Fragment.HelpP4Fragment;
+import com.gohn.walarm.Fragment.HelpFragment;
 import com.gohn.walarm.R;
 
 public class HelpActivity extends FragmentActivity {
@@ -74,25 +71,21 @@ public class HelpActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a DummySectionFragment (defined as a static inner class
-            // below) with the page number as its lone argument.
             switch (position) {
                 case 0:
-                    return new HelpP1Fragment(mContext);
+                    return new HelpFragment(mContext,R.drawable.help_alarm);
                 case 1:
-                    return new HelpP1Fragment(mContext);
+                    return new HelpFragment(mContext,R.drawable.help_ring);
                 case 2:
-                    return new HelpP1Fragment(mContext);
+                    return new HelpFragment(mContext,R.drawable.help_set);
                 case 3:
-                    return new HelpP1Fragment(mContext);
+                    return new HelpFragment(mContext,R.drawable.help_fire);
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // total pages.
             return 4;
         }
 
