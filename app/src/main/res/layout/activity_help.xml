@@ -32,13 +32,13 @@
             android:padding="15dp" >
 
             <Button
-                android:id="@+id/btn2"
+                android:id="@+id/btn1"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:background="@drawable/frag_circle2" />
 
             <Button
-                android:id="@+id/btn1"
+                android:id="@+id/btn2"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_marginLeft="6dp"
@@ -46,6 +46,12 @@
 
             <Button
                 android:id="@+id/btn3"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/frag_circle1" />
+            <Button
+                android:id="@+id/btn4"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_marginLeft="6dp"

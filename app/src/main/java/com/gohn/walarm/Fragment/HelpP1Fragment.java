@@ -48,27 +48,4 @@ public class HelpP1Fragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
         }
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        // 유저가 선택을 취소 했을때.
-//        if ( data == null ) return;
-//
-//        // 벨소리 선택 팝업에서 선택된 알람이 인텐트에 담겨온다.
-//        Uri uri = (Uri)data.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-//
-//        if ( uri == null ) return;
-//
-//        Ringtone ringtone = RingtoneManager.getRingtone(mContext, uri);
-//
-//        String title = ringtone.getTitle(mContext);
-//
-//        dbMgr.updateRing(requestCode, uri.toString());
-//
-//        updateRingName();
-//
-//        Log.e("gohn", "req code : " + requestCode);
-//        Log.e("gohn", "data : " + uri);
-//    }
 }

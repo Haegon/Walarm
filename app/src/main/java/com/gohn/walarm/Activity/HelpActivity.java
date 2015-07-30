@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.gohn.walarm.Fragment.HelpP1Fragment;
 import com.gohn.walarm.Fragment.HelpP2Fragment;
 import com.gohn.walarm.Fragment.HelpP3Fragment;
+import com.gohn.walarm.Fragment.HelpP4Fragment;
 import com.gohn.walarm.R;
 
 public class HelpActivity extends FragmentActivity {
@@ -22,6 +23,7 @@ public class HelpActivity extends FragmentActivity {
     Button bt1;
     Button bt2;
     Button bt3;
+    Button bt4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class HelpActivity extends FragmentActivity {
         bt1=(Button) findViewById(R.id.btn1);
         bt2=(Button) findViewById(R.id.btn2);
         bt3=(Button) findViewById(R.id.btn3);
+        bt4=(Button) findViewById(R.id.btn4);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -78,9 +81,11 @@ public class HelpActivity extends FragmentActivity {
                 case 0:
                     return new HelpP1Fragment(mContext);
                 case 1:
-                    return new HelpP2Fragment(mContext);
+                    return new HelpP1Fragment(mContext);
                 case 2:
-                    return new HelpP3Fragment(mContext);
+                    return new HelpP1Fragment(mContext);
+                case 3:
+                    return new HelpP1Fragment(mContext);
             }
             return null;
         }
@@ -88,7 +93,7 @@ public class HelpActivity extends FragmentActivity {
         @Override
         public int getCount() {
             // total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -102,19 +107,28 @@ public class HelpActivity extends FragmentActivity {
         switch(action)
         {
             case 0:
-                setButton(bt2,4,15,R.drawable.frag_circle2);
-                setButton(bt1,4,15,R.drawable.frag_circle1);
-                setButton(bt3,4,15,R.drawable.frag_circle1);
-                break;
-            case 1:
                 setButton(bt1,4,15,R.drawable.frag_circle2);
                 setButton(bt2,4,15,R.drawable.frag_circle1);
                 setButton(bt3,4,15,R.drawable.frag_circle1);
+                setButton(bt4,4,15,R.drawable.frag_circle1);
+                break;
+            case 1:
+                setButton(bt1,4,15,R.drawable.frag_circle1);
+                setButton(bt2,4,15,R.drawable.frag_circle2);
+                setButton(bt3,4,15,R.drawable.frag_circle1);
+                setButton(bt4,4,15,R.drawable.frag_circle1);
                 break;
             case 2:
-                setButton(bt3,4,15,R.drawable.frag_circle2);
-                setButton(bt2,4,15,R.drawable.frag_circle1);
                 setButton(bt1,4,15,R.drawable.frag_circle1);
+                setButton(bt2,4,15,R.drawable.frag_circle1);
+                setButton(bt3,4,15,R.drawable.frag_circle2);
+                setButton(bt4,4,15,R.drawable.frag_circle1);
+                break;
+            case 3:
+                setButton(bt1, 4, 15, R.drawable.frag_circle1);
+                setButton(bt2,4,15,R.drawable.frag_circle1);
+                setButton(bt3,4,15,R.drawable.frag_circle1);
+                setButton(bt4,4,15,R.drawable.frag_circle2);
                 break;
         }
     }

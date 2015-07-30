@@ -82,6 +82,8 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         fab_option.setOnClickListener(this);
         com.getbase.floatingactionbutton.FloatingActionButton fab_help = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_help);
         fab_help.setOnClickListener(this);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_info = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_info);
+        fab_info.setOnClickListener(this);
     }
 
     @Override
@@ -97,6 +99,9 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
                 startActivityForResult(intentAdd, 0);
                 break;
             case R.id.fab_option:
+                Log.e("gohn", "fab_option");
+                break;
+            case R.id.fab_info:
                 Log.e("gohn", "fab_option");
                 break;
             case R.id.fab_help:
