@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gohn.walarm.Activity.AlarmSetActivity;
+import com.gohn.walarm.Activity.HelpActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Flags;
@@ -79,6 +80,8 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
         fab_add.setOnClickListener(this);
         com.getbase.floatingactionbutton.FloatingActionButton fab_option = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_option);
         fab_option.setOnClickListener(this);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_help = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_help);
+        fab_help.setOnClickListener(this);
     }
 
     @Override
@@ -89,13 +92,16 @@ public class AlarmSetFragment extends ListFragment implements View.OnClickListen
                 toggle();
                 break;
             case R.id.fab_add:
-                Intent intent = new Intent(mContext, AlarmSetActivity.class);
-                intent.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
-                startActivityForResult(intent, 0);
+                Intent intentAdd = new Intent(mContext, AlarmSetActivity.class);
+                intentAdd.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
+                startActivityForResult(intentAdd, 0);
                 break;
             case R.id.fab_option:
                 Log.e("gohn", "fab_option");
+                break;
             case R.id.fab_help:
+                Intent intentHelp = new Intent(mContext, HelpActivity.class);
+                startActivityForResult(intentHelp, 0);
                 Log.e("gohn","fab_help");
                 break;
         }
