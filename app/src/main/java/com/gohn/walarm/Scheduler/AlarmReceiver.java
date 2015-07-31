@@ -180,6 +180,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         if ( leftMinute >= Days.MINUTEOFDAY) {
             sb.append(leftMinute / Days.MINUTEOFDAY);
             sb.append(context.getResources().getString(R.string.toast_day));
+            sb.append(" ");
 
             leftMinute = leftMinute - (leftMinute / Days.MINUTEOFDAY ) * Days.MINUTEOFDAY;
         }
@@ -187,6 +188,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         if ( leftMinute >= Days.MINUTEOFHOUR) {
             sb.append(leftMinute / Days.MINUTEOFHOUR);
             sb.append(context.getResources().getString(R.string.toast_hour));
+            sb.append(" ");
 
             leftMinute = leftMinute - (leftMinute / Days.MINUTEOFHOUR ) * Days.MINUTEOFHOUR;
         }
@@ -194,6 +196,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         if ( leftMinute > 0) {
             sb.append(leftMinute);
             sb.append(context.getResources().getString(R.string.toast_minute));
+            sb.append(" ");
         }
 
 

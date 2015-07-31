@@ -208,8 +208,8 @@ public class AlarmSetActivity extends Activity implements TimePickerDialog.OnTim
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(AlarmSetActivity.this);
-        builder.setMessage("삭제 하시겠습니까?").setPositiveButton("예", dialogClickListener)
-                .setNegativeButton("아니오", dialogClickListener).show();
+        builder.setMessage(R.string.dlg_delete).setPositiveButton(R.string.dlg_yes, dialogClickListener)
+                .setNegativeButton(R.string.dlg_no, dialogClickListener).show();
     }
 
     private void ExitPopup() {
