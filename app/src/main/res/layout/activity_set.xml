@@ -199,48 +199,12 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/button_small"
-        android:gravity="center_vertical|right"
-        android:orientation="horizontal"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp">
-
-
-        <com.gohn.walarm.Extention.TextViewEx
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/set_vibe"
-            android:textSize="@dimen/set_text" />
-
-        <CheckBox
-            android:id="@+id/cbVibe"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:button="@drawable/onoff"
-            android:clickable="true"
-            android:focusable="false"
-            android:gravity="center_vertical|right" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/button_small"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="1dp"
@@ -249,26 +213,56 @@
 
 
         <com.gohn.walarm.Extention.TextViewEx
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="@string/set_ring"
-            android:textSize="@dimen/set_text" />
+            android:text="@string/set_vibe"
+            android:textSize="@dimen/set_text"
+            android:layout_marginLeft="30dp" />
 
         <CheckBox
-            android:id="@+id/cbRing"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:id="@+id/cbVibe"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
             android:button="@drawable/onoff"
             android:clickable="true"
             android:focusable="false"
             android:gravity="center_vertical" />
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/button_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp">
+
+
+        <com.gohn.walarm.Extention.TextViewEx
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/set_ring"
+            android:textSize="@dimen/set_text"
+            android:layout_marginLeft="30dp" />
+
+        <CheckBox
+            android:id="@+id/cbRing"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/onoff"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
 
 </LinearLayout>
