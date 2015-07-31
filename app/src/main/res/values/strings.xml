@@ -33,4 +33,21 @@
     <string name="toast_hour">h </string>
     <string name="toast_minute">m </string>
 
+    <string name="notices_default_style" translatable="false">
+        p.license {
+        background:grey;
+        }
+        body {
+        font-family: sans-serif;
+        overflow-wrap: break-word;
+        }
+        pre {
+        background-color: #eeeeee;
+        padding: 1em;
+        white-space: pre-wrap;
+        }
+    </string>
+    <string name="notices_title">Open Source License</string>
+    <string name="notices_close">Close</string>
+
 </resources>
