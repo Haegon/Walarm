@@ -47,7 +47,6 @@ public class ButtonEx extends Button {
         int maskedAction = event.getActionMasked();
         if (maskedAction == MotionEvent.ACTION_DOWN) {
             getBackground().setColorFilter(Color.argb(150, 155, 155, 155), PorterDuff.Mode.SRC_ATOP);
-
         } else if (maskedAction == MotionEvent.ACTION_UP) {
             getBackground().setColorFilter(null);
         }

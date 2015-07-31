@@ -84,7 +84,7 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM|RingtoneManager.TYPE_RINGTONE);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
 
         switch (v.getId()) {
             case R.id.btn_weather_1:
@@ -117,8 +117,6 @@ public class RingSetFragment extends Fragment implements View.OnClickListener {
         if ( uri == null ) return;
 
         Ringtone ringtone = RingtoneManager.getRingtone(mContext, uri);
-
-        String title = ringtone.getTitle(mContext);
 
         dbMgr.updateRing(requestCode, uri.toString());
 
