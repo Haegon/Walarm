@@ -191,7 +191,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             leftMinute = leftMinute - (leftMinute / Days.MINUTEOFHOUR ) * Days.MINUTEOFHOUR;
         }
 
-        if ( leftMinute >= 0) {
+        if ( leftMinute > 0) {
             sb.append(leftMinute);
             sb.append(context.getResources().getString(R.string.toast_minute));
         }
