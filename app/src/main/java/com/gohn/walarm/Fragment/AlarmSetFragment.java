@@ -16,15 +16,10 @@ import android.widget.ListView;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gohn.walarm.Activity.AlarmSetActivity;
 import com.gohn.walarm.Activity.HelpActivity;
-import com.gohn.walarm.Activity.MainActivity;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
-import com.gohn.walarm.Util.licensesdialog.LicensesDialogFragment;
-import com.gohn.walarm.Util.licensesdialog.licenses.ApacheSoftwareLicense20;
-import com.gohn.walarm.Util.licensesdialog.licenses.License;
-import com.gohn.walarm.Util.licensesdialog.model.Notice;
 import com.melnykov.fab.FloatingActionButton;
 
 import com.gohn.walarm.Util.licensesdialog.LicensesDialog;
