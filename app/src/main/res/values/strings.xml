@@ -6,13 +6,13 @@
     <string name="noti_title">Walarm !!</string>
     <string name="noti_msg">It is your Alarm Time</string>
 
-    <string name="day_sunday">S</string>
-    <string name="day_monday">M</string>
-    <string name="day_tuesday">T</string>
-    <string name="day_wednesday">W</string>
-    <string name="day_thursday">T</string>
-    <string name="day_friday">F</string>
-    <string name="day_saturday">S</string>
+    <string name="day_sunday">S\nU\nN</string>
+    <string name="day_monday">M\nO\nN</string>
+    <string name="day_tuesday">T\nU\nE</string>
+    <string name="day_wednesday">W\nE\nD</string>
+    <string name="day_thursday">T\nH\nU</string>
+    <string name="day_friday">F\nR\nI</string>
+    <string name="day_saturday">S\nA\nT</string>
 
     <string name="set_cancel">Cancel</string>
     <string name="set_delete">Delete</string>
