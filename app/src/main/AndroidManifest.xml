@@ -30,6 +30,7 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,9 +45,11 @@
         <activity
             android:name=".Activity.HelpActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
-        </activity>
-
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
+        <activity
+            android:name=".Activity.RingSetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
 
         <receiver android:name=".Scheduler.AlarmReceiver" />
         <receiver
@@ -58,6 +61,7 @@
         </receiver>
 
         <service android:name=".Scheduler.SchedulingService" />
+
     </application>
 
 </manifest>

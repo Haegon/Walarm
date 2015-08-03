@@ -50,5 +50,9 @@
     </string>
     <string name="notices_title">Open Source License</string>
     <string name="notices_close">Close</string>
+    <string name="title_activity_ring_set">RingSetActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

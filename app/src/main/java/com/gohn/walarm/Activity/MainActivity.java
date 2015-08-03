@@ -1,43 +1,43 @@
 package com.gohn.walarm.Activity;
 
+import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
-import com.gohn.walarm.Fragment.AlarmSetFragment;
-import com.gohn.walarm.Fragment.RingSetFragment;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.gohn.walarm.Adapter.AlarmListAdapter;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
-import com.gohn.walarm.Model.Colors;
+import com.gohn.walarm.Model.Flags;
 import com.gohn.walarm.R;
 import com.gohn.walarm.Util.BackPressCloseHandler;
+import com.gohn.walarm.Util.licensesdialog.LicensesDialog;
+import com.melnykov.fab.FloatingActionButton;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ListActivity implements View.OnClickListener, AbsListView.OnScrollListener{
 
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    Context mContext;
     BackPressCloseHandler backPressCloseHandler;
     LocateMgr gps;
-    ViewPager mViewPager;
+    AlarmListAdapter mAdapter = null;
+    FloatingActionsMenu fam;
+    FloatingActionButton fab_menu;
+    AlarmDBMgr dbMgr;
+    boolean isToggle = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_alarmset);
 
-        // 블랙 테마 아닐때 사용하려고 했던 부분.
-//        if (android.os.Build.VERSION.SDK_INT >= 21) {
-//            Window window = getWindow();
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            window.setStatusBarColor(Colors.Background);
-//        }
+        mContext = getApplicationContext();
 
         // gps 매니저 초기화
         gps = LocateMgr.getInstance(this);
@@ -47,18 +47,44 @@ public class MainActivity extends FragmentActivity {
             LocateMgr.getInstance(this).showSettingsAlert();
         }
 
-        AlarmDBMgr dbMgr = AlarmDBMgr.getInstance(this);
+        dbMgr = AlarmDBMgr.getInstance(this);
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(
-                getApplicationContext(), getSupportFragmentManager());
+        View view = getWindow().getDecorView().findViewById(android.R.id.content);
+        view.setBackgroundColor(Color.WHITE);
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mAdapter = new AlarmListAdapter(mContext, dbMgr.getAlarms());
+        setListAdapter(mAdapter);
 
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        getListView().setOnScrollListener(this);
+        // 리스트들의 구분선 제거 - xml에서 해도 되는데 여기서 해보고 싶었음.
+        listView.setDivider(null);
+        //listView.setDividerHeight(3);
+
+        // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
+        // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
+        fab_menu = (FloatingActionButton) view.findViewById(R.id.fab_menu);
+        fab_menu.setOnClickListener(this);
+        // 리스트 뷰에 매달아서 리스너를 자동 등록해주는 경우에만 사용.
+        // 참 거지같당....
+        //fab_add.attachToListView(listView);
+
+        fam = (FloatingActionsMenu)view.findViewById(R.id.fam_menu);
+        fam.setOnClickListener(this);
+        fam.setVisibility(View.INVISIBLE);
+
+        // 버튼 이벤트를 가져온다.
+        com.getbase.floatingactionbutton.FloatingActionButton fab_add = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_add);
+        fab_add.setOnClickListener(this);
+//        com.getbase.floatingactionbutton.FloatingActionButton fab_option = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_option);
+//        fab_option.setOnClickListener(this);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_help = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_help);
+        fab_help.setOnClickListener(this);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_info = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_info);
+        fab_info.setOnClickListener(this);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_ring = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_ring);
+        fab_ring.setOnClickListener(this);
     }
 
     @Override
@@ -74,38 +100,92 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        Context mContext;
 
-        public SectionsPagerAdapter(Context mContext, FragmentManager fm) {
-            super(fm);
-            this.mContext = mContext;
-        }
+    @Override
+    public void onClick(View v) {
 
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a DummySectionFragment (defined as a static inner class
-            // below) with the page number as its lone argument.
-            switch (position) {
-                case 0:
-                    return new AlarmSetFragment(mContext);
-                case 1:
-                    return new RingSetFragment(mContext);
-            }
-            return null;
-        }
+        switch (v.getId()) {
+            case R.id.fab_menu:
+                toggle();
+                break;
+            case R.id.fab_add:
+                Intent intentAdd = new Intent(mContext, AlarmSetActivity.class);
+                intentAdd.putExtra(Flags.ALARMSETINTENT, Flags.ADD);
+                startActivityForResult(intentAdd, 0);
+                break;
+            case R.id.fab_ring:
+                Intent intentRing = new Intent(mContext, RingSetActivity.class);
+                startActivityForResult(intentRing, 0);
+                break;
+//            case R.id.fab_option:
+//                Log.e("gohn", "fab_option");
+//                break;
+            case R.id.fab_info:
+                Log.e("gohn", "fab_option");
 
-        @Override
-        public int getCount() {
-            // total pages.
-            return 2;
-        }
+                new LicensesDialog.Builder(MainActivity.this)
+                        .setNotices(R.raw.notices)
+                        .build()
+                        .show();
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return null;
+                break;
+            case R.id.fab_help:
+                Intent intentHelp = new Intent(mContext, HelpActivity.class);
+                startActivityForResult(intentHelp, 0);
+                Log.e("gohn","fab_help");
+                break;
         }
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        String name = mAdapter.mData.get(position).Name;
+        int no = mAdapter.mData.get(position).No;
+        int hour = mAdapter.mData.get(position).Hour;
+        int min = mAdapter.mData.get(position).Minute;
+        int days = mAdapter.mData.get(position).Days;
+        int options = mAdapter.mData.get(position).Options;
+
+        Log.e("gohn", "Just Click => " + hour + ":" + min);
+
+        Intent intent = new Intent(mContext, AlarmSetActivity.class);
+        intent.putExtra(Flags.ALARMSETINTENT, Flags.MODIFY);
+        intent.putExtra(Flags.ALARMNAME, name);
+        intent.putExtra(Flags.ALARMNUMBER, no);
+        intent.putExtra(Flags.ALARMHOUR, hour);
+        intent.putExtra(Flags.ALARMMINUTE, min);
+        intent.putExtra(Flags.ALARMDAYS, days);
+        intent.putExtra(Flags.ALARMOPTIONS, options);
+
+        startActivityForResult(intent, 0);
+    }
+
+    // 스크롤 할 때 fab가 자동으로 보였다 사라지는 기능이 있긴한데
+    // toggle 기능때문에 자동을 막고 스크롤 onScroll에서 보이고 숨기고를 담당하도록 하였다.
+    // fab의 온스크롤에다가 현재 리스트뷰를 등록하면 전에 등록했던 리스너는 씹히는 거지같은 경우 때문에..
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if ( scrollState == SCROLL_STATE_IDLE) {
+            fab_menu.show();
+        } else {
+            if ( isToggle )
+                toggle();
+            fab_menu.hide();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    }
+
+    void toggle() {
+        isToggle = !isToggle;
+        fam.toggle();
+        if ( isToggle )
+            fam.setVisibility(View.VISIBLE);
+        else
+            fam.setVisibility(View.INVISIBLE);
+    }
 }
