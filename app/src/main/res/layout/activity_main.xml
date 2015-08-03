@@ -10,6 +10,17 @@
         android:layout_height="match_parent"
         android:background="#ff000000" />
 
+
+    <com.gohn.walarm.Extention.TextViewEx
+        android:id="@+id/text_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="@string/main_empty"
+        android:textSize="@dimen/set_text" />
+
+
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fam_menu"
         android:layout_width="wrap_content"
@@ -20,47 +31,52 @@
         android:layout_marginRight="7dp"
         fab:fab_addButtonColorNormal="#00ffffff"
         fab:fab_addButtonColorPressed="#00ffffff"
-        fab:fab_addButtonPlusIconColor="#00ffffff">
+        fab:fab_addButtonPlusIconColor="#00ffffff"
+        fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_info"
             fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed" />
+            fab:fab_colorPressed="@color/primary_pressed"
+            fab:fab_icon="@drawable/ic_info"
+            fab:fab_title="라이센스" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_help"
             fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed" />
+            fab:fab_colorPressed="@color/primary_pressed"
+            fab:fab_icon="@drawable/ic_help"
+            fab:fab_title="라이센스" />
 
         <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
-            <!--android:id="@+id/fab_option"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--fab:fab_icon="@drawable/ic_option"-->
-            <!--fab:fab_colorNormal="@color/primary"-->
-            <!--fab:fab_colorPressed="@color/primary_pressed" />-->
+        <!--android:id="@+id/fab_option"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--fab:fab_icon="@drawable/ic_option"-->
+        <!--fab:fab_colorNormal="@color/primary"-->
+        <!--fab:fab_colorPressed="@color/primary_pressed" />-->
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_ring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_note"
             fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed" />
+            fab:fab_colorPressed="@color/primary_pressed"
+            fab:fab_icon="@drawable/ic_note"
+            fab:fab_title="라이센스" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_add"
             fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed" />
+            fab:fab_colorPressed="@color/primary_pressed"
+            fab:fab_icon="@drawable/ic_add"
+            fab:fab_title="라이센스" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

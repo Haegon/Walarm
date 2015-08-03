@@ -36,5 +36,6 @@
 
     <string name="notices_title">Open Source License</string>
     <string name="notices_close">닫기</string>
+    <string name="main_empty">등록된 알람이 없습니다.</string>
 
 </resources>

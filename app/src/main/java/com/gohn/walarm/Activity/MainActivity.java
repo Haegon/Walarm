@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
+import com.gohn.walarm.Extention.TextViewEx;
 import com.gohn.walarm.Manager.AlarmDBMgr;
 import com.gohn.walarm.Manager.LocateMgr;
 import com.gohn.walarm.Model.Flags;
@@ -35,7 +36,7 @@ public class MainActivity extends ListActivity implements View.OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarmset);
+        setContentView(R.layout.activity_main);
 
         mContext = getApplicationContext();
 
@@ -61,6 +62,11 @@ public class MainActivity extends ListActivity implements View.OnClickListener, 
         // 리스트들의 구분선 제거 - xml에서 해도 되는데 여기서 해보고 싶었음.
         listView.setDivider(null);
         //listView.setDividerHeight(3);
+
+        // 알람이 없는 경우만 텍스트를 보여준다.
+        TextViewEx textEmpty = (TextViewEx)findViewById(R.id.text_empty);
+        if ( mAdapter.getCount() > 0 ) textEmpty.setVisibility(View.GONE);
+        else textEmpty.setTextColor(Color.GRAY);
 
         // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
         // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
