@@ -5,6 +5,8 @@
     <color name="ripple">#ff599af0</color>
     <color name="accent">#E91E63</color>
     <color name="accent_pressed">#C2185B</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="light_gray">#777777</color>
 
     <color name="mdtp_accent_color">#ff000000</color>
     <color name="mdtp_accent_color_dark">#ff000000</color>

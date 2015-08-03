@@ -20,11 +20,22 @@
         android:text="@string/main_empty"
         android:textSize="@dimen/set_text" />
 
+    <TextView
+        android:id="@+id/text_menu"
+        style="@style/menu_labels_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="90dp"
+        android:text="@string/main_menu" />
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fam_menu"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="4dp"
@@ -41,7 +52,7 @@
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
             fab:fab_icon="@drawable/ic_info"
-            fab:fab_title="라이센스" />
+            fab:fab_title="@string/main_info" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_help"
@@ -50,7 +61,7 @@
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
             fab:fab_icon="@drawable/ic_help"
-            fab:fab_title="라이센스" />
+            fab:fab_title="@string/main_help" />
 
         <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
         <!--android:id="@+id/fab_option"-->
@@ -67,7 +78,7 @@
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
             fab:fab_icon="@drawable/ic_note"
-            fab:fab_title="라이센스" />
+            fab:fab_title="@string/main_ring" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
@@ -76,7 +87,7 @@
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
             fab:fab_icon="@drawable/ic_add"
-            fab:fab_title="라이센스" />
+            fab:fab_title="@string/main_add" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

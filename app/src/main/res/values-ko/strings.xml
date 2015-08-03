@@ -38,4 +38,10 @@
     <string name="notices_close">닫기</string>
     <string name="main_empty">등록된 알람이 없습니다.</string>
 
+    <string name="main_menu">메뉴</string>
+    <string name="main_add">알람 추가</string>
+    <string name="main_ring">벨소리 설정</string>
+    <string name="main_help">도움말</string>
+    <string name="main_info">정보</string>
+
 </resources>

@@ -57,4 +57,10 @@
 
     <string name="main_empty">There is no alarm.\nPlease add new one.</string>
 
+    <string name="main_menu">Menu</string>
+    <string name="main_add">Add Alarm</string>
+    <string name="main_ring">Ring Tone Setting</string>
+    <string name="main_help">Help</string>
+    <string name="main_info">Information</string>
+
 </resources>

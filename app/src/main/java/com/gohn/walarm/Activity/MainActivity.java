@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.gohn.walarm.Adapter.AlarmListAdapter;
@@ -63,11 +65,6 @@ public class MainActivity extends ListActivity implements View.OnClickListener, 
         listView.setDivider(null);
         //listView.setDividerHeight(3);
 
-        // 알람이 없는 경우만 텍스트를 보여준다.
-        TextViewEx textEmpty = (TextViewEx)findViewById(R.id.text_empty);
-        if ( mAdapter.getCount() > 0 ) textEmpty.setVisibility(View.GONE);
-        else textEmpty.setTextColor(Color.GRAY);
-
         // 추가 버튼을 버튼 클래스를 확장한 클래스를 사용하다보니 사용하는 뷰에서 onClick 리스너를 호출하지 못하는 상황이 되었는데
         // 리스너를 현재 뷰로 지정해주면 이 뷰에서 클릭을 받아올 수 있다.
         fab_menu = (FloatingActionButton) view.findViewById(R.id.fab_menu);
@@ -78,7 +75,6 @@ public class MainActivity extends ListActivity implements View.OnClickListener, 
 
         fam = (FloatingActionsMenu)view.findViewById(R.id.fam_menu);
         fam.setOnClickListener(this);
-        fam.setVisibility(View.INVISIBLE);
 
         // 버튼 이벤트를 가져온다.
         com.getbase.floatingactionbutton.FloatingActionButton fab_add = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_add);
@@ -91,6 +87,22 @@ public class MainActivity extends ListActivity implements View.OnClickListener, 
         fab_info.setOnClickListener(this);
         com.getbase.floatingactionbutton.FloatingActionButton fab_ring = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.fab_ring);
         fab_ring.setOnClickListener(this);
+
+
+        // 알람이 없는 경우만 메뉴 라벨과 안내 문구를 보여준다.
+        TextViewEx textEmpty = (TextViewEx)findViewById(R.id.text_empty);
+        TextView textMenu = (TextView)findViewById(R.id.text_menu);
+            if ( mAdapter.getCount() > 0 ) {
+                textEmpty.setVisibility(View.GONE);
+                textMenu.setVisibility(View.GONE);
+
+                fam.setMinimumHeight(0);
+                ViewGroup.LayoutParams lp = fam.getLayoutParams();
+                lp.height = 0;
+        } else {
+            textEmpty.setTextColor(Color.GRAY);
+        }
+
     }
 
     @Override
